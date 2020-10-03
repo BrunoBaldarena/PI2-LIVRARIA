@@ -186,6 +186,7 @@ public class telaLogin extends javax.swing.JFrame {
     private void butCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butCancelarActionPerformed
         telaLogin.this.setVisible(false);
         telaLogin.this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_butCancelarActionPerformed
 
     /**
