@@ -230,9 +230,10 @@ public class telaInicial extends javax.swing.JFrame {
 
     private void btnLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLivrosActionPerformed
         // TODO add your handling code here:
-        telaLivros livros = new telaLivros();
-        livros.setVisible(true);
+        telaProduto p = new telaProduto();
+        p.setVisible(true);
         telaInicial.this.setVisible(false);
+        telaInicial.this.dispose();
     }//GEN-LAST:event_btnLivrosActionPerformed
 
     /**
