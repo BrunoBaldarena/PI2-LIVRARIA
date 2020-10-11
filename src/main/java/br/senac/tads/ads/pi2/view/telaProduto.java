@@ -150,6 +150,11 @@ public class telaProduto extends javax.swing.JFrame {
                 txtPrecoFocusLost(evt);
             }
         });
+        txtPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelProdutoLayout = new javax.swing.GroupLayout(panelProduto);
         panelProduto.setLayout(panelProdutoLayout);
@@ -408,15 +413,28 @@ public class telaProduto extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
+        if (!validaCamposVazios()){
+            JOptionPane.showMessageDialog(this, "Campos validados ok");
+        } else {
+            JOptionPane.showMessageDialog(this, "Campos validados nok");
+
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling cod"e here:
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
         // TODO add your handling code here:
+        txtPreco.setText("");
+        txtCodProduto.setText("");
+        txtNomeProduto.setText("");
     }//GEN-LAST:event_btnLimparCamposActionPerformed
+
+    private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -452,6 +470,23 @@ public class telaProduto extends javax.swing.JFrame {
                 new telaProduto().setVisible(true);
             }
         });
+    }
+    
+    public  boolean validaCamposVazios(){
+        // Valida se os campos estao preenchidos
+        String cv = ""; // Campos Vazios
+        
+        if (txtPreco.getText().isEmpty()) cv += ", Preco";
+        if (txtCodProduto.getText().isEmpty()) cv += ", Codigo";
+        if (txtNomeProduto.getText().isEmpty())cv += ", Nome";
+        
+        if (!cv.equals("")) {
+            cv = cv.substring(2, (cv.length()));
+            JOptionPane.showMessageDialog(this, "Por favor, preencha os campos vazios.\n" + cv);
+            return true;
+        } else{
+            return false;
+        }
     }
     
     public static boolean isNumeric (String n) {
