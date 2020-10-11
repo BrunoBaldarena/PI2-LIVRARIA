@@ -223,7 +223,7 @@ public class telaLogin extends javax.swing.JFrame {
     }
     
     public static boolean validaUsuario( String usuario, String senha){
-        return usuario.equals("admin") && senha.equals("admin");
+        return usuario.equals("") && senha.equals("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
