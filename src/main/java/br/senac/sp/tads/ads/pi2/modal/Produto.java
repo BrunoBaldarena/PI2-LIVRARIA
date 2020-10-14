@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.ads.pi2.view;
+package br.senac.sp.tads.ads.pi2.modal;
 
 /**
  *
