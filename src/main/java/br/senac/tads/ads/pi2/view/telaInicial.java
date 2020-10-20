@@ -238,6 +238,8 @@ public class telaInicial extends javax.swing.JFrame {
 
     private void btnCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaixaActionPerformed
         // TODO add your handling code here:
+        telaCaixa c = new telaCaixa();
+        c.setVisible(true);
     }//GEN-LAST:event_btnCaixaActionPerformed
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
