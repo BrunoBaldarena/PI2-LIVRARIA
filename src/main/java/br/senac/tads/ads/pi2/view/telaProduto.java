@@ -480,7 +480,12 @@ public class telaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxCategoriaActionPerformed
 
     private void txtPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecoFocusLost
-        String valorDigitado = txtPreco.getText();
+        //Tratando entrada preco
+        try {
+                Double.parseDouble(txtPreco.getText().replaceAll(",", "."));
+        } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "Erro na conversao, o valor digitado deve ser um preco.\n" + e);
+        }
     }//GEN-LAST:event_txtPrecoFocusLost
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -490,25 +495,13 @@ public class telaProduto extends javax.swing.JFrame {
             String autor = txtAutor.getText();
             String tipo = cbxTipo.getSelectedItem().toString();
             String categoria = cbxCategoria.getSelectedItem().toString();    
-            
-            //Tratando entrada preco
-            try {
-                Double preco = Double.parseDouble(txtPreco.getText().replaceAll(",", "."));
-            } catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(this, "Erro na conversao\n" + e);
-            }
-            
-            
-            //Produto produto = new Produto(nomeProduto, categoria, tipo, autor, preco);
-
         } else {
-            //JOptionPane.showMessageDialog(this, "Campos validados nok");
-
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling cod"e here:
+        String busca = txtBusca.getText();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
