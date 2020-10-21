@@ -18,7 +18,8 @@ public class telaProduto extends javax.swing.JFrame {
      */
     public telaProduto() {
         initComponents();
-        this.setBounds(250, 150, 1124, 718);
+        // Inicializando com o JFrame centralizado
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -38,21 +39,21 @@ public class telaProduto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         panelProduto = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        lblCodigo = new javax.swing.JLabel();
         txtCodProduto = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtNomeProduto = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtPreco = new javax.swing.JFormattedTextField();
-        txtAutor = new javax.swing.JTextField();
-        cbxCategoria = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblTipo = new javax.swing.JLabel();
         cbxTipo = new javax.swing.JComboBox<>();
+        lblNome = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        lblPreco = new javax.swing.JLabel();
+        txtPreco = new javax.swing.JFormattedTextField();
+        lblCategoria = new javax.swing.JLabel();
+        cbxCategoria = new javax.swing.JComboBox<>();
+        lblAutor = new javax.swing.JLabel();
+        txtAutor = new javax.swing.JTextField();
         btnLimparCampos = new javax.swing.JButton();
         panelBusca = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        lblBusca = new javax.swing.JLabel();
         txtBusca = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         panelAcoes = new javax.swing.JPanel();
@@ -60,7 +61,7 @@ public class telaProduto extends javax.swing.JFrame {
         btnAtuallizar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblProduto = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,33 +148,43 @@ public class telaProduto extends javax.swing.JFrame {
         panelProduto.setBackground(new java.awt.Color(35, 70, 72));
         panelProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "Produto", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Autor:");
+        lblCodigo.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        lblCodigo.setForeground(new java.awt.Color(255, 255, 255));
+        lblCodigo.setText("Codigo:");
 
         txtCodProduto.setEditable(false);
         txtCodProduto.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtCodProduto.setForeground(new java.awt.Color(35, 70, 72));
 
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Nome:");
+        lblTipo.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        lblTipo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTipo.setText("Tipo:");
 
-        txtNomeProduto.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        txtNomeProduto.setForeground(new java.awt.Color(35, 70, 72));
-        txtNomeProduto.addActionListener(new java.awt.event.ActionListener() {
+        cbxTipo.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        cbxTipo.setForeground(new java.awt.Color(35, 70, 72));
+        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Livro", "Revista", "Quadrinho", "Multimidia" }));
+        cbxTipo.setToolTipText("");
+        cbxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeProdutoActionPerformed(evt);
+                cbxTipoActionPerformed(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Codigo:");
+        lblNome.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(255, 255, 255));
+        lblNome.setText("Nome:");
 
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Preço: (R$)");
+        txtNome.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        txtNome.setForeground(new java.awt.Color(35, 70, 72));
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
+
+        lblPreco.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        lblPreco.setForeground(new java.awt.Color(255, 255, 255));
+        lblPreco.setText("Preço: (R$)");
 
         txtPreco.setForeground(new java.awt.Color(35, 70, 72));
         txtPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
@@ -188,14 +199,18 @@ public class telaProduto extends javax.swing.JFrame {
                 txtPrecoActionPerformed(evt);
             }
         });
-
-        txtAutor.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        txtAutor.setForeground(new java.awt.Color(35, 70, 72));
-        txtAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAutorActionPerformed(evt);
+        txtPreco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecoKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPrecoKeyReleased(evt);
             }
         });
+
+        lblCategoria.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        lblCategoria.setForeground(new java.awt.Color(255, 255, 255));
+        lblCategoria.setText("Categoria:");
 
         cbxCategoria.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         cbxCategoria.setForeground(new java.awt.Color(35, 70, 72));
@@ -207,21 +222,15 @@ public class telaProduto extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Tipo:");
+        lblAutor.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        lblAutor.setForeground(new java.awt.Color(255, 255, 255));
+        lblAutor.setText("Autor:");
 
-        jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Categoria:");
-
-        cbxTipo.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        cbxTipo.setForeground(new java.awt.Color(35, 70, 72));
-        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Livro", "Revista", "Quadrinho", "Papelaria", "Multimidia" }));
-        cbxTipo.setToolTipText("");
-        cbxTipo.addActionListener(new java.awt.event.ActionListener() {
+        txtAutor.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        txtAutor.setForeground(new java.awt.Color(35, 70, 72));
+        txtAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxTipoActionPerformed(evt);
+                txtAutorActionPerformed(evt);
             }
         });
 
@@ -243,27 +252,27 @@ public class telaProduto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProdutoLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(lblCodigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
+                        .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNomeProduto))
+                        .addComponent(txtNome))
                     .addGroup(panelProdutoLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(lblPreco)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel9)
+                        .addComponent(lblCategoria)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(lblAutor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtAutor))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProdutoLayout.createSequentialGroup()
@@ -277,20 +286,20 @@ public class telaProduto extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodProduto)
-                    .addComponent(jLabel5)
+                    .addComponent(lblCodigo)
                     .addComponent(cbxTipo)
-                    .addComponent(jLabel8)
-                    .addComponent(txtNomeProduto)
-                    .addComponent(jLabel4))
+                    .addComponent(lblTipo)
+                    .addComponent(txtNome)
+                    .addComponent(lblNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
+                        .addComponent(lblAutor)
                         .addComponent(txtAutor))
                     .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
+                        .addComponent(lblPreco)
                         .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9)
+                        .addComponent(lblCategoria)
                         .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLimparCampos)
@@ -300,9 +309,9 @@ public class telaProduto extends javax.swing.JFrame {
         panelBusca.setBackground(new java.awt.Color(35, 70, 72));
         panelBusca.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "Busca", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Nome/Código: ");
+        lblBusca.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        lblBusca.setForeground(new java.awt.Color(255, 255, 255));
+        lblBusca.setText("Nome/Código: ");
 
         txtBusca.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtBusca.setForeground(new java.awt.Color(35, 70, 72));
@@ -323,7 +332,7 @@ public class telaProduto extends javax.swing.JFrame {
             panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBuscaLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel7)
+                .addComponent(lblBusca)
                 .addGap(10, 10, 10)
                 .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
@@ -337,7 +346,7 @@ public class telaProduto extends javax.swing.JFrame {
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7))
+                        .addComponent(lblBusca))
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -396,12 +405,12 @@ public class telaProduto extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Nome", "Autor", "Preco", "Tipo", "Categoria"
+                "Codigo", "Produto", "Autor", "Preco", "Tipo", "Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -412,7 +421,7 @@ public class telaProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblProduto);
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -481,7 +490,7 @@ public class telaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_panelPrincipalComponentMoved
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
+        // fecha janela abeira no memento
         telaProduto.this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
@@ -490,35 +499,39 @@ public class telaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxCategoriaActionPerformed
 
     private void txtPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecoFocusLost
-        //Tratando entrada preco
-        try {
-                Double.parseDouble(txtPreco.getText().replaceAll(",", "."));
-        } catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(this, "Erro na conversao, o valor digitado deve ser um preco.\n" + e);
-        }
+        //
     }//GEN-LAST:event_txtPrecoFocusLost
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        // Se nao tiver campos vazios
         if (!validaCamposVazios()){
-            String nomeProduto = txtNomeProduto.getText();
+            String nomeProduto = txtNome.getText();
             String autor = txtAutor.getText();
             String tipo = cbxTipo.getSelectedItem().toString();
             String categoria = cbxCategoria.getSelectedItem().toString();    
-        } else {
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling cod"e here:
+        // Defnindo texto para efetuar busca
         String busca = txtBusca.getText();
+        String tipo = null;
+        try {
+            Integer.parseInt(txtBusca.getText());
+            tipo = "Codigo";
+            
+        } catch (NumberFormatException e){
+            tipo = "Nome";
+        } finally {
+            JOptionPane.showMessageDialog(this, tipo);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        // TODO add your handling code here:
+        // Limpando os campos
         txtPreco.setText("");
         txtAutor.setText("");
-        txtNomeProduto.setText("");
+        txtNome.setText("");
         cbxTipo.setSelectedIndex(0);
         cbxCategoria.setSelectedIndex(0);
     }//GEN-LAST:event_btnLimparCamposActionPerformed
@@ -535,9 +548,24 @@ public class telaProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAutorActionPerformed
 
-    private void txtNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeProdutoActionPerformed
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeProdutoActionPerformed
+    }//GEN-LAST:event_txtNomeActionPerformed
+
+    private void txtPrecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoKeyTyped
+        //
+    }//GEN-LAST:event_txtPrecoKeyTyped
+
+    private void txtPrecoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoKeyReleased
+        // Validação da entrada de preco
+        if(!txtPreco.getText().equals("")){
+            try {
+                Double.parseDouble(txtPreco.getText().replaceAll(",", "."));
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "Este campo não aceita letras. Por favor digite um valor numerico.");
+            }
+        }
+    }//GEN-LAST:event_txtPrecoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -576,16 +604,16 @@ public class telaProduto extends javax.swing.JFrame {
     }
     
     public  boolean validaCamposVazios(){
-        // Valida se os campos estao preenchidos
-        String cv = ""; // Campos Vazios
+        // Valida se os campos obrigatorios estao preenchidos
+        String cv = null;
         
         if (txtPreco.getText().isEmpty()) cv += ", Preco";
-        if (txtNomeProduto.getText().isEmpty())cv += ", Nome";
+        if (txtNome.getText().isEmpty())cv += ", Nome";
         if (txtAutor.getText().isEmpty())cv += ", Autor";
         if (cbxTipo.getSelectedItem() == "-") cv += ", Tipo";
         if (cbxCategoria.getSelectedItem() == "-") cv += ", Categoria";
         
-        if (!cv.equals("")) {
+        if (cv != null) {
             cv = cv.substring(2, (cv.length()));
             JOptionPane.showMessageDialog(this, "Por favor, preencha os campos vazios.\n" + cv);
             return true;
@@ -614,26 +642,26 @@ public class telaProduto extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lblAutor;
+    private javax.swing.JLabel lblBusca;
+    private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPreco;
+    private javax.swing.JLabel lblTipo;
     private javax.swing.JPanel panelAcoes;
     private javax.swing.JPanel panelBusca;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelProduto;
     private javax.swing.JPanel panelTitulo;
+    private javax.swing.JTable tblProduto;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtCodProduto;
-    private javax.swing.JTextField txtNomeProduto;
+    private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }
