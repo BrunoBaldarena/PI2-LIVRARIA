@@ -24,6 +24,10 @@ public class Produto {
         this.autor = autor;
         this.preco = preco;
     }
+    
+     public Produto(){
+         
+     }
 
     public String getNome() {
         return nome;
