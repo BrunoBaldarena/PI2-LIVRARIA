@@ -5,6 +5,8 @@
  */
 package br.senac.tads.ads.pi2.view;
 
+import java.awt.event.KeyEvent;
+import static java.lang.String.valueOf;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +20,7 @@ public class telaCaixa extends javax.swing.JFrame {
      */
     public telaCaixa() {
         initComponents();
+        // Definindo tamanho in1cial da janela
         this.setBounds(250, 150, 1124, 718);
     }
 
@@ -52,8 +55,8 @@ public class telaCaixa extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         btnSelecionarCliente1 = new javax.swing.JButton();
-        btnRegistrar2 = new javax.swing.JButton();
-        txtCliente1 = new javax.swing.JTextField();
+        btnFinalizarCompra = new javax.swing.JButton();
+        txtCliente = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         panelBusca2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -63,9 +66,9 @@ public class telaCaixa extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         btnSelecionarCliente2 = new javax.swing.JButton();
         btnSelecionarCliente3 = new javax.swing.JButton();
-        rdFeminino = new javax.swing.JRadioButton();
-        rdMasculino = new javax.swing.JRadioButton();
-        rdOutros = new javax.swing.JRadioButton();
+        rdDebito = new javax.swing.JRadioButton();
+        rdCredito = new javax.swing.JRadioButton();
+        rdDinheiro = new javax.swing.JRadioButton();
         jLabel19 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -147,6 +150,16 @@ public class telaCaixa extends javax.swing.JFrame {
 
         txtBusca.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtBusca.setForeground(new java.awt.Color(35, 70, 72));
+        txtBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscaActionPerformed(evt);
+            }
+        });
+        txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyTyped(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -176,6 +189,9 @@ public class telaCaixa extends javax.swing.JFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtQuantidadeKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtQuantidadeKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtQuantidadeKeyReleased(evt);
             }
@@ -183,7 +199,7 @@ public class telaCaixa extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Desconto:");
+        jLabel9.setText("Desconto (R$):");
 
         txtDesconto.setForeground(new java.awt.Color(35, 70, 72));
         txtDesconto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
@@ -196,6 +212,11 @@ public class telaCaixa extends javax.swing.JFrame {
         txtDesconto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescontoActionPerformed(evt);
+            }
+        });
+        txtDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescontoKeyTyped(evt);
             }
         });
 
@@ -218,23 +239,23 @@ public class telaCaixa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscaLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBuscaLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscaLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnRegistrar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
-            .addGroup(panelBuscaLayout.createSequentialGroup()
-                .addComponent(btnRegistrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelBuscaLayout.setVerticalGroup(
             panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,15 +265,16 @@ public class telaCaixa extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRegistrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRegistrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         btnVoltar.setBackground(new java.awt.Color(35, 70, 72));
@@ -297,24 +319,24 @@ public class telaCaixa extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrar2.setBackground(new java.awt.Color(35, 70, 72));
-        btnRegistrar2.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
-        btnRegistrar2.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrar2.setText("Finalizar Compra");
-        btnRegistrar2.setActionCommand("Registrar Item");
-        btnRegistrar2.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalizarCompra.setBackground(new java.awt.Color(35, 70, 72));
+        btnFinalizarCompra.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
+        btnFinalizarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        btnFinalizarCompra.setText("Finalizar Compra");
+        btnFinalizarCompra.setActionCommand("Registrar Item");
+        btnFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrar2ActionPerformed(evt);
+                btnFinalizarCompraActionPerformed(evt);
             }
         });
 
-        txtCliente1.setEditable(false);
-        txtCliente1.setBackground(new java.awt.Color(204, 204, 204));
-        txtCliente1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        txtCliente1.setForeground(new java.awt.Color(35, 70, 72));
-        txtCliente1.addActionListener(new java.awt.event.ActionListener() {
+        txtCliente.setEditable(false);
+        txtCliente.setBackground(new java.awt.Color(204, 204, 204));
+        txtCliente.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        txtCliente.setForeground(new java.awt.Color(35, 70, 72));
+        txtCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCliente1ActionPerformed(evt);
+                txtClienteActionPerformed(evt);
             }
         });
 
@@ -419,28 +441,28 @@ public class telaCaixa extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(rdFeminino);
-        rdFeminino.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
-        rdFeminino.setForeground(new java.awt.Color(242, 241, 240));
-        rdFeminino.setText("Debito");
-        rdFeminino.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdDebito);
+        rdDebito.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
+        rdDebito.setForeground(new java.awt.Color(242, 241, 240));
+        rdDebito.setText("Debito");
+        rdDebito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdFemininoActionPerformed(evt);
+                rdDebitoActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(rdMasculino);
-        rdMasculino.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
-        rdMasculino.setForeground(new java.awt.Color(242, 241, 240));
-        rdMasculino.setText("Credito");
+        buttonGroup1.add(rdCredito);
+        rdCredito.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
+        rdCredito.setForeground(new java.awt.Color(242, 241, 240));
+        rdCredito.setText("Credito");
 
-        buttonGroup1.add(rdOutros);
-        rdOutros.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
-        rdOutros.setForeground(new java.awt.Color(242, 241, 240));
-        rdOutros.setText("Dinheiro");
-        rdOutros.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdDinheiro);
+        rdDinheiro.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
+        rdDinheiro.setForeground(new java.awt.Color(242, 241, 240));
+        rdDinheiro.setText("Dinheiro");
+        rdDinheiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdOutrosActionPerformed(evt);
+                rdDinheiroActionPerformed(evt);
             }
         });
 
@@ -459,7 +481,7 @@ public class telaCaixa extends javax.swing.JFrame {
                     .addGroup(panelBusca1Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCliente1)
+                        .addComponent(txtCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSelecionarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,14 +501,14 @@ public class telaCaixa extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(panelBusca1Layout.createSequentialGroup()
-                                    .addComponent(rdFeminino)
+                                    .addComponent(rdDebito)
                                     .addGap(18, 18, 18)
-                                    .addComponent(rdMasculino)
+                                    .addComponent(rdCredito)
                                     .addGap(0, 0, Short.MAX_VALUE))
                                 .addGroup(panelBusca1Layout.createSequentialGroup()
-                                    .addComponent(rdOutros)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                                    .addComponent(btnRegistrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(rdDinheiro)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                                    .addComponent(btnFinalizarCompra))))))
                 .addContainerGap())
         );
 
@@ -497,7 +519,7 @@ public class telaCaixa extends javax.swing.JFrame {
         panelBusca1Layout.setVerticalGroup(
             panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBusca1Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelBusca3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -509,18 +531,18 @@ public class telaCaixa extends javax.swing.JFrame {
                     .addComponent(btnSelecionarCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSelecionarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(rdFeminino)
-                    .addComponent(rdMasculino))
+                    .addComponent(rdDebito)
+                    .addComponent(rdCredito))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rdOutros)
+                .addComponent(rdDinheiro)
                 .addGap(5, 5, 5)
-                .addComponent(btnRegistrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -577,13 +599,7 @@ public class telaCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_panelPrincipalComponentMoved
 
     private void txtDescontoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescontoFocusLost
-        //Tratando entrada prec
-        try {
-            Double.parseDouble(txtDesconto.getText().replace(",","."));
-        } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Desconto precisa ser um valor numeico");
-            txtDesconto.setText("");
-        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_txtDescontoFocusLost
 
     private void txtDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescontoActionPerformed
@@ -594,23 +610,18 @@ public class telaCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
         String msg = null;
         try {
-            Integer.parseInt(txtDesconto.getText());
+            Double.parseDouble(txtDesconto.getText().replace(",","."));
         } catch (NumberFormatException e){
-            if (msg == null){
-                msg = "Desconto precisa ser um valor";
-            } else{
-                msg += "\nDesconto precisa ser um valor";
-            }
+            msg = "Desconto precisa ser um valor";
+            txtDesconto.setText("");
         }
         
         try {
-            Integer.parseInt(txtQuantidade.getText().replaceAll(",", "."));
+            Double.parseDouble(txtQuantidade.getText().replaceAll(",", "."));
         } catch (NumberFormatException e){
-            if (msg == null){
-                msg = "Quantidade precisa ser um numero inteiro";
-            } else{
-                msg += "\nQuantidade precisa ser um numero inteiro";
-            }
+            if (msg == null) msg = "Quantidade precisa ser um numero inteiro";
+            else msg += "\nQuantidade precisa ser um numero inteiro";
+            txtQuantidade.setText("");
         }
         if(msg != null) JOptionPane.showMessageDialog(this, msg);
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
@@ -624,13 +635,22 @@ public class telaCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSelecionarCliente1ActionPerformed
 
-    private void btnRegistrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar2ActionPerformed
+    private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrar2ActionPerformed
+        String pagamento;
+        
+        if (rdDebito.isSelected()) pagamento = "Debito";
+        else if (rdCredito.isSelected()) pagamento = "Credito";
+        else if (rdDinheiro.isSelected()) pagamento = "Dinheiro";
+        else JOptionPane.showMessageDialog(this, "Voce deve selecionar um metodo de pagamento!", "Aviso",JOptionPane.WARNING_MESSAGE);
+        
+        if (txtCliente.getText().equals("")) JOptionPane.showMessageDialog(this, "Voce deve selecionar um Cliente", "Aviso",JOptionPane.WARNING_MESSAGE);;
+                
+    }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
-    private void txtCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCliente1ActionPerformed
+    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCliente1ActionPerformed
+    }//GEN-LAST:event_txtClienteActionPerformed
 
     private void btnSelecionarCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarCliente2ActionPerformed
         // TODO add your handling code here:
@@ -640,27 +660,49 @@ public class telaCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSelecionarCliente3ActionPerformed
 
-    private void rdFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdFemininoActionPerformed
+    private void rdDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdDebitoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdFemininoActionPerformed
+    }//GEN-LAST:event_rdDebitoActionPerformed
 
-    private void rdOutrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdOutrosActionPerformed
+    private void rdDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdDinheiroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdOutrosActionPerformed
+    }//GEN-LAST:event_rdDinheiroActionPerformed
 
     private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
-        // TODO add your handling code here:
+        // Validação de entrada quantidade
+        char c = evt.getKeyChar();
+        
+        if(((c < '0') || (c > '9') && (c != KeyEvent.VK_BACK_SPACE))) evt.consume(); 
+        
+        try {
+            Integer.parseInt(valueOf(c));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Neste campo deve ser inserido um numero!", "Aviso", JOptionPane.WARNING_MESSAGE);        
+        }
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     private void txtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyReleased
         // TODO add your handling code here:
-        try {
-            Integer.parseInt(txtQuantidade.getText());
-        } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Quantidade precisa ser um valor inteiro");
-            txtQuantidade.setText("");
-        }
     }//GEN-LAST:event_txtQuantidadeKeyReleased
+
+    private void txtQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtQuantidadeKeyPressed
+
+    private void txtDescontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoKeyTyped
+
+
+
+    }//GEN-LAST:event_txtDescontoKeyTyped
+
+    private void txtBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscaActionPerformed
+
+    private void txtBuscaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyTyped
+        // TODO Quando a tecla é pressionada, trazer os produtos cujo nome ou codigo iniciem com conteudo deste campo
+    }//GEN-LAST:event_txtBuscaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -710,8 +752,8 @@ public class telaCaixa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnRegistrar1;
-    private javax.swing.JButton btnRegistrar2;
     private javax.swing.JButton btnSelecionarCliente1;
     private javax.swing.JButton btnSelecionarCliente2;
     private javax.swing.JButton btnSelecionarCliente3;
@@ -740,11 +782,11 @@ public class telaCaixa extends javax.swing.JFrame {
     private javax.swing.JPanel panelBusca5;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelTitulo;
-    private javax.swing.JRadioButton rdFeminino;
-    private javax.swing.JRadioButton rdMasculino;
-    private javax.swing.JRadioButton rdOutros;
+    private javax.swing.JRadioButton rdCredito;
+    private javax.swing.JRadioButton rdDebito;
+    private javax.swing.JRadioButton rdDinheiro;
     private javax.swing.JTextField txtBusca;
-    private javax.swing.JTextField txtCliente1;
+    private javax.swing.JTextField txtCliente;
     private javax.swing.JFormattedTextField txtDesconto;
     private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
