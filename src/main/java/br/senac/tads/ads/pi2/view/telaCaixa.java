@@ -633,10 +633,12 @@ public class telaCaixa extends javax.swing.JFrame {
 
     private void btnSelecionarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarCliente1ActionPerformed
         // TODO add your handling code here:
+        telaSelecaoCliente s = new telaSelecaoCliente();
+        s.setVisible(true);
     }//GEN-LAST:event_btnSelecionarCliente1ActionPerformed
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
-        // TODO add your handling code here:
+        // Validacao das entradas para finalizacao das compras
         String pagamento;
         
         if (rdDebito.isSelected()) pagamento = "Debito";
