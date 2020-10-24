@@ -212,6 +212,9 @@
                   <Image iconType="3" name="/Images/botao_info.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInfoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

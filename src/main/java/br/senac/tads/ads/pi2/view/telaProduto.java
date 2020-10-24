@@ -162,7 +162,7 @@ public class telaProduto extends javax.swing.JFrame {
 
         cbxTipo.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         cbxTipo.setForeground(new java.awt.Color(35, 70, 72));
-        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Livro", "Revista", "Quadrinho", "Multimidia" }));
+        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Livro", "Revista", "Quadrinho", "Multimidia" }));
         cbxTipo.setToolTipText("");
         cbxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +214,7 @@ public class telaProduto extends javax.swing.JFrame {
 
         cbxCategoria.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         cbxCategoria.setForeground(new java.awt.Color(35, 70, 72));
-        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Biografias", "Coleções", "Comportamento", "Contos", "Crítica", "Ficção", "Folclore", "Humor", "Infantojuvenil", "Jogos", "Jornais", "Literatura Brasileira", "Literatura Estrangeira", "Manuscritos", "Poesia", "Outros" }));
+        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Biografias", "Coleções", "Comportamento", "Contos", "Crítica", "Ficção", "Folclore", "Humor", "Infantojuvenil", "Jogos", "Jornais", "Literatura Brasileira", "Literatura Estrangeira", "Manuscritos", "Poesia", "Outros" }));
         cbxCategoria.setToolTipText("");
         cbxCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,11 +410,11 @@ public class telaProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Produto", "Autor", "Preco", "Tipo", "Categoria"
+                "Codigo", "Produto", "Autor", "Preco", "Tipo", "Categoria", " items Em Estoque"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

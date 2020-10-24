@@ -101,6 +101,11 @@ public class telaInicial extends javax.swing.JFrame {
         btnInfo.setBackground(new java.awt.Color(35, 70, 72));
         btnInfo.setForeground(new java.awt.Color(35, 70, 72));
         btnInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/botao_info.png"))); // NOI18N
+        btnInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInfoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLateralLayout = new javax.swing.GroupLayout(panelLateral);
         panelLateral.setLayout(panelLateralLayout);
@@ -249,6 +254,12 @@ public class telaInicial extends javax.swing.JFrame {
         //telaInicial.this.setVisible(false);
         //telaInicial.this.dispose();
     }//GEN-LAST:event_btnClienteActionPerformed
+
+    private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
+        // TODO add your handling code here:
+        telaSobre s = new telaSobre();
+        s.setVisible(true);
+    }//GEN-LAST:event_btnInfoActionPerformed
 
     /**
      * @param args the command line arguments

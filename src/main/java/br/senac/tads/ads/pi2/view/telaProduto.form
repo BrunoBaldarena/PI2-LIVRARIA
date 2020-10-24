@@ -382,7 +382,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
-                    <StringItem index="0" value="-"/>
+                    <StringItem index="0" value="Selecionar"/>
                     <StringItem index="1" value="Livro"/>
                     <StringItem index="2" value="Revista"/>
                     <StringItem index="3" value="Quadrinho"/>
@@ -473,7 +473,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="17">
-                    <StringItem index="0" value="-"/>
+                    <StringItem index="0" value="Selecionar"/>
                     <StringItem index="1" value="Biografias"/>
                     <StringItem index="2" value="Cole&#xe7;&#xf5;es"/>
                     <StringItem index="3" value="Comportamento"/>
@@ -747,17 +747,23 @@
             <Component class="javax.swing.JTable" name="tblProduto">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="0">
+                  <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="Codigo" type="java.lang.Object"/>
                     <Column editable="false" title="Produto" type="java.lang.Object"/>
                     <Column editable="false" title="Autor" type="java.lang.Object"/>
                     <Column editable="false" title="Preco" type="java.lang.Object"/>
                     <Column editable="false" title="Tipo" type="java.lang.Object"/>
                     <Column editable="false" title="Categoria" type="java.lang.Object"/>
+                    <Column editable="true" title=" items Em Estoque" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
