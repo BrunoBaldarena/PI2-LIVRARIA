@@ -18,7 +18,8 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
      */
     public telaDetalhesRelatorio() {
         initComponents();
-        this.setBounds(250, 150, 1124, 718);
+        //this.setBounds(250, 150, 1124, 718);
+        pack();
     }
 
     /**

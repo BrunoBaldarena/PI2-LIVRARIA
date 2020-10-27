@@ -21,7 +21,9 @@ public class telaCaixa extends javax.swing.JFrame {
     public telaCaixa() {
         initComponents();
         // Definindo tamanho in1cial da janela
-        this.setBounds(250, 150, 1124, 718);
+        //this.setBounds(250, 150, 1124, 718);
+        this.setLocationRelativeTo(null);
+        pack();
     }
 
     /**

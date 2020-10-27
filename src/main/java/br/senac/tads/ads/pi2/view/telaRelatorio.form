@@ -307,7 +307,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnRegistrar" pref="336" max="32767" attributes="0"/>
-                          <Component id="btnLimparCampos" alignment="0" pref="336" max="32767" attributes="0"/>
+                          <Component id="btnLimparCampos" alignment="0" pref="324" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

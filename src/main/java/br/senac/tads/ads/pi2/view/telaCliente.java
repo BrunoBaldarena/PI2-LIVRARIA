@@ -34,7 +34,7 @@ public class telaCliente extends javax.swing.JFrame {
         initComponents();
         rdFeminino.setSelected(true);
         //this.setExtendedState(MAXIMIZED_BOTH);
-        this.setBounds(250, 150, 1405, 760);
+       // this.setBounds(250, 150, 1405, 760);
         this.setLocationRelativeTo(null);
         pack();
     }

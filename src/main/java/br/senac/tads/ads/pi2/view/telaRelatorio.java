@@ -17,7 +17,9 @@ public class telaRelatorio extends javax.swing.JFrame {
     public telaRelatorio() {
         initComponents();
         //this.setExtendedState(MAXIMIZED_BOTH);
-        this.setBounds(250, 150, 1151, 718);
+        //this.setBounds(250, 150, 1151, 718);
+        this.setLocationRelativeTo(null);
+        pack();
     }
 
     /**
