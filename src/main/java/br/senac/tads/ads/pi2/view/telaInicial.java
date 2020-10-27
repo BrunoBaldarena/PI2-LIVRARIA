@@ -43,6 +43,7 @@ public class telaInicial extends javax.swing.JFrame {
         lblLogo = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
         btnInfo = new javax.swing.JButton();
+        btnCliente1 = new javax.swing.JButton();
         panelDataHora = new javax.swing.JPanel();
         lblData = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
@@ -61,7 +62,7 @@ public class telaInicial extends javax.swing.JFrame {
 
         btnLivros.setBackground(new java.awt.Color(35, 70, 72));
         btnLivros.setForeground(new java.awt.Color(35, 70, 72));
-        btnLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Livros de Papel.png"))); // NOI18N
+        btnLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/livro_logo.png"))); // NOI18N
         btnLivros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLivrosActionPerformed(evt);
@@ -70,7 +71,7 @@ public class telaInicial extends javax.swing.JFrame {
 
         btnCliente.setBackground(new java.awt.Color(35, 70, 72));
         btnCliente.setForeground(new java.awt.Color(35, 70, 72));
-        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Cliente de Papel.png"))); // NOI18N
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cliente_logo.png"))); // NOI18N
         btnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClienteActionPerformed(evt);
@@ -79,14 +80,15 @@ public class telaInicial extends javax.swing.JFrame {
 
         btnCaixa.setBackground(new java.awt.Color(35, 70, 72));
         btnCaixa.setForeground(new java.awt.Color(35, 70, 72));
-        btnCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Caixa de Papel.png"))); // NOI18N
+        btnCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/caixa_logo.png"))); // NOI18N
         btnCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCaixaActionPerformed(evt);
             }
         });
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo 1.png"))); // NOI18N
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo 1.png"))); // NOI18N
 
         btnSair.setBackground(new java.awt.Color(35, 70, 72));
         btnSair.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -107,6 +109,15 @@ public class telaInicial extends javax.swing.JFrame {
             }
         });
 
+        btnCliente1.setBackground(new java.awt.Color(35, 70, 72));
+        btnCliente1.setForeground(new java.awt.Color(35, 70, 72));
+        btnCliente1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Dados_logo.png"))); // NOI18N
+        btnCliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCliente1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLateralLayout = new javax.swing.GroupLayout(panelLateral);
         panelLateral.setLayout(panelLateralLayout);
         panelLateralLayout.setHorizontalGroup(
@@ -115,19 +126,20 @@ public class telaInicial extends javax.swing.JFrame {
             .addGroup(panelLateralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLivros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLateralLayout.createSequentialGroup()
-                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8))
+                    .addComponent(btnCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLivros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                     .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLateralLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         panelLateralLayout.setVerticalGroup(
             panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLateralLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(lblLogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLivros)
@@ -135,11 +147,15 @@ public class telaInicial extends javax.swing.JFrame {
                 .addComponent(btnCaixa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(btnInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        panelLateralLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCaixa, btnCliente, btnCliente1, btnLivros});
 
         panelDataHora.setBackground(new java.awt.Color(35, 70, 72));
         panelDataHora.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -185,7 +201,7 @@ public class telaInicial extends javax.swing.JFrame {
                 .addComponent(panelLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1067, Short.MAX_VALUE))
+                .addContainerGap(1070, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +226,7 @@ public class telaInicial extends javax.swing.JFrame {
             .addComponent(panelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(1366, 790));
+        setSize(new java.awt.Dimension(1366, 827));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -261,6 +277,10 @@ public class telaInicial extends javax.swing.JFrame {
         s.setVisible(true);
     }//GEN-LAST:event_btnInfoActionPerformed
 
+    private void btnCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCliente1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -308,6 +328,7 @@ public class telaInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCaixa;
     private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnCliente1;
     private javax.swing.JButton btnInfo;
     private javax.swing.JButton btnLivros;
     private javax.swing.JButton btnSair;
