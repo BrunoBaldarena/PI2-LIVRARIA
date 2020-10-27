@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.ads.pi2.validators;
+package br.senac.sp.tads.ads.pi2.resources;
 
 import java.util.InputMismatchException;
 
@@ -14,6 +14,11 @@ import java.util.InputMismatchException;
 
 public class ValidaCPF {
     public static boolean isCPF(String CPF) {
+        
+        CPF = CPF.replace(" ", "");//Tira espaco
+        CPF = CPF.replace(".", "");//Tira ponto
+        CPF = CPF.replace("-", "");//Tira barra
+        
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (CPF.equals("00000000000") ||
             CPF.equals("11111111111") ||

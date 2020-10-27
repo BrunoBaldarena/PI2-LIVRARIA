@@ -23,8 +23,9 @@ public class Cliente {
     private String bairro;
     private String uf;
     private String complemento;
+    private String email;
 
-    public Cliente(int cod, String nome, String cpf, String sexo, String dataNascimento, String telefone, String logadoutro, String cep, String cidade, String bairro, String uf, String complemento) {
+    public Cliente(int cod, String nome, String cpf, String sexo, String dataNascimento, String telefone, String logadoutro, String cep, String cidade, String bairro, String uf, String complemento, String email) {
         this.cod = cod;
         this.nome = nome;
         this.cpf = cpf;
@@ -37,7 +38,17 @@ public class Cliente {
         this.bairro = bairro;
         this.uf = uf;
         this.complemento = complemento;
+        this.email = email;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     public Cliente() {
     }

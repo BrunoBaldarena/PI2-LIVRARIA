@@ -15,19 +15,64 @@ public class Produto {
     private String tipo;
     private String autor;
     private Double preco;
+    private int quantidade; 
+    private String editora;
+    private String observacao; 
+    private int ano; 
     private int id;
 
-    public Produto(String nome, String categoria, String tipo, String autor, Double preco) {
+    public Produto(String nome, String categoria, String tipo, String autor, Double preco, int quantidade, String editora, String observacao, int ano, int id) {
         this.nome = nome;
         this.categoria = categoria;
         this.tipo = tipo;
         this.autor = autor;
         this.preco = preco;
+        this.quantidade = quantidade;
+        this.editora = editora;
+        this.observacao = observacao;
+        this.ano = ano;
+        this.id = id;
     }
+
+ 
     
      public Produto(){
          
      }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+     
+     
 
     public String getNome() {
         return nome;
