@@ -188,7 +188,7 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder justification="1" position="2" title="Inclusao de Produto">
+                <TitledBorder justification="1" position="2" title="Selecione um Cliente">
                   <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder roundedCorners="true" thickness="3">
                       <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
