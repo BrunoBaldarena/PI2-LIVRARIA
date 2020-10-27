@@ -621,7 +621,7 @@ public class telaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_panelPrincipalComponentMoved
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // fecha janela abeira no memento
+        // fecha janela aberta no memento
         telaProduto.this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
