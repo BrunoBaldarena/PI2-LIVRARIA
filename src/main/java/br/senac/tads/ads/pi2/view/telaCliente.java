@@ -6,7 +6,7 @@
 package br.senac.tads.ads.pi2.view;
 
 import br.senac.sp.tads.ads.pi2.modal.Cliente;
-import br.senac.sp.tads.ads.pi2.resources.ValidaCPF;
+import br.senac.sp.tads.ads.pi2.utils.ValidaCPF;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.InputStream;

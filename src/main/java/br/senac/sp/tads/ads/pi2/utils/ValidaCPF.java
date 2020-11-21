@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.ads.pi2.resources;
+package br.senac.sp.tads.ads.pi2.utils;
 
 import java.util.InputMismatchException;
 

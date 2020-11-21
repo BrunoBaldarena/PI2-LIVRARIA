@@ -11,14 +11,14 @@ package br.senac.sp.tads.ads.pi2.modal;
  */
 public class Usuario {
     
-    private int cod; 
+    private int id; 
     private String tipo;
     private String nome; 
     private String usuario;
     private String senha;
 
-    public Usuario(int cod, String nome, String tipo, String usuario, String senha) {
-        this.cod = cod;
+    public Usuario(int id, String nome, String tipo, String usuario, String senha) {
+        this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.usuario = usuario;
@@ -28,8 +28,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    public int getCod() {
-        return cod;
+    public int getId() {
+        return id;
     }
 
     public String getTipo() {
@@ -48,8 +48,8 @@ public class Usuario {
         return senha;
     }
 
-    public void setCod(int cod) {
-        this.cod = cod;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTipo(String tipo) {

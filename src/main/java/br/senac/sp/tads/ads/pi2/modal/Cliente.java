@@ -11,7 +11,7 @@ package br.senac.sp.tads.ads.pi2.modal;
  */
 public class Cliente {
     
-    private int cod; 
+    private int id; 
     private String nome;
     private String cpf; 
     private String sexo;
@@ -25,8 +25,8 @@ public class Cliente {
     private String complemento;
     private String email;
 
-    public Cliente(int cod, String nome, String cpf, String sexo, String dataNascimento, String telefone, String logadoutro, String cep, String cidade, String bairro, String uf, String complemento, String email) {
-        this.cod = cod;
+    public Cliente(int id, String nome, String cpf, String sexo, String dataNascimento, String telefone, String logadoutro, String cep, String cidade, String bairro, String uf, String complemento, String email) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.sexo = sexo;
@@ -53,12 +53,12 @@ public class Cliente {
     public Cliente() {
     }
 
-    public int getCod() {
-        return cod;
+    public int getId() {
+        return id;
     }
 
-    public void setCod(int cod) {
-        this.cod = cod;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
