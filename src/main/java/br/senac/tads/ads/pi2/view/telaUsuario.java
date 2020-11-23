@@ -5,13 +5,23 @@
  */
 package br.senac.tads.ads.pi2.view;
 
+import br.senac.sp.tads.ads.pi2.controller.UsuarioController;
+import br.senac.sp.tads.ads.pi2.helper.UsuarioHelper;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
  * @author victorsantos
  */
 public class telaUsuario extends javax.swing.JFrame {
+
+    private final UsuarioController controller;
 
     /**
      * Creates new form telaLivros
@@ -20,6 +30,15 @@ public class telaUsuario extends javax.swing.JFrame {
         initComponents();
         // Inicializando com o JFrame centralizado
         this.setLocationRelativeTo(null);
+        controller = new UsuarioController(this);
+        btnAtuallizar.setEnabled(false);
+        btnRemover.setEnabled(false);
+        
+        try {
+            controller.getUsuario();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -45,7 +64,6 @@ public class telaUsuario extends javax.swing.JFrame {
         cbxTipo = new javax.swing.JComboBox<>();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        btnLimparCampos = new javax.swing.JButton();
         lblNome1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         lblNome2 = new javax.swing.JLabel();
@@ -54,8 +72,13 @@ public class telaUsuario extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         btnAtuallizar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
+        btnLimparCampos = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProduto = new javax.swing.JTable();
+        tblUsuario = new javax.swing.JTable();
+        panelBusca = new javax.swing.JPanel();
+        txtBusca = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        lblBusca = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,15 +167,28 @@ public class telaUsuario extends javax.swing.JFrame {
 
         lblCodigo.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         lblCodigo.setForeground(new java.awt.Color(255, 255, 255));
-        lblCodigo.setText("Codigo:");
+        lblCodigo.setText("Cod:");
 
         txtCodigo.setEditable(false);
         txtCodigo.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(35, 70, 72));
+        txtCodigo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtCodigoPropertyChange(evt);
+            }
+        });
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyReleased(evt);
+            }
+        });
 
         lblTipo.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         lblTipo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTipo.setText("Tipo:");
+        lblTipo.setText("*Tipo:");
 
         cbxTipo.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         cbxTipo.setForeground(new java.awt.Color(35, 70, 72));
@@ -166,7 +202,7 @@ public class telaUsuario extends javax.swing.JFrame {
 
         lblNome.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         lblNome.setForeground(new java.awt.Color(255, 255, 255));
-        lblNome.setText("Nome:");
+        lblNome.setText("*Nome:");
 
         txtNome.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtNome.setForeground(new java.awt.Color(35, 70, 72));
@@ -176,19 +212,9 @@ public class telaUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnLimparCampos.setBackground(new java.awt.Color(35, 70, 72));
-        btnLimparCampos.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
-        btnLimparCampos.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimparCampos.setText("Limpar Campos");
-        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparCamposActionPerformed(evt);
-            }
-        });
-
         lblNome1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         lblNome1.setForeground(new java.awt.Color(255, 255, 255));
-        lblNome1.setText("Usuario: ");
+        lblNome1.setText("*Usuário: ");
 
         txtUsuario.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(35, 70, 72));
@@ -200,7 +226,7 @@ public class telaUsuario extends javax.swing.JFrame {
 
         lblNome2.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         lblNome2.setForeground(new java.awt.Color(255, 255, 255));
-        lblNome2.setText("Senha:");
+        lblNome2.setText("*Senha:");
 
         txtSenha.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
 
@@ -212,27 +238,32 @@ public class telaUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProdutoLayout.createSequentialGroup()
-                        .addComponent(lblNome1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblNome2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSenha)
-                        .addGap(238, 238, 238)
-                        .addComponent(btnLimparCampos))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelProdutoLayout.createSequentialGroup()
-                        .addComponent(lblCodigo)
+                        .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelProdutoLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(lblTipo))
+                            .addGroup(panelProdutoLayout.createSequentialGroup()
+                                .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome2)
+                                    .addComponent(lblCodigo, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panelProdutoLayout.createSequentialGroup()
+                                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblNome)
+                                        .addGap(109, 109, 109))
+                                    .addGroup(panelProdutoLayout.createSequentialGroup()
+                                        .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbxTipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(48, 48, 48)
+                                        .addComponent(lblNome1)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNome)))
+                        .addComponent(txtUsuario)))
                 .addContainerGap())
         );
         panelProdutoLayout.setVerticalGroup(
@@ -242,20 +273,19 @@ public class telaUsuario extends javax.swing.JFrame {
                 .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigo)
                     .addComponent(lblCodigo)
-                    .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTipo)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLimparCampos)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProdutoLayout.createSequentialGroup()
-                        .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNome1)
-                            .addComponent(lblNome2)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                .addGap(13, 13, 13)
+                .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTipo)
+                    .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome1))
+                .addGap(19, 19, 19)
+                .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNome2)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         panelAcoes.setBackground(new java.awt.Color(35, 70, 72));
@@ -264,7 +294,7 @@ public class telaUsuario extends javax.swing.JFrame {
         btnRegistrar.setBackground(new java.awt.Color(35, 70, 72));
         btnRegistrar.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrar.setText("Incluir Usuarios");
+        btnRegistrar.setText("Incluir Usuário");
         btnRegistrar.setActionCommand("Registrar Item");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,24 +305,49 @@ public class telaUsuario extends javax.swing.JFrame {
         btnAtuallizar.setBackground(new java.awt.Color(35, 70, 72));
         btnAtuallizar.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
         btnAtuallizar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAtuallizar.setText("Atualizar Usuario");
+        btnAtuallizar.setText("Atualizar Usuário");
+        btnAtuallizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtuallizarActionPerformed(evt);
+            }
+        });
 
         btnRemover.setBackground(new java.awt.Color(35, 70, 72));
         btnRemover.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
         btnRemover.setForeground(new java.awt.Color(255, 255, 255));
-        btnRemover.setText("Remover Usuario");
+        btnRemover.setText("Remover Usuário");
+
+        btnLimparCampos.setBackground(new java.awt.Color(35, 70, 72));
+        btnLimparCampos.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
+        btnLimparCampos.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimparCampos.setText("Limpar Campos");
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAcoesLayout = new javax.swing.GroupLayout(panelAcoes);
         panelAcoes.setLayout(panelAcoesLayout);
         panelAcoesLayout.setHorizontalGroup(
             panelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAcoesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegistrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAtuallizar)
-                .addGap(2, 2, 2)
-                .addComponent(btnRemover))
+                .addContainerGap()
+                .addGroup(panelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAcoesLayout.createSequentialGroup()
+                        .addGroup(panelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAtuallizar)
+                            .addComponent(btnRemover))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelAcoesLayout.createSequentialGroup()
+                        .addGroup(panelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelAcoesLayout.createSequentialGroup()
+                                .addGap(0, 2, Short.MAX_VALUE)
+                                .addComponent(btnRegistrar))
+                            .addGroup(panelAcoesLayout.createSequentialGroup()
+                                .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
 
         panelAcoesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnRegistrar, btnRemover});
@@ -301,57 +356,103 @@ public class telaUsuario extends javax.swing.JFrame {
             panelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAcoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAtuallizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelAcoesLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAtuallizar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLimparCampos, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
+        tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Tipo", "Nome"
+                "Código", "Tipo", "Nome", "Usuário"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblProduto);
+        tblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsuarioMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblUsuario);
+
+        panelBusca.setBackground(new java.awt.Color(35, 70, 72));
+        panelBusca.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "Busca", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        txtBusca.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        txtBusca.setForeground(new java.awt.Color(35, 70, 72));
+
+        btnBuscar.setBackground(new java.awt.Color(35, 70, 72));
+        btnBuscar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.setPreferredSize(new java.awt.Dimension(65, 31));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        lblBusca.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        lblBusca.setForeground(new java.awt.Color(255, 255, 255));
+        lblBusca.setText("Nome/Usuario: ");
+
+        javax.swing.GroupLayout panelBuscaLayout = new javax.swing.GroupLayout(panelBusca);
+        panelBusca.setLayout(panelBuscaLayout);
+        panelBuscaLayout.setHorizontalGroup(
+            panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBuscaLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(lblBusca)
+                .addGap(18, 18, 18)
+                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+        );
+        panelBuscaLayout.setVerticalGroup(
+            panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBuscaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblBusca))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPrincipalLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
+                        .addComponent(panelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPrincipalLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane2)))
-                .addGap(15, 15, 15))
-            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
                         .addComponent(panelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -359,18 +460,19 @@ public class telaUsuario extends javax.swing.JFrame {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)))
-                .addContainerGap())
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(panelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -384,7 +486,7 @@ public class telaUsuario extends javax.swing.JFrame {
             .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(1124, 740));
+        setSize(new java.awt.Dimension(1229, 716));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -400,19 +502,22 @@ public class telaUsuario extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // Se nao tiver campos vazios
         if (!validaCamposVazios()){
-            String nomeProduto = txtNome.getText();
-            String tipo = cbxTipo.getSelectedItem().toString();
-            String usuario = txtUsuario.getText();
-            String senha = txtSenha.getText();
+            
+            try {
+                controller.createUsuario();
+                controller.getUsuario();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
         // Limpando os campos
-        txtNome.setText("");
-        cbxTipo.setSelectedIndex(0);
-        txtUsuario.setText("");
-        txtSenha.setText("");
+        UsuarioHelper helper = new UsuarioHelper(this);
+        helper.limparTela();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void cbxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoActionPerformed
@@ -426,6 +531,63 @@ public class telaUsuario extends javax.swing.JFrame {
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try {
+            // Defnindo texto para efetuar busca
+            controller.getUsuario();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnAtuallizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtuallizarActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            controller.updateUsuario();
+            controller.getUsuario();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnAtuallizarActionPerformed
+
+    private void tblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuarioMouseClicked
+        // TODO add your handling code here:
+        
+               int linha = tblUsuario.getSelectedRow(); //retorna um inteiro
+       
+       
+       int codigo =  (int) tblUsuario.getValueAt(linha,0); 
+       Object tipo = (String) tblUsuario.getValueAt(linha,1); 
+       Object nome = (String) tblUsuario.getValueAt(linha,2); 
+       Object usuario = (String) tblUsuario.getValueAt(linha,3); 
+       
+       
+       txtCodigo.setText(String.valueOf(codigo));
+       txtNome.setText((String) nome);
+       txtUsuario.setText((String) usuario);
+       cbxTipo.setSelectedItem(tipo);
+    }//GEN-LAST:event_tblUsuarioMouseClicked
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtCodigoKeyTyped
+
+    private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtCodigoKeyReleased
+
+    private void txtCodigoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtCodigoPropertyChange
+        // TODO add your handling code here:
+                
+                
+        btnAtuallizar.setEnabled(true);
+        btnRemover.setEnabled(true);
+    }//GEN-LAST:event_txtCodigoPropertyChange
 
     /**
      * @param args the command line arguments
@@ -494,6 +656,7 @@ public class telaUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtuallizar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRemover;
@@ -504,19 +667,85 @@ public class telaUsuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblBusca;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;
     private javax.swing.JLabel lblNome2;
     private javax.swing.JLabel lblTipo;
     private javax.swing.JPanel panelAcoes;
+    private javax.swing.JPanel panelBusca;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelProduto;
     private javax.swing.JPanel panelTitulo;
-    private javax.swing.JTable tblProduto;
+    private javax.swing.JTable tblUsuario;
+    private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNome;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public JComboBox<String> getCbxTipo() {
+        return cbxTipo;
+    }
+
+    public void setCbxTipo(JComboBox<String> cbxTipo) {
+        this.cbxTipo = cbxTipo;
+    }
+
+    public JTextField getTxtNome() {
+        return txtNome;
+    }
+
+    public void setTxtNome(JTextField txtNome) {
+        this.txtNome = txtNome;
+    }
+
+    public JPasswordField getTxtSenha() {
+        return txtSenha;
+    }
+
+    public void setTxtSenha(JPasswordField txtSenha) {
+        this.txtSenha = txtSenha;
+    }
+
+    public JTextField getTxtUsuario() {
+        return txtUsuario;
+    }
+
+    public void setTxtUsuario(JTextField txtUsuario) {
+        this.txtUsuario = txtUsuario;
+    }
+
+    public JTextField getTxtCodigo() {
+        return txtCodigo;
+    }
+
+    public void setTxtCodigo(JTextField txtCodigo) {
+        this.txtCodigo = txtCodigo;
+    }
+    
+    public void exibeMensagemAtencao(String mensagem) {
+         JOptionPane.showMessageDialog(this, mensagem, "Aviso", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public JTable getTblUsuario() {
+        return tblUsuario;
+    }
+
+    public void setTblUsuario(JTable tblUsuario) {
+        this.tblUsuario = tblUsuario;
+    }
+
+    public JTextField getTxtBusca() {
+        return txtBusca;
+    }
+
+    public void setTxtBusca(JTextField txtBusca) {
+        this.txtBusca = txtBusca;
+    }
+
+
+
 }

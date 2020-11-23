@@ -5,8 +5,14 @@
  */
 package br.senac.tads.ads.pi2.view;
 
+import br.senac.sp.tads.ads.pi2.controller.LoginController;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -14,12 +20,15 @@ import javax.swing.JOptionPane;
  */
 public class telaLogin extends javax.swing.JFrame {
 
+    private final LoginController controller;
+
     /**
      * Creates new form telaLogin
      */
     public telaLogin() {
         initComponents();
         this.setResizable(false);
+        controller = new LoginController(this);
     }
 
     /**
@@ -171,17 +180,30 @@ public class telaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void butEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butEntrarActionPerformed
-        // TODO add your handling code here:
-        String usuario = txtUsuario.getText();
-        String senha = txtSenha.getText();
-        
-        if (validaUsuario(usuario,senha)){
+
+
+        try {
+            /*
+            // TODO add your handling code here:
+            String usuario = txtUsuario.getText();
+            String senha = txtSenha.getText();
+            
+            if (validaUsuario(usuario,senha)){
             telaInicial tela_inicial = new telaInicial();
             tela_inicial.setVisible(true);
             telaLogin.this.dispose();
-        } else {
+            } else {
             JOptionPane.showMessageDialog(this, "Usuario ou senha incorreto.");
+            }
+            */
+            
+            controller.entrarNoSistema();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(telaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
+         
+         
     }//GEN-LAST:event_butEntrarActionPerformed
 
     public void keyPressed(KeyEvent evt) {  
@@ -248,4 +270,25 @@ public class telaLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public JPasswordField getTxtSenha() {
+        return txtSenha;
+    }
+
+    public void setTxtSenha(JPasswordField txtSenha) {
+        this.txtSenha = txtSenha;
+    }
+
+    public JTextField getTxtUsuario() {
+        return txtUsuario;
+    }
+
+    public void setTxtUsuario(JTextField txtUsuario) {
+        this.txtUsuario = txtUsuario;
+    }
+
+    public void exibeMensagemAtencao(String mensagem) {
+         JOptionPane.showMessageDialog(this, mensagem, "Aviso", JOptionPane.WARNING_MESSAGE);
+    }
+
 }

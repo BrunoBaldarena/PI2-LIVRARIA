@@ -5,7 +5,7 @@
  */
 package br.senac.sp.tads.ads.pi2.dao;
 
-import br.senac.sp.tads.ads.pi2.controller.GerenciadorConexao;
+import br.senac.sp.tads.ads.pi2.utils.GerenciadorConexao;
 import br.senac.sp.tads.ads.pi2.modal.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

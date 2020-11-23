@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.ads.pi2.controller;
+package br.senac.sp.tads.ads.pi2.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ public class GerenciadorConexao {
     public static String DRIVER = "com.mysql.cj.jdbc.Driver";  //A partir da versao 8.0, mudou para com.mysql.cj.jdbc.Driver (Connector/J)                   
     
     public static String SERVER = "localhost";
-    public static String DATABASE = "lojainformatica";              //nome do seu banco de dados
+    public static String DATABASE = "librariadepapel";              //nome do seu banco de dados
     
     public static String LOGIN = "root";                     //nome de um usuário de seu BD      
     public static String SENHA = "123456";                         //sua senha de acesso
