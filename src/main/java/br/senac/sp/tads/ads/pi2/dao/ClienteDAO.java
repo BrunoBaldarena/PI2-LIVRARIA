@@ -36,8 +36,7 @@ public class ClienteDAO {
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
             ps.setString(3, cliente.getSexo());
-            //ps.setString(4, cliente.getDataNascimento());
-            ps.setString(4, "2020-02-02"); // tmp
+            ps.setString(4, cliente.getDataNascimento());
             ps.setString(5, cliente.getTelefone());
             ps.setString(6, cliente.getLogadoutro());
             ps.setString(7, cliente.getCep());
@@ -73,8 +72,7 @@ public class ClienteDAO {
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
             ps.setString(3, cliente.getSexo());
-            //ps.setString(4, cliente.getDataNascimento());
-            ps.setString(4, "2020-02-02"); // tmp
+            ps.setString(4, cliente.getDataNascimento());
             ps.setString(5, cliente.getTelefone());
             ps.setString(6, cliente.getLogadoutro());
             ps.setString(7, cliente.getCep());

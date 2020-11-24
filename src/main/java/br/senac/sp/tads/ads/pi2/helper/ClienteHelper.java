@@ -6,7 +6,9 @@
 package br.senac.sp.tads.ads.pi2.helper;
 
 import br.senac.sp.tads.ads.pi2.modal.Cliente;
+import br.senac.sp.tads.ads.pi2.utils.Conversores;
 import br.senac.tads.ads.pi2.view.telaCliente;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,7 +36,7 @@ public class ClienteHelper {
         }        
         String email = view.getTxtNomeCliente().getText();
         String cpf = view.getTxtCPF().getText().replaceAll(".","").replaceAll("-","");
-        String dataNascimento = view.getTxtDtNascimento().getText().replaceAll("/","");
+        String dataNascimento = Conversores.convertDate(view.getTxtDtNascimento().getText());
         String telefone = view.getTxtTelefone().getText();
         String cep = view.getTxtCEP().getText();
         String logadouro = view.getTxtLogadouro().getText();
