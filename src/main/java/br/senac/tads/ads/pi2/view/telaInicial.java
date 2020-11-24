@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
 
 /**
@@ -302,8 +304,14 @@ public class telaInicial extends javax.swing.JFrame {
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         // TODO add your handling code here:
-        telaCliente c = new telaCliente();
-        c.setVisible(true);
+        telaCliente c;
+        try {
+            c = new telaCliente();
+            c.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         //telaInicial.this.setVisible(false);
         //telaInicial.this.dispose();
     }//GEN-LAST:event_btnClienteActionPerformed

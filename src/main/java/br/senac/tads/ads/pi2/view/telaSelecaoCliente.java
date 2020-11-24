@@ -7,6 +7,8 @@ package br.senac.tads.ads.pi2.view;
 
 import java.awt.event.KeyEvent;
 import static java.lang.String.valueOf;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -276,8 +278,14 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        telaCliente c = new telaCliente();
-        c.setVisible(true);
+        telaCliente c;
+        try {
+            c = new telaCliente();
+            c.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaSelecaoCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
