@@ -79,4 +79,10 @@ public class ValidaCPF {
             CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
         }
     
+        public String trataCPF(String CPF){
+            CPF = CPF.replace(" ", "");//Tira espaco
+            CPF = CPF.replace(".", "");//Tira ponto
+            CPF = CPF.replace("-", "");//Tira barra
+            return CPF;
+        }
 }

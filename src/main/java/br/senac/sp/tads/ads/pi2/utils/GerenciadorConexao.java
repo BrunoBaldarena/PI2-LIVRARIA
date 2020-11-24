@@ -24,7 +24,7 @@ public class GerenciadorConexao {
     public static String DATABASE = "librariadepapel";              //nome do seu banco de dados
     
     public static String LOGIN = "root";                     //nome de um usuário de seu BD      
-    public static String SENHA = "123456";                         //sua senha de acesso
+    public static String SENHA = "";                         //sua senha de acesso
     
     public static String URL = "";
     

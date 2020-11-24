@@ -5,6 +5,8 @@
  */
 package br.senac.tads.ads.pi2.view;
 
+import br.senac.sp.tads.ads.pi2.controller.ClienteController;
+import br.senac.sp.tads.ads.pi2.helper.ClienteHelper;
 import br.senac.sp.tads.ads.pi2.modal.Cliente;
 import br.senac.sp.tads.ads.pi2.utils.ValidaCPF;
 import java.awt.event.KeyEvent;
@@ -13,7 +15,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -26,18 +36,31 @@ public class telaCliente extends javax.swing.JFrame {
     String cidade;
     String uf;
     
+    private final ClienteController controller;
+    private final ClienteHelper helper;
 
     /**
      * Creates new form telaCliente
      */
-    public telaCliente() {
+    public telaCliente() throws ClassNotFoundException {
         initComponents();
         rdFeminino.setSelected(true);
-        //this.setExtendedState(MAXIMIZED_BOTH);
-       // this.setBounds(250, 150, 1405, 760);
         this.setLocationRelativeTo(null);
-        pack();
+        //pack();
+        controller = new ClienteController(this);
+        btnAtuallizar.setEnabled(false);
+        btnRemover.setEnabled(false);
+        
+        try{
+            controller.getCliente();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.helper = new ClienteHelper(this);
     }
+        
+    
     
      public  boolean validaCamposVazios(){
         
@@ -47,7 +70,7 @@ public class telaCliente extends javax.swing.JFrame {
         
         if (txtNomeCliente.getText().isEmpty()) cv += ", Nome";
         if (txtEmail.getText().isEmpty()) cv += ", E-mail";
-         if (txtCPF.getText().equals("   .   .   -  ")) cv += ", CPF";
+        if (txtCPF.getText().equals("   .   .   -  ")) cv += ", CPF";
         if (txtDtNascimento.getText().equals("  /  /    "))cv += ", Data de Nascimento";
         if (txtTelefone.getText().equals("(  )     -    "))cv += ", Telefone";
         if (txtCEP.getText().isEmpty())cv += ", CEP";
@@ -213,7 +236,7 @@ public class telaCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, Short.MAX_VALUE))
         );
         panelBuscaLayout.setVerticalGroup(
             panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,6 +268,11 @@ public class telaCliente extends javax.swing.JFrame {
         btnAtuallizar.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
         btnAtuallizar.setForeground(new java.awt.Color(255, 255, 255));
         btnAtuallizar.setText("Atualizar Item");
+        btnAtuallizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtuallizarActionPerformed(evt);
+            }
+        });
 
         btnRemover.setBackground(new java.awt.Color(35, 70, 72));
         btnRemover.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
@@ -632,15 +660,20 @@ public class telaCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "CPF", "E-mail", "Sexo", "Tel/Cel", "UF"
+                "Codigo", "Nome", "Sexo", "E-Mail", "CPF", "Data Nascimento", "Telefone", "CEP", "Logadouro", "Bairro", "Cidade", "UF", "Complemento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tableCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableClienteMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tableCliente);
@@ -700,7 +733,7 @@ public class telaCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
         );
 
         pack();
@@ -805,23 +838,14 @@ public class telaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeClienteKeyTyped
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        txtCodCliente.setText("");
-        txtNomeCliente.setText("");
-        txtEmail.setText("");
-        txtLogadouro.setText("");
-        txtCEP.setText("");
-        txtBairro.setText("");
-        txtCidade.setText("");
-        txtBairro.setText("");
-        txtDtNascimento.setText("");
-        txtCPF.setText("");
-        txtTelefone.setText("");
-        txtUF.setText("");
-        txtComplemento.setText("");
+       
+        ClienteHelper helper = new ClienteHelper(this);
+        helper.limparTela();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
+        
 
     }//GEN-LAST:event_btnRemoverActionPerformed
 
@@ -829,9 +853,6 @@ public class telaCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
 
          if (!validaCamposVazios()) {
-
-
-
             //Valida o se o E-mail é válido exemplo@exemplo.com
             String EMAIL_PATTERN
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -851,40 +872,17 @@ public class telaCliente extends javax.swing.JFrame {
                 
               JOptionPane.showMessageDialog(this, "CPF inválido!", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-
-            //Verifico qual radioButton foi selecionado
-
-            String sexo = "";
-            if (rdMasculino.isSelected()) {
-                sexo = "Masculino";
-            }
-
-            if (rdFeminino.isSelected()) {
-                sexo = "Feminino";
-            }
-
-            if (rdOutros.isSelected()) {
-                sexo = "Outros";
-            }
             
             
-            //Intanciando a classe model Cliente
-            Cliente cliente = new Cliente();
+             try {
+                 controller.createCliente();
+                 controller.getCliente();
+             } catch (ClassNotFoundException ex) {
+                 Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            
 
-            //Setando os valores nas váriaveis da model
-
-            cliente.setBairro(txtBairro.getText());
-            cliente.setCep(txtCEP.getText());
-            cliente.setCidade(txtCidade.getText());
-            cliente.setComplemento(txtComplemento.getText());
-            cliente.setCpf(txtCPF.getText());
-            cliente.setDataNascimento(txtDtNascimento.getText());
-            cliente.setLogadoutro(txtLogadouro.getText());
-            cliente.setNome(txtNomeCliente.getText());
-            cliente.setSexo(sexo);
-            cliente.setTelefone(txtTelefone.getText());
-            cliente.setUf(txtUF.getText());
-
+            
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -916,15 +914,51 @@ public class telaCliente extends javax.swing.JFrame {
         String busca = txtBusca.getText();
         String tipo = null;
         try {
-            Integer.parseInt(txtBusca.getText());
+            Integer.parseInt(busca);
             tipo = "Codigo";
 
         } catch (NumberFormatException e){
             tipo = "Nome";
         } finally {
-            JOptionPane.showMessageDialog(this, tipo);
+            try {
+                controller.getCliente();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnAtuallizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtuallizarActionPerformed
+        // TODO add your handling code here:
+        try {
+            controller.updateCliente();
+            controller.getCliente();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAtuallizarActionPerformed
+
+    private void tableClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClienteMouseClicked
+        // TODO add your handling code here:
+        int linhaSelecionada = tableCliente.getSelectedRow();
+        
+        Cliente cliente = new Cliente();
+        cliente.setId((int) tableCliente.getValueAt(linhaSelecionada,0));
+        cliente.setNome((String) tableCliente.getValueAt(linhaSelecionada,1));
+        cliente.setSexo((String) tableCliente.getValueAt(linhaSelecionada,2));
+        cliente.setEmail((String) tableCliente.getValueAt(linhaSelecionada,3));
+        cliente.setCpf((String) tableCliente.getValueAt(linhaSelecionada,4));
+        cliente.setDataNascimento((String) tableCliente.getValueAt(linhaSelecionada,5));
+        cliente.setTelefone((String) tableCliente.getValueAt(linhaSelecionada,6));
+        cliente.setCep((String) tableCliente.getValueAt(linhaSelecionada,7));
+        cliente.setLogadoutro((String) tableCliente.getValueAt(linhaSelecionada,8));
+        cliente.setBairro((String) tableCliente.getValueAt(linhaSelecionada,9));
+        cliente.setCidade((String) tableCliente.getValueAt(linhaSelecionada,10));
+        cliente.setUf((String) tableCliente.getValueAt(linhaSelecionada,11));
+        cliente.setComplemento((String) tableCliente.getValueAt(linhaSelecionada,12));
+        
+        helper.setarModelo(cliente);
+    }//GEN-LAST:event_tableClienteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -952,11 +986,16 @@ public class telaCliente extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(telaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaCliente().setVisible(true);
+                try {
+                    new telaCliente().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -1010,7 +1049,83 @@ public class telaCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtUF;
     // End of variables declaration//GEN-END:variables
 
+    public void exibeMensagemAtencao(String mensagem) {
+         JOptionPane.showMessageDialog(this, mensagem, "Aviso", JOptionPane.WARNING_MESSAGE);
+    }
+    
+    public ButtonGroup getGrupoSexo() {
+        return grupoSexo;
+    }
 
+    public JTextField getTxtBairro() {
+        return txtBairro;
+    }
+
+    public JTextField getTxtBusca() {
+        return txtBusca;
+    }
+
+    public JFormattedTextField getTxtCEP() {
+        return txtCEP;
+    }
+
+    public JFormattedTextField getTxtCPF() {
+        return txtCPF;
+    }
+
+    public JTextField getTxtCidade() {
+        return txtCidade;
+    }
+
+    public JTextField getTxtCodCliente() {
+        return txtCodCliente;
+    }
+
+    public JTextField getTxtComplemento() {
+        return txtComplemento;
+    }
+
+    public JFormattedTextField getTxtDtNascimento() {
+        return txtDtNascimento;
+    }
+
+    public JTextField getTxtEmail() {
+        return txtEmail;
+    }
+
+    public JTextField getTxtLogadouro() {
+        return txtLogadouro;
+    }
+
+    public JTextField getTxtNomeCliente() {
+        return txtNomeCliente;
+    }
+
+    public JFormattedTextField getTxtTelefone() {
+        return txtTelefone;
+    }
+
+    public JTextField getTxtUF() {
+        return txtUF;
+    }
+
+    public JRadioButton getRdFeminino() {
+        return rdFeminino;
+    }
+
+    public JRadioButton getRdMasculino() {
+        return rdMasculino;
+    }
+
+    public JRadioButton getRdOutros() {
+        return rdOutros;
+    }
+
+    public JTable getTableCliente() {
+        return tableCliente;
+    }
+
+    
    
     
 }
