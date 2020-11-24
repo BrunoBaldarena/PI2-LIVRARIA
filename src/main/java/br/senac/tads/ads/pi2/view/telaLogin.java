@@ -78,6 +78,11 @@ public class telaLogin extends javax.swing.JFrame {
                 txtSenhaActionPerformed(evt);
             }
         });
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyTyped(evt);
+            }
+        });
 
         butEntrar.setBackground(new java.awt.Color(35, 70, 72));
         butEntrar.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
@@ -221,6 +226,10 @@ public class telaLogin extends javax.swing.JFrame {
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
+
+    private void txtSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaKeyTyped
 
     /**
      * @param args the command line arguments

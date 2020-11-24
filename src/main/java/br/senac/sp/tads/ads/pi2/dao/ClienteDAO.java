@@ -27,7 +27,7 @@ public class ClienteDAO {
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
 
-        String SQL = "INSERT INTO cliente (nome, cpf, sexo, dataNascimento, telefone, logadoutro, cep, cidade, bairro,uf,complemento,email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+        String SQL = "INSERT INTO cliente (nome, cpf, sexo, dataNascimento, telefone, logadouro, cep, cidade, bairro,uf,complemento,email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
 
         PreparedStatement ps = conexao.prepareStatement(SQL);
 
@@ -36,7 +36,8 @@ public class ClienteDAO {
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
             ps.setString(3, cliente.getSexo());
-            ps.setString(4, cliente.getDataNascimento());
+            //ps.setString(4, cliente.getDataNascimento());
+            ps.setString(4, "2020-02-02"); // tmp
             ps.setString(5, cliente.getTelefone());
             ps.setString(6, cliente.getLogadoutro());
             ps.setString(7, cliente.getCep());
@@ -64,7 +65,7 @@ public class ClienteDAO {
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
 
-        String SQL = "UPDATE cliente SET nome=?, cpf=?, sexo=?, dataNascimento=?, telefone=?, logadoutro=?, cep=?, cidade=?, bairro=?,uf=?,complemento=?,email=? WHERE id=?;";
+        String SQL = "UPDATE cliente SET nome=?, cpf=?, sexo=?, dataNascimento=?, telefone=?, logadouro=?, cep=?, cidade=?, bairro=?,uf=?,complemento=?,email=? WHERE id=?;";
         PreparedStatement ps = conexao.prepareStatement(SQL);
 
         try {
@@ -72,7 +73,8 @@ public class ClienteDAO {
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
             ps.setString(3, cliente.getSexo());
-            ps.setString(4, cliente.getDataNascimento());
+            //ps.setString(4, cliente.getDataNascimento());
+            ps.setString(4, "2020-02-02"); // tmp
             ps.setString(5, cliente.getTelefone());
             ps.setString(6, cliente.getLogadoutro());
             ps.setString(7, cliente.getCep());
@@ -102,7 +104,8 @@ public class ClienteDAO {
 
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
-        String SQL = "SELECT * FROM cliente WHERE nome LIKE '%" + textoBusca + "% OR cpf LIKE '%" + textoBusca + "%';";
+        String SQL = "SELECT * FROM cliente";
+        //WHERE nome LIKE '%" + textoBusca + "% OR cpf LIKE '%" + textoBusca + "%';";
 
         Statement st = conexao.createStatement();
         ResultSet rs = st.executeQuery(SQL);
