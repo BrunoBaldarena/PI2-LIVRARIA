@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,8 +46,9 @@ public class ClienteDAO {
             ps.setString(10, cliente.getUf());
             ps.setString(11, cliente.getComplemento());
             ps.setString(12, cliente.getEmail());
-
-            ps.execute();
+            
+            boolean sucess = ps.execute();     // Executa o Comando
+            if(sucess) JOptionPane.showMessageDialog(null, "Cliente Incluido com Sucesso");
 
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -81,9 +83,10 @@ public class ClienteDAO {
             ps.setString(10, cliente.getUf());
             ps.setString(11, cliente.getComplemento());
             ps.setString(12, cliente.getEmail());
-            ps.setString(13, Integer.toString(cliente.getId()));
+            ps.setInt(13, cliente.getId());
 
-            ps.execute();
+            int linhasAfetadas = ps.executeUpdate();     // Executa o Comando
+            if(linhasAfetadas > 0) JOptionPane.showMessageDialog(null, "Cliente Atualizado com Sucesso");
 
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -150,18 +153,16 @@ public class ClienteDAO {
         Connection conexao = GerenciadorConexao.CONEXAO;
         String sql = "DELETE FROM cliente WHERE id=?;";
 
-        PreparedStatement pst = conexao.prepareStatement(sql);
-
-        try {
+        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
 
             pst.setInt(1, id);
-
-            pst.execute();
-
+            
+            int linhasAfetadas = pst.executeUpdate();     // Executa o Comando
+            if(linhasAfetadas > 0) JOptionPane.showMessageDialog(null, "Cliente Excluido com Sucesso");
+            
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            pst.close();
             GerenciadorConexao.fecharConexao();
 
         }

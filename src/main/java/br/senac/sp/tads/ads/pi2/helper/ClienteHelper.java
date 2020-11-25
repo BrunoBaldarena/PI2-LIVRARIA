@@ -61,6 +61,7 @@ public class ClienteHelper {
         modelo.setBairro(bairro);
         modelo.setCidade(cidade);
         modelo.setUf(uf);
+        modelo.setId(codigo);
         
         if (!"".equals(complemento)){
             modelo.setComplemento(complemento);

@@ -843,7 +843,18 @@ public class telaCliente extends javax.swing.JFrame {
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
-        
+        if(!txtCodCliente.getText().equals("")){
+            try {
+                controller.deleteCliente();
+                controller.getCliente();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Para atualizar, por favor selecione um cliente acima!", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnRemoverActionPerformed
 
