@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author victorsantos
  */
 public class Conversores {
-    public static String convertDate(String data){
+    public static String convertDate(String data){      // Define data para padrao para inclusao no banco de dados
         data = data.replaceAll("/","").replaceAll(" ", "");
         
         String dia = data.substring(0,2);
@@ -24,4 +24,18 @@ public class Conversores {
             
         return dataConvertida;
     }
+    
+    public static String convertDateToView(String data){
+        data = data.replaceAll("-","");
+        
+        String dia = data.substring(6,8);
+        String mes = data.substring(4,6);
+        String ano = data.substring(0,4);
+        
+        
+        String dataConvertida = dia + "/" + mes + "/" + ano;
+            
+        return dataConvertida;
+    }
 }
+

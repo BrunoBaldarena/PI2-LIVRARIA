@@ -27,7 +27,7 @@ public class ClienteDAO {
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
 
-        String SQL = "INSERT INTO cliente (nome, cpf, sexo, dataNascimento, telefone, logadouro, cep, cidade, bairro,uf,complemento,email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+        String SQL = "INSERT INTO cliente (nome, cpf, sexo, dataNascimento, telefone, logadouro, cep, cidade, bairro, uf, complemento, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
 
         PreparedStatement ps = conexao.prepareStatement(SQL);
 

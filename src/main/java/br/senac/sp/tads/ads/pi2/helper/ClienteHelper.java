@@ -34,8 +34,8 @@ public class ClienteHelper {
         } else{
             sexo = "Outro";
         }        
-        String email = view.getTxtNomeCliente().getText();
-        String cpf = view.getTxtCPF().getText().replaceAll(".","").replaceAll("-","");
+        String email = view.getTxtEmail().getText();
+        String cpf = view.getTxtCPF().getText().replaceAll("\\.","").replaceAll("-","");
         String dataNascimento = Conversores.convertDate(view.getTxtDtNascimento().getText());
         String telefone = view.getTxtTelefone().getText();
         String cep = view.getTxtCEP().getText();
@@ -76,7 +76,8 @@ public class ClienteHelper {
         String sexo = modelo.getSexo();
         String email = modelo.getEmail();
         String cpf = modelo.getCpf();
-        String nascimento = modelo.getDataNascimento();
+        String nascimento = Conversores.convertDateToView(modelo.getDataNascimento());
+        JOptionPane.showMessageDialog(null, nascimento);
         String telefone = modelo.getTelefone();
         String cep = modelo.getCep();
         String logadouro = modelo.getLogadoutro();

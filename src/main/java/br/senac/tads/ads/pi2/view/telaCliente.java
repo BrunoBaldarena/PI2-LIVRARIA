@@ -859,30 +859,23 @@ public class telaCliente extends javax.swing.JFrame {
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
             String email = txtEmail.getText();
+            String msg = "| ";
 
-            if (!email.matches(EMAIL_PATTERN)) {
-                JOptionPane.showMessageDialog(this, "E-mail inválido!", "Aviso", JOptionPane.WARNING_MESSAGE);
-
-            }
-            
+            if (!email.matches(EMAIL_PATTERN)) msg += "E-mail inválido! | ";
             
             //Valida se o CPF é válido
-  
-            if(!ValidaCPF.isCPF(txtCPF.getText())){
-                
-              JOptionPane.showMessageDialog(this, "CPF inválido!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            if(!ValidaCPF.isCPF(txtCPF.getText())) msg += "CPF inválido! | ";
+            
+            if(!msg.equals("| ")) {
+                JOptionPane.showMessageDialog(this, msg, "Aviso", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    controller.createCliente();
+                    controller.getCliente();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            
-            
-             try {
-                 controller.createCliente();
-                 controller.getCliente();
-             } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
-             }
-            
-
-            
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
