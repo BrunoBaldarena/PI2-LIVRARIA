@@ -77,7 +77,6 @@ public class ClienteHelper {
         String email = modelo.getEmail();
         String cpf = modelo.getCpf();
         String nascimento = Conversores.convertDateToView(modelo.getDataNascimento());
-        JOptionPane.showMessageDialog(null, nascimento);
         String telefone = modelo.getTelefone();
         String cep = modelo.getCep();
         String logadouro = modelo.getLogadoutro();

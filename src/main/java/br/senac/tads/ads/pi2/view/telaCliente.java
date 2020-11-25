@@ -44,12 +44,10 @@ public class telaCliente extends javax.swing.JFrame {
      */
     public telaCliente() throws ClassNotFoundException {
         initComponents();
-        rdFeminino.setSelected(true);
         this.setLocationRelativeTo(null);
         //pack();
         controller = new ClienteController(this);
-        btnAtuallizar.setEnabled(false);
-        btnRemover.setEnabled(false);
+        
         
         try{
             controller.getCliente();
@@ -923,12 +921,18 @@ public class telaCliente extends javax.swing.JFrame {
 
     private void btnAtuallizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtuallizarActionPerformed
         // TODO add your handling code here:
-        try {
-            controller.updateCliente();
-            controller.getCliente();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        if(!txtCodCliente.getText().equals("")){
+            try {
+                controller.updateCliente();
+                controller.getCliente();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Para atualizar, por favor selecione um cliente acima!", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
+        
+        
     }//GEN-LAST:event_btnAtuallizarActionPerformed
 
     private void tableClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClienteMouseClicked

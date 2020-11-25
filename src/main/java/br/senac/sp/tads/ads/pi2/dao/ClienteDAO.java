@@ -64,7 +64,7 @@ public class ClienteDAO {
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
 
-        String SQL = "UPDATE cliente SET nome=?, cpf=?, sexo=?, dataNascimento=?, telefone=?, logadouro=?, cep=?, cidade=?, bairro=?,uf=?,complemento=?,email=? WHERE id=?;";
+        String SQL = "UPDATE cliente SET nome=?, cpf=?, sexo=?, dataNascimento=?, telefone=?, logadouro=?, cep=?, cidade=?, bairro=? ,uf=?, complemento=?, email=? WHERE id=?;";
         PreparedStatement ps = conexao.prepareStatement(SQL);
 
         try {
@@ -81,7 +81,7 @@ public class ClienteDAO {
             ps.setString(10, cliente.getUf());
             ps.setString(11, cliente.getComplemento());
             ps.setString(12, cliente.getEmail());
-            ps.setInt(13, cliente.getId());
+            ps.setString(13, Integer.toString(cliente.getId()));
 
             ps.execute();
 
@@ -140,7 +140,6 @@ public class ClienteDAO {
         }
         return clientes;
     }
-
 
     public void deletar(int id)
             throws SQLException, Exception {
