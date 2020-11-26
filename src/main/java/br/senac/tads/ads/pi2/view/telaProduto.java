@@ -5,23 +5,143 @@
  */
 package br.senac.tads.ads.pi2.view;
 
+import br.senac.sp.tads.ads.pi2.controller.ProdutoController;
+import br.senac.sp.tads.ads.pi2.helper.ProdutoHelper;
+import br.senac.sp.tads.ads.pi2.modal.Produto;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
  * @author victorsantos
  */
 public class telaProduto extends javax.swing.JFrame {
+    
+    private final ProdutoController controller;
+    private final ProdutoHelper helper;
 
     /**
      * Creates new form telaLivros
      */
-    public telaProduto() {
+    public telaProduto()  {
         initComponents();
         pack();
         // Inicializando com o JFrame centralizado
         this.setLocationRelativeTo(null);
+        
+        controller = new ProdutoController(this);
+        
+        try{
+            controller.getProduto();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.helper = new ProdutoHelper(this);
+    }
+
+    public JComboBox<String> getCbxCategoria() {
+        return cbxCategoria;
+    }
+
+    public void setCbxCategoria(JComboBox<String> cbxCategoria) {
+        this.cbxCategoria = cbxCategoria;
+    }
+
+    public JComboBox<String> getCbxTipo() {
+        return cbxTipo;
+    }
+
+    public void setCbxTipo(JComboBox<String> cbxTipo) {
+        this.cbxTipo = cbxTipo;
+    }
+    
+    
+    public JTable getTblProduto() {
+        return tblProduto;
+    }
+
+    public void setTblProduto(JTable tblProduto) {
+        this.tblProduto = tblProduto;
+    }
+    
+    
+    public JFormattedTextField getTxtAno() {
+        return txtAno;
+    }
+
+    public void setTxtAno(JFormattedTextField txtAno) {
+        this.txtAno = txtAno;
+    }
+
+    public JTextField getTxtAutor() {
+        return txtAutor;
+    }
+
+    public void setTxtAutor(JTextField txtAutor) {
+        this.txtAutor = txtAutor;
+    }
+
+    public JTextField getTxtBusca() {
+        return txtBusca;
+    }
+
+    public void setTxtBusca(JTextField txtBusca) {
+        this.txtBusca = txtBusca;
+    }
+
+    public JTextField getTxtCodProduto() {
+        return txtCodProduto;
+    }
+
+    public void setTxtCodProduto(JTextField txtCodProduto) {
+        this.txtCodProduto = txtCodProduto;
+    }
+
+    public JTextField getTxtEditora() {
+        return txtEditora;
+    }
+
+    public void setTxtEditora(JTextField txtEditora) {
+        this.txtEditora = txtEditora;
+    }
+
+    public JTextField getTxtNome() {
+        return txtNome;
+    }
+
+    public void setTxtNome(JTextField txtNome) {
+        this.txtNome = txtNome;
+    }
+
+    public JTextField getTxtObeservacao() {
+        return txtObeservacao;
+    }
+
+    public void setTxtObeservacao(JTextField txtObeservacao) {
+        this.txtObeservacao = txtObeservacao;
+    }
+
+    public JFormattedTextField getTxtPreco() {
+        return txtPreco;
+    }
+
+    public void setTxtPreco(JFormattedTextField txtPreco) {
+        this.txtPreco = txtPreco;
+    }
+
+    public JFormattedTextField getTxtQtd() {
+        return txtQtd;
+    }
+
+    public void setTxtQtd(JFormattedTextField txtQtd) {
+        this.txtQtd = txtQtd;
     }
     
     public  boolean validaCamposVazios(){
@@ -203,15 +323,20 @@ public class telaProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Produto", "Autor", "Preco", "Tipo", "Categoria", " items Em Estoque"
+                "Codigo", "Produto", "Autor", "Editora", "Ano", "Preco", "Tipo", "Categoria", "Items Em Estoque", "Observação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProdutoMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblProduto);
@@ -281,11 +406,11 @@ public class telaProduto extends javax.swing.JFrame {
             }
         });
         txtPreco.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecoKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPrecoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecoKeyTyped(evt);
             }
         });
 
@@ -320,7 +445,7 @@ public class telaProduto extends javax.swing.JFrame {
         lblTipo1.setText("*Tipo:");
 
         txtQtd.setForeground(new java.awt.Color(35, 70, 72));
-        txtQtd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtQtd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtQtd.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtQtd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -515,11 +640,21 @@ public class telaProduto extends javax.swing.JFrame {
         btnAtuallizar.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
         btnAtuallizar.setForeground(new java.awt.Color(255, 255, 255));
         btnAtuallizar.setText("Atualizar Item");
+        btnAtuallizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtuallizarActionPerformed(evt);
+            }
+        });
 
         btnRemover.setBackground(new java.awt.Color(35, 70, 72));
         btnRemover.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
         btnRemover.setForeground(new java.awt.Color(255, 255, 255));
         btnRemover.setText("Remover Item");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setBackground(new java.awt.Color(35, 70, 72));
         btnLimparCampos.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
@@ -659,7 +794,9 @@ public class telaProduto extends javax.swing.JFrame {
         char c = evt.getKeyChar();
 
         if(((c < '0') || (c > '9') && (c != KeyEvent.VK_BACK_SPACE))){
-            evt.consume();
+            if(c != ',') {
+                evt.consume();
+            }           
 
         }
     }//GEN-LAST:event_txtPrecoKeyTyped
@@ -759,18 +896,19 @@ public class telaProduto extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // Se nao tiver campos vazios
         if (!validaCamposVazios()){
-            String nomeProduto = txtNome.getText();
-            String autor = txtObeservacao.getText();
-            String tipo = cbxTipo.getSelectedItem().toString();
-            String categoria = cbxCategoria.getSelectedItem().toString();
-            String observacao = txtObeservacao.getText();
-            String editora = txtEditora.getText();
-            int quantidade = Integer.parseInt(txtQtd.getText());
+            
+            try {
+                controller.createProduto();
+                controller.getProduto();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
         // Limpando os campos
+        txtCodProduto.setText("");
         txtPreco.setText("");
         txtObeservacao.setText("");
         txtNome.setText("");
@@ -780,22 +918,65 @@ public class telaProduto extends javax.swing.JFrame {
         txtAutor.setText("");
         txtEditora.setText("");
         txtQtd.setText("");
+        
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // Defnindo texto para efetuar busca
-        String busca = txtBusca.getText();
-        String tipo = null;
         try {
-            Integer.parseInt(txtBusca.getText());
-            tipo = "Codigo";
-
-        } catch (NumberFormatException e){
-            tipo = "Nome";
-        } finally {
-            JOptionPane.showMessageDialog(this, tipo);
+            // Defnindo texto para efetuar busca
+            controller.getProduto();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tblProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMouseClicked
+        // TODO add your handling code here:
+        int linhaSelecionada = tblProduto.getSelectedRow();
+           
+        Produto p = new Produto();
+        p.setId((int) tblProduto.getValueAt(linhaSelecionada,0));
+        p.setNome((String) tblProduto.getValueAt(linhaSelecionada, 1));
+        p.setAutor((String)tblProduto.getValueAt(linhaSelecionada, 2));
+        p.setEditora((String)tblProduto.getValueAt(linhaSelecionada, 3));
+        p.setAno((int)tblProduto.getValueAt(linhaSelecionada, 4));
+        p.setPreco((Double) tblProduto.getValueAt(linhaSelecionada, 5));
+        p.setTipo((String) tblProduto.getValueAt(linhaSelecionada, 6));
+        p.setCategoria((String) tblProduto.getValueAt(linhaSelecionada, 7));
+        p.setQuantidade((int) tblProduto.getValueAt(linhaSelecionada, 8));
+        p.setObservacao((String) tblProduto.getValueAt(linhaSelecionada, 9));
+        
+        cbxTipo.setSelectedItem((String) tblProduto.getValueAt(linhaSelecionada, 6));
+        cbxCategoria.setSelectedItem((String) tblProduto.getValueAt(linhaSelecionada, 7));
+        
+        
+        helper.setarModelo(p);
+    }//GEN-LAST:event_tblProdutoMouseClicked
+
+    private void btnAtuallizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtuallizarActionPerformed
+        // TODO add your handling code here:
+        if (!validaCamposVazios()){
+            
+            try {
+                controller.updateProduto();
+                controller.getProduto();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnAtuallizarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // TODO add your handling code here:
+        if(!txtCodProduto.getText().equals("")) {
+            try {
+                controller.deleteProduto();
+                controller.getProduto();
+            } catch (Exception ex) {
+                Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
     /**
      * @param args the command line arguments

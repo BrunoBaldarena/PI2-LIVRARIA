@@ -101,7 +101,7 @@ public class ProdutoDAO {
 
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
-        String SQL = "SELECT * FROM produto WHERE id LIKE '%"+textoBusca+"% OR nome LIKE '%"+textoBusca+"%';";
+        String SQL = "SELECT * FROM produto WHERE id LIKE '%"+textoBusca+"%' OR nome LIKE '%"+textoBusca+"%';";
         
         Statement st = conexao.createStatement();
         ResultSet rs = st.executeQuery(SQL);
