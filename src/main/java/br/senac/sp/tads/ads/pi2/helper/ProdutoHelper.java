@@ -61,7 +61,7 @@ public class ProdutoHelper {
         view.getTxtEditora().setText(modelo.getEditora());
         view.getTxtAno().setText(Integer.toString(modelo.getAno()));
         view.getTxtQtd().setText(Integer.toString(modelo.getQuantidade()));
-        view.getTxtPreco().setText(Double.toString(modelo.getPreco()));
+        view.getTxtPreco().setText(Double.toString(modelo.getPreco()).replace(".",","));
         view.getTxtObeservacao().setText(modelo.getObservacao());
         view.getCbxCategoria().setSelectedItem(modelo.getCategoria());
         view.getCbxTipo().setSelectedItem(modelo.getTipo());

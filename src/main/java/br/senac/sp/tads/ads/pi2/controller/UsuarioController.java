@@ -86,7 +86,7 @@ public class UsuarioController {
                
                for (Usuario u : ListUsuarios) {
                 tmUsuarios.addRow(new Object[]{u.getId(),u.getTipo(),u.getNome(),u.getUsuario()});
-            }
+                }
                 
             }
             

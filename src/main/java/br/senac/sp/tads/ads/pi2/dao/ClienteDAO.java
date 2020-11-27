@@ -105,9 +105,8 @@ public class ClienteDAO {
 
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
-        String SQL = "SELECT * FROM cliente";
-        //WHERE nome LIKE '%" + textoBusca + "% OR cpf LIKE '%" + textoBusca + "%';";
-
+        String SQL = "SELECT * FROM cliente WHERE nome LIKE '%"+textoBusca+"%' OR cpf LIKE '"+textoBusca+"%';";
+        
         Statement st = conexao.createStatement();
         ResultSet rs = st.executeQuery(SQL);
 
