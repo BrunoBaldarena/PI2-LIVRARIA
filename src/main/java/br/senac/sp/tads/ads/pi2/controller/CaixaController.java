@@ -36,6 +36,7 @@ public class CaixaController {
             ArrayList<Produto> listaInclusaoCaixa = dao.buscarCaixa(textoBusca);
             
             DefaultTableModel tmProdutos = new DefaultTableModel();
+            tmProdutos.addColumn("ID");
             tmProdutos.addColumn("Nome");
             tmProdutos.addColumn("Tipo");
             tmProdutos.addColumn("Preco");

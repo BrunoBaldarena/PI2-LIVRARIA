@@ -143,7 +143,7 @@ public class ProdutoDAO {
 
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
-        String SQL = "SELECT nome, tipo, preco, quantidade FROM produto WHERE nome LIKE '%"+textoBusca+"%';";
+        String SQL = "SELECT id, nome, tipo, preco, quantidade FROM produto WHERE nome LIKE '%"+textoBusca+"%';";
         
         Statement st = conexao.createStatement();
         ResultSet rs = st.executeQuery(SQL);
@@ -154,6 +154,7 @@ public class ProdutoDAO {
 
                 Produto produto = new Produto();
 
+                produto.setNome(rs.getString("id"));
                 produto.setNome(rs.getString("nome"));
                 produto.setTipo(rs.getString("tipo"));
                 produto.setPreco(rs.getDouble("preco"));

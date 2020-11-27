@@ -156,9 +156,18 @@ public class telaCaixa extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "ID", "Nome", "Tipo", "Preco", "Qtd Estoque"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblInclusaoProduto.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(tblInclusaoProduto);
         tblInclusaoProduto.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
