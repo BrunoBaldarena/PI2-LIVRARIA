@@ -5,8 +5,10 @@
  */
 package br.senac.sp.tads.ads.pi2.controller;
 
+import br.senac.sp.tads.ads.pi2.dao.ClienteDAO;
 import br.senac.sp.tads.ads.pi2.dao.UsuarioDAO;
 import br.senac.sp.tads.ads.pi2.helper.UsuarioHelper;
+import br.senac.sp.tads.ads.pi2.modal.Cliente;
 import br.senac.sp.tads.ads.pi2.modal.Usuario;
 import br.senac.tads.ads.pi2.view.telaUsuario;
 import java.sql.SQLException;
@@ -97,8 +99,17 @@ public class UsuarioController {
         
     }
     
-    public void deleteUsuario(){
+    public void deleteUsuario() throws Exception{
+        Usuario usuario = helper.obterModelo();
+        UsuarioDAO dao = new UsuarioDAO();
         
+        
+        try {
+            dao.deletar(usuario.getId());
+            helper.limparTela();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
