@@ -9,7 +9,7 @@ package br.senac.sp.tads.ads.pi2.modal;
  *
  * @author baldarena
  */
-public class Venda {
+public class Caixa {
     
     private int codigoVenda;
     private String dataVenda;
@@ -20,10 +20,10 @@ public class Venda {
     private String tipoPagamento; 
     private float descontoTotal; 
 
-    public Venda() {
+    public Caixa() {
     }
 
-    public Venda(int codigoVenda, String dataVenda, float valorTotal, int IdCliente, int idCaixa, int quantidade, String tipoPagamento, float descontoTotal) {
+    public Caixa(int codigoVenda, String dataVenda, float valorTotal, int IdCliente, int idCaixa, int quantidade, String tipoPagamento, float descontoTotal) {
         this.codigoVenda = codigoVenda;
         this.dataVenda = dataVenda;
         this.valorTotal = valorTotal;

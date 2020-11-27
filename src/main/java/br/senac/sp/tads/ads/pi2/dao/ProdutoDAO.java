@@ -134,6 +134,42 @@ public class ProdutoDAO {
         }
         return produtos;
     }
+    
+    public ArrayList<Produto> buscarCaixa(String textoBusca) throws ClassNotFoundException, SQLException {
+
+        ArrayList<Produto> produtos = new ArrayList<>();
+
+        GerenciadorConexao.abrirConexao();
+
+        //Chama a conexao com o banco de dados 
+        Connection conexao = GerenciadorConexao.CONEXAO;
+        String SQL = "SELECT nome, tipo, preco, quantidade FROM produto WHERE nome LIKE '%"+textoBusca+"%';";
+        
+        Statement st = conexao.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+
+        try {
+
+            while (rs.next()) {
+
+                Produto produto = new Produto();
+
+                produto.setNome(rs.getString("nome"));
+                produto.setTipo(rs.getString("tipo"));
+                produto.setPreco(rs.getDouble("preco"));
+                produto.setQuantidade(rs.getInt("quantidade"));
+                produtos.add(produto);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            st.close();
+            rs.close();
+            GerenciadorConexao.fecharConexao();
+        }
+        return produtos;
+    }
 
     public void deletar(int id)
             throws SQLException, Exception {

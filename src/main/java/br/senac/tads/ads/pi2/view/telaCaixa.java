@@ -5,9 +5,19 @@
  */
 package br.senac.tads.ads.pi2.view;
 
+import br.senac.sp.tads.ads.pi2.controller.CaixaController;
+import br.senac.sp.tads.ads.pi2.controller.ClienteController;
+import br.senac.sp.tads.ads.pi2.helper.CaixaHelper;
+import br.senac.sp.tads.ads.pi2.helper.ClienteHelper;
 import java.awt.event.KeyEvent;
 import static java.lang.String.valueOf;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,12 +28,22 @@ public class telaCaixa extends javax.swing.JFrame {
     /**
      * Creates new form telaLivros
      */
-    public telaCaixa() {
+    
+    private final CaixaController controller;
+    private final CaixaHelper helper;
+
+    
+    public telaCaixa() throws ClassNotFoundException {
         initComponents();
         // Definindo tamanho in1cial da janela
         //this.setBounds(250, 150, 1124, 718);
         this.setLocationRelativeTo(null);
         pack();
+        controller = new CaixaController(this);
+        
+        controller.getProduto();
+        
+        this.helper = new CaixaHelper(this);
     }
 
     /**
@@ -43,16 +63,16 @@ public class telaCaixa extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtBusca = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblInclusaoProduto = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtDesconto = new javax.swing.JFormattedTextField();
-        btnRegistrar1 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         panelBusca1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblItensVenda = new javax.swing.JTable();
         btnSelecionarCliente1 = new javax.swing.JButton();
         btnFinalizarCompra = new javax.swing.JButton();
         txtCliente = new javax.swing.JTextField();
@@ -126,29 +146,25 @@ public class telaCaixa extends javax.swing.JFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtBuscaKeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyReleased(evt);
+            }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblInclusaoProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Tipo", "Produto", "Preço"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
-        jScrollPane2.setViewportView(jTable2);
+        ));
+        jScrollPane2.setViewportView(tblInclusaoProduto);
+        tblInclusaoProduto.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Qtd.:");
+        jLabel8.setText("*Qtd.:");
 
         txtQuantidade.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtQuantidade.setForeground(new java.awt.Color(35, 70, 72));
@@ -187,14 +203,14 @@ public class telaCaixa extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrar1.setBackground(new java.awt.Color(35, 70, 72));
-        btnRegistrar1.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
-        btnRegistrar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrar1.setText("Registrar");
-        btnRegistrar1.setActionCommand("Registrar Item");
-        btnRegistrar1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setBackground(new java.awt.Color(35, 70, 72));
+        btnRegistrar.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.setActionCommand("Registrar Item");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrar1ActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -215,13 +231,13 @@ public class telaCaixa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscaLayout.createSequentialGroup()
-                        .addGap(0, 68, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscaLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnRegistrar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         panelBuscaLayout.setVerticalGroup(
@@ -240,7 +256,7 @@ public class telaCaixa extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -257,7 +273,7 @@ public class telaCaixa extends javax.swing.JFrame {
         panelBusca1.setBackground(new java.awt.Color(35, 70, 72));
         panelBusca1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "Venda", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblItensVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -273,7 +289,7 @@ public class telaCaixa extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tblItensVenda);
 
         btnSelecionarCliente1.setBackground(new java.awt.Color(35, 70, 72));
         btnSelecionarCliente1.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
@@ -473,7 +489,7 @@ public class telaCaixa extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(panelBusca1Layout.createSequentialGroup()
                                 .addComponent(rdDinheiro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnFinalizarCompra)))))
                 .addContainerGap())
         );
@@ -581,25 +597,33 @@ public class telaCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescontoActionPerformed
 
-    private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
         String msg = null;
-        try {
-            Double.parseDouble(txtDesconto.getText().replace(",","."));
-        } catch (NumberFormatException e){
-            msg = "Desconto precisa ser um valor";
-            txtDesconto.setText("");
+        
+        if(!txtDesconto.getText().equals("")){
+            try {
+                Double.parseDouble(txtDesconto.getText().replace(",","."));
+            } catch (NumberFormatException e){
+                msg = "Desconto precisa ser um valor";
+                txtDesconto.setText("");
+            }
+        }
+      
+        if(!txtQuantidade.getText().equals("")){
+            try {
+                Integer.parseInt(txtQuantidade.getText());
+            } catch (NumberFormatException e){
+                if (msg == null) msg = "Quantidade precisa ser um numero inteiro";
+                else msg += "\nQuantidade precisa ser um numero inteiro";
+                txtQuantidade.setText("");
+            }
+        } else{
+            msg = "Você precisa preencher o campo de quantidade!";
         }
         
-        try {
-            Double.parseDouble(txtQuantidade.getText().replaceAll(",", "."));
-        } catch (NumberFormatException e){
-            if (msg == null) msg = "Quantidade precisa ser um numero inteiro";
-            else msg += "\nQuantidade precisa ser um numero inteiro";
-            txtQuantidade.setText("");
-        }
         if(msg != null) JOptionPane.showMessageDialog(this, msg);
-    }//GEN-LAST:event_btnRegistrar1ActionPerformed
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
@@ -679,7 +703,19 @@ public class telaCaixa extends javax.swing.JFrame {
 
     private void txtBuscaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyTyped
         // TODO Quando a tecla é pressionada, trazer os produtos cujo nome ou codigo iniciem com conteudo deste campo
+        
     }//GEN-LAST:event_txtBuscaKeyTyped
+
+    private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
+        try {
+            // TODO add your handling code here:
+            controller.getProduto();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaCaixa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+    }//GEN-LAST:event_txtBuscaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -714,7 +750,11 @@ public class telaCaixa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaCaixa().setVisible(true);
+                try {
+                    new telaCaixa().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(telaCaixa.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -728,9 +768,31 @@ public class telaCaixa extends javax.swing.JFrame {
         }
     }
 
+    public JButton getBtnRegistrar() {
+        return btnRegistrar;
+    }
+
+    public JTable getTblInclusaoProduto() {
+        return tblInclusaoProduto;
+    }
+
+    public JTextField getTxtBusca() {
+        return txtBusca;
+    }
+
+    public JFormattedTextField getTxtDesconto() {
+        return txtDesconto;
+    }
+
+    public JTextField getTxtQuantidade() {
+        return txtQuantidade;
+    }
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinalizarCompra;
-    private javax.swing.JButton btnRegistrar1;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSelecionarCliente1;
     private javax.swing.JButton btnSelecionarCliente2;
     private javax.swing.JButton btnSelecionarCliente3;
@@ -749,8 +811,6 @@ public class telaCaixa extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JPanel panelBusca;
     private javax.swing.JPanel panelBusca1;
     private javax.swing.JPanel panelBusca2;
@@ -760,6 +820,8 @@ public class telaCaixa extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdCredito;
     private javax.swing.JRadioButton rdDebito;
     private javax.swing.JRadioButton rdDinheiro;
+    private javax.swing.JTable tblInclusaoProduto;
+    private javax.swing.JTable tblItensVenda;
     private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JFormattedTextField txtDesconto;
