@@ -5,11 +5,15 @@
  */
 package br.senac.tads.ads.pi2.view;
 
+import br.senac.sp.tads.ads.pi2.controller.ClienteController;
+import br.senac.sp.tads.ads.pi2.controller.SelecaoClienteController;
 import java.awt.event.KeyEvent;
 import static java.lang.String.valueOf;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -20,9 +24,19 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
     /**
      * Creates new form telaLivros
      */
+    
+    private final SelecaoClienteController controller;
+
     public telaSelecaoCliente() {
         initComponents();
-        // Definindo tamanho in1cial da janela
+        controller = new SelecaoClienteController(this);
+        
+        
+        try{
+            controller.getClienteCaixa();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -44,8 +58,8 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtBusca = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        btnRegistrar = new javax.swing.JButton();
+        tableCliente = new javax.swing.JTable();
+        btnSelecionar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
@@ -129,34 +143,37 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtBuscaKeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyReleased(evt);
+            }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Nome", "CPF", "Telefone"
+                "Codigo", "Nome", "CPF"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tableCliente);
 
-        btnRegistrar.setBackground(new java.awt.Color(35, 70, 72));
-        btnRegistrar.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
-        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrar.setText("Selecionar");
-        btnRegistrar.setActionCommand("Registrar Item");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        btnSelecionar.setBackground(new java.awt.Color(35, 70, 72));
+        btnSelecionar.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
+        btnSelecionar.setForeground(new java.awt.Color(255, 255, 255));
+        btnSelecionar.setText("Selecionar");
+        btnSelecionar.setActionCommand("Registrar Item");
+        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
+                btnSelecionarActionPerformed(evt);
             }
         });
 
@@ -183,7 +200,7 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscaLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,7 +218,7 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -259,9 +276,21 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_panelPrincipalComponentMoved
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+        telaCaixa c;
+        try {
+            String[] cliente = new String[2]; 
+            
+            cliente = controller.clienteSelecionado();
+            
+            c = new telaCaixa(cliente[0], cliente[1]);
+            c.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
@@ -287,6 +316,15 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
+        try {
+
+            controller.getClienteCaixa();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaSelecaoCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtBuscaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -339,9 +377,21 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
         }
     }
 
+    public JTextField getTxtBusca() {
+        return txtBusca;
+    }
+
+    public JTable getTableCliente() {
+        return tableCliente;
+    }
+    
+    
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnSelecionar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel2;
@@ -349,10 +399,10 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel panelBusca;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelTitulo;
+    private javax.swing.JTable tableCliente;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 }

@@ -167,7 +167,42 @@ public class ClienteDAO {
         }
 
     }
+    
+    public ArrayList buscaCaixa(String txt) throws ClassNotFoundException, SQLException{
 
+        ArrayList<Cliente> clientes = new ArrayList<>();
+
+        GerenciadorConexao.abrirConexao();
+
+        //Chama a conexao com o banco de dados 
+        Connection conexao = GerenciadorConexao.CONEXAO;
+        String SQL = "SELECT id, nome, cpf FROM cliente WHERE nome LIKE '%"+txt+"%';";
+        
+        Statement st = conexao.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+
+        try {
+
+            while (rs.next()) {
+
+                Cliente cliente = new Cliente();
+
+                cliente.setId(rs.getInt("id"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+
+                clientes.add(cliente);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            st.close();
+            rs.close();
+            GerenciadorConexao.fecharConexao();
+        }
+        return clientes;
+    }
     
     public boolean verificarCpfDuplicado(String cpf) throws ClassNotFoundException, SQLException {
 

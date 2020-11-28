@@ -33,6 +33,8 @@ public class telaCaixa extends javax.swing.JFrame {
     
     private final CaixaController controller;
     private final CaixaHelper helper;
+    private String cliente = null;
+    private int idCliente = 0;
 
     
     public telaCaixa() throws ClassNotFoundException {
@@ -46,6 +48,25 @@ public class telaCaixa extends javax.swing.JFrame {
         controller.getProduto();
         
         this.helper = new CaixaHelper(this);
+    }
+    
+    public telaCaixa(String idCliente, String cliente) throws ClassNotFoundException {
+        initComponents();
+        // Definindo tamanho in1cial da janela
+        //this.setBounds(250, 150, 1124, 718);
+        this.setLocationRelativeTo(null);
+        pack();
+        controller = new CaixaController(this);
+        
+        controller.getProduto();
+        
+        this.helper = new CaixaHelper(this);
+        
+        this.cliente = cliente;
+        this.idCliente = Integer.parseInt(idCliente);
+        
+        this.txtCliente.setText(cliente);
+        
     }
 
     /**
@@ -75,7 +96,6 @@ public class telaCaixa extends javax.swing.JFrame {
         panelBusca1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblItensVenda = new javax.swing.JTable();
-        btnSelecionarCliente1 = new javax.swing.JButton();
         btnFinalizarCompra = new javax.swing.JButton();
         txtCliente = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -292,17 +312,6 @@ public class telaCaixa extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblItensVenda);
 
-        btnSelecionarCliente1.setBackground(new java.awt.Color(35, 70, 72));
-        btnSelecionarCliente1.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
-        btnSelecionarCliente1.setForeground(new java.awt.Color(255, 255, 255));
-        btnSelecionarCliente1.setText("Selecionar"); // NOI18N
-        btnSelecionarCliente1.setActionCommand("Registrar Item");
-        btnSelecionarCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelecionarCliente1ActionPerformed(evt);
-            }
-        });
-
         btnFinalizarCompra.setBackground(new java.awt.Color(35, 70, 72));
         btnFinalizarCompra.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
         btnFinalizarCompra.setForeground(new java.awt.Color(255, 255, 255));
@@ -429,9 +438,7 @@ public class telaCaixa extends javax.swing.JFrame {
                     .addGroup(panelBusca1Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSelecionarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCliente))
                     .addGroup(panelBusca1Layout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -457,7 +464,7 @@ public class telaCaixa extends javax.swing.JFrame {
         panelBusca1Layout.setVerticalGroup(
             panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBusca1Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelBusca3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -467,7 +474,6 @@ public class telaCaixa extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSelecionarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBusca1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -570,12 +576,6 @@ public class telaCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
         telaCaixa.this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void btnSelecionarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarCliente1ActionPerformed
-        // TODO add your handling code here:
-        telaSelecaoCliente s = new telaSelecaoCliente();
-        s.setVisible(true);
-    }//GEN-LAST:event_btnSelecionarCliente1ActionPerformed
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
         // Validacao das entradas para finalizacao das compras
@@ -756,7 +756,6 @@ public class telaCaixa extends javax.swing.JFrame {
     private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRemoverRegistro;
-    private javax.swing.JButton btnSelecionarCliente1;
     private javax.swing.JButton btnVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel14;
