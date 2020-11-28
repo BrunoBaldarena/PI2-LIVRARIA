@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -69,6 +70,8 @@ public class telaCaixa extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtDesconto = new javax.swing.JFormattedTextField();
         btnRegistrar = new javax.swing.JButton();
+        lblQtdDisponivel = new javax.swing.JLabel();
+        QtdDisponivel = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         panelBusca1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -153,7 +156,7 @@ public class telaCaixa extends javax.swing.JFrame {
 
         tblInclusaoProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null}
             },
             new String [] {
                 "ID", "Nome", "Tipo", "Preco", "Qtd Estoque"
@@ -167,7 +170,13 @@ public class telaCaixa extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblInclusaoProduto.setColumnSelectionAllowed(true);
+        tblInclusaoProduto.setToolTipText("");
+        tblInclusaoProduto.setRowSelectionAllowed(true);
+        tblInclusaoProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblInclusaoProdutoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblInclusaoProduto);
         tblInclusaoProduto.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -223,6 +232,14 @@ public class telaCaixa extends javax.swing.JFrame {
             }
         });
 
+        lblQtdDisponivel.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
+        lblQtdDisponivel.setForeground(new java.awt.Color(255, 255, 255));
+        lblQtdDisponivel.setText("0");
+
+        QtdDisponivel.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
+        QtdDisponivel.setForeground(new java.awt.Color(255, 255, 255));
+        QtdDisponivel.setText("Quantidade disponivel: ");
+
         javax.swing.GroupLayout panelBuscaLayout = new javax.swing.GroupLayout(panelBusca);
         panelBusca.setLayout(panelBuscaLayout);
         panelBuscaLayout.setHorizontalGroup(
@@ -240,13 +257,16 @@ public class telaCaixa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscaLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 69, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscaLayout.createSequentialGroup()
+                        .addComponent(QtdDisponivel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblQtdDisponivel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelBuscaLayout.setVerticalGroup(
@@ -257,7 +277,7 @@ public class telaCaixa extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -265,7 +285,11 @@ public class telaCaixa extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(QtdDisponivel)
+                        .addComponent(lblQtdDisponivel)))
                 .addContainerGap())
         );
 
@@ -498,7 +522,7 @@ public class telaCaixa extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(panelBusca1Layout.createSequentialGroup()
                                 .addComponent(rdDinheiro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                                 .addComponent(btnFinalizarCompra)))))
                 .addContainerGap())
         );
@@ -621,7 +645,11 @@ public class telaCaixa extends javax.swing.JFrame {
       
         if(!txtQuantidade.getText().equals("")){
             try {
-                Integer.parseInt(txtQuantidade.getText());
+                if(helper.verificaEstoque()){
+                    // continua
+                } else{
+                    JOptionPane.showMessageDialog(null, "Só esta disponivel "+lblQtdDisponivel.getText()+" unidades deste item!");
+                }
             } catch (NumberFormatException e){
                 if (msg == null) msg = "Quantidade precisa ser um numero inteiro";
                 else msg += "\nQuantidade precisa ser um numero inteiro";
@@ -726,6 +754,16 @@ public class telaCaixa extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtBuscaKeyReleased
 
+    private void tblInclusaoProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblInclusaoProdutoMouseClicked
+        // TODO add your handling code here:
+        lblQtdDisponivel.setText(tblInclusaoProduto.getValueAt(tblInclusaoProduto.getSelectedRow(), 4).toString());
+            
+        
+        
+
+        
+    }//GEN-LAST:event_tblInclusaoProdutoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -797,9 +835,16 @@ public class telaCaixa extends javax.swing.JFrame {
         return txtQuantidade;
     }
 
+    public JLabel getLblQtdDisponivel() {
+        return lblQtdDisponivel;
+    }
+    
+    
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel QtdDisponivel;
     private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSelecionarCliente1;
@@ -820,6 +865,7 @@ public class telaCaixa extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblQtdDisponivel;
     private javax.swing.JPanel panelBusca;
     private javax.swing.JPanel panelBusca1;
     private javax.swing.JPanel panelBusca2;

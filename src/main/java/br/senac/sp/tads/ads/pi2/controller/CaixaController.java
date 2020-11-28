@@ -49,7 +49,7 @@ public class CaixaController {
                
                
             for (Produto p : listaInclusaoCaixa) {
-                tmProdutos.addRow(new Object[]{p.getNome(),p.getTipo(),p.getPreco(),p.getQuantidade()});
+                tmProdutos.addRow(new Object[]{p.getId(),p.getNome(),p.getTipo(),p.getPreco(),p.getQuantidade()});
             }
 
         } catch (SQLException ex) {

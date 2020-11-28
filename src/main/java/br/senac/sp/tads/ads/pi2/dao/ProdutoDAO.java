@@ -154,7 +154,7 @@ public class ProdutoDAO {
 
                 Produto produto = new Produto();
 
-                produto.setNome(rs.getString("id"));
+                produto.setId(rs.getInt("id"));
                 produto.setNome(rs.getString("nome"));
                 produto.setTipo(rs.getString("tipo"));
                 produto.setPreco(rs.getDouble("preco"));

@@ -320,7 +320,8 @@ public class telaProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblProduto.setColumnSelectionAllowed(true);
+        tblProduto.setCellSelectionEnabled(false);
+        tblProduto.setRowSelectionAllowed(true);
         tblProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblProdutoMouseClicked(evt);
