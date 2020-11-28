@@ -77,7 +77,6 @@ public class telaUsuario extends javax.swing.JFrame {
         tblUsuario = new javax.swing.JTable();
         panelBusca = new javax.swing.JPanel();
         txtBusca = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         lblBusca = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -260,7 +259,7 @@ public class telaUsuario extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(lblNome1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario))
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProdutoLayout.createSequentialGroup()
                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
@@ -411,15 +410,9 @@ public class telaUsuario extends javax.swing.JFrame {
 
         txtBusca.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtBusca.setForeground(new java.awt.Color(35, 70, 72));
-
-        btnBuscar.setBackground(new java.awt.Color(35, 70, 72));
-        btnBuscar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setText("BUSCAR");
-        btnBuscar.setPreferredSize(new java.awt.Dimension(65, 31));
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+        txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyReleased(evt);
             }
         });
 
@@ -435,19 +428,16 @@ public class telaUsuario extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(lblBusca)
                 .addGap(10, 10, 10)
-                .addComponent(txtBusca, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                .addGap(10, 10, 10)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtBusca)
+                .addContainerGap())
         );
         panelBuscaLayout.setVerticalGroup(
             panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBuscaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblBusca))
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBusca))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -549,15 +539,6 @@ public class telaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try {
-            // Defnindo texto para efetuar busca
-            controller.getUsuario();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     private void btnAtuallizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtuallizarActionPerformed
         try {
             // TODO add your handling code here:
@@ -627,6 +608,16 @@ public class telaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
 
+    private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
+        // TODO add your handling code here:
+        try {
+            // Defnindo texto para efetuar busca
+            controller.getUsuario();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtBuscaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -694,7 +685,6 @@ public class telaUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtuallizar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRemover;

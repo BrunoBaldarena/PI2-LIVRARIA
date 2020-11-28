@@ -191,7 +191,6 @@ public class telaProduto extends javax.swing.JFrame {
         panelBusca = new javax.swing.JPanel();
         lblBusca = new javax.swing.JLabel();
         txtBusca = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -278,15 +277,9 @@ public class telaProduto extends javax.swing.JFrame {
 
         txtBusca.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtBusca.setForeground(new java.awt.Color(35, 70, 72));
-
-        btnBuscar.setBackground(new java.awt.Color(35, 70, 72));
-        btnBuscar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setText("BUSCAR");
-        btnBuscar.setPreferredSize(new java.awt.Dimension(65, 31));
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+        txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyReleased(evt);
             }
         });
 
@@ -298,23 +291,16 @@ public class telaProduto extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(lblBusca)
                 .addGap(10, 10, 10)
-                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(txtBusca, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelBuscaLayout.setVerticalGroup(
             panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBuscaLayout.createSequentialGroup()
-                .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBuscaLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblBusca)))
-                    .addGroup(panelBuscaLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBusca))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -708,7 +694,6 @@ public class telaProduto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(1137, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
@@ -782,7 +767,7 @@ public class telaProduto extends javax.swing.JFrame {
         char c=evt.getKeyChar();
 
         //Aqui verificamos se o que foi digitado é um número, um backspace ou um delete. Se for, consumimos o evento, ou seja, o jTextField não receberá o valor digitado
-        if((Character.isDigit(c) || (c==KeyEvent.VK_BACK_SPACE) || c==KeyEvent.VK_DELETE)){
+        if(((c==KeyEvent.VK_BACK_SPACE) || c==KeyEvent.VK_DELETE)){
             evt.consume();
 
         }
@@ -862,7 +847,7 @@ public class telaProduto extends javax.swing.JFrame {
         char c=evt.getKeyChar();
 
         //Aqui verificamos se o que foi digitado é um número, um backspace ou um delete. Se for, consumimos o evento, ou seja, o jTextField não receberá o valor digitado
-        if((Character.isDigit(c) || (c==KeyEvent.VK_BACK_SPACE) || c==KeyEvent.VK_DELETE)){
+        if(((c==KeyEvent.VK_BACK_SPACE) || c==KeyEvent.VK_DELETE)){
             evt.consume();
 
         }
@@ -879,7 +864,7 @@ public class telaProduto extends javax.swing.JFrame {
         char c=evt.getKeyChar();
 
         //Aqui verificamos se o que foi digitado é um número, um backspace ou um delete. Se for, consumimos o evento, ou seja, o jTextField não receberá o valor digitado
-        if((Character.isDigit(c) || (c==KeyEvent.VK_BACK_SPACE) || c==KeyEvent.VK_DELETE)){
+        if(((c==KeyEvent.VK_BACK_SPACE) || c==KeyEvent.VK_DELETE)){
             evt.consume();
 
         }
@@ -916,27 +901,9 @@ public class telaProduto extends javax.swing.JFrame {
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
         // Limpando os campos
-        txtCodProduto.setText("");
-        txtPreco.setText("");
-        txtObeservacao.setText("");
-        txtNome.setText("");
-        cbxTipo.setSelectedIndex(0);
-        cbxCategoria.setSelectedIndex(0);
-        txtAno.setText("");
-        txtAutor.setText("");
-        txtEditora.setText("");
-        txtQtd.setText("");
+        helper.limparTela();
         
     }//GEN-LAST:event_btnLimparCamposActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try {
-            // Defnindo texto para efetuar busca
-            controller.getProduto();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tblProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMouseClicked
         // TODO add your handling code here:
@@ -992,6 +959,15 @@ public class telaProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
+    private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
+        try {
+            // Defnindo texto para efetuar busca
+            controller.getProduto();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtBuscaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1032,7 +1008,6 @@ public class telaProduto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtuallizar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRemover;
