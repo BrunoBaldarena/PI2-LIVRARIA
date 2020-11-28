@@ -12,15 +12,17 @@ package br.senac.sp.tads.ads.pi2.modal;
 public class ProdutoVenda {
     private int id;
     private  String nome;
+    private String tipo;
     private Double preco;
-    private int qtdEstoque;
+    private int quantidade;
     
 
-    public ProdutoVenda(int id, String nome, Double preco, int qtdEstoque) {
+    public ProdutoVenda(int id, String nome, String tipo, Double preco, int qtdEstoque) {
         this.id = id;
         this.nome = nome;
+        this.tipo = tipo;
         this.preco = preco;
-        this.qtdEstoque = qtdEstoque;
+        this.quantidade = qtdEstoque;
     }
     
     public ProdutoVenda(){
@@ -39,8 +41,8 @@ public class ProdutoVenda {
         return preco;
     }
 
-    public int getQtdEstoque() {
-        return qtdEstoque;
+    public int getQuantidade() {
+        return quantidade;
     }
 
     public void setId(int id) {
@@ -55,8 +57,20 @@ public class ProdutoVenda {
         this.preco = preco;
     }
 
-    public void setQtdEstoque(int qtdEstoque) {
-        this.qtdEstoque = qtdEstoque;
+    public void setQuantidade(int qtdEstoque) {
+        this.quantidade = qtdEstoque;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Object getQtdEstoque() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
