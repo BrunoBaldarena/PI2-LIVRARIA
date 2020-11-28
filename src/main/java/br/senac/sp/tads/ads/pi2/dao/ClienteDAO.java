@@ -168,4 +168,31 @@ public class ClienteDAO {
 
     }
 
+    
+    public boolean verificarCpfDuplicado(String cpf) throws ClassNotFoundException, SQLException {
+
+        boolean cpfExistente = false;
+        
+        GerenciadorConexao.abrirConexao();
+
+        //Chama a conexao com o banco de dados 
+        Connection conexao = GerenciadorConexao.CONEXAO;
+        String SQL = "SELECT cpf FROM cliente WHERE cpf = '"+cpf+"';";
+        
+        ResultSet rs;
+        try (Statement st = conexao.createStatement()) {
+            rs = st.executeQuery(SQL);
+            cpfExistente = rs.getString("cpf").equals(cpf);
+        }
+        rs.close();
+        GerenciadorConexao.fecharConexao();
+        return cpfExistente;
+    }
+    
+    
+    
+    
+    
+    
+    
 }

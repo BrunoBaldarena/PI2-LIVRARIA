@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -101,6 +102,19 @@ public class ClienteController {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    
+    public void cpfDuplicado() throws ClassNotFoundException{
+        ClienteDAO dao = new ClienteDAO();
+        
+        try {
+            dao.verificarCpfDuplicado(view.getTxtCPF().getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
     
 }

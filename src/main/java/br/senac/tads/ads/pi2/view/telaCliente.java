@@ -464,6 +464,11 @@ public class telaCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCPF.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        txtCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCPFFocusLost(evt);
+            }
+        });
         txtCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCPFActionPerformed(evt);
@@ -968,6 +973,12 @@ public class telaCliente extends javax.swing.JFrame {
         
         helper.setarModelo(cliente);
     }//GEN-LAST:event_tableClienteMouseClicked
+
+    private void txtCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCPFFocusLost
+        // TODO add your handling code here:
+        
+        //controller.cpfDuplicado();    Terminar desenvolvimento de validacao de usuario existente
+    }//GEN-LAST:event_txtCPFFocusLost
 
     /**
      * @param args the command line arguments

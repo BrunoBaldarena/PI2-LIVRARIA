@@ -298,8 +298,13 @@ public class telaInicial extends javax.swing.JFrame {
 
     private void btnCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaixaActionPerformed
         // TODO add your handling code here:
-        telaCaixa c = new telaCaixa();
-        c.setVisible(true);
+        telaCaixa c;
+        try {
+            c = new telaCaixa();
+            c.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCaixaActionPerformed
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
