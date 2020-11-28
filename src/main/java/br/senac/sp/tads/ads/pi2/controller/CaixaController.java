@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CaixaController {
     private final telaCaixa view;
+    int seqCod = 0;
     int countItem = 0;
     double valorAtual = 0;
 
@@ -66,19 +67,41 @@ public class CaixaController {
         
         int qtd = Integer.parseInt(view.getTxtQuantidade().getText());
 
-        
+        seqCod += 1;
         countItem += 1;
         valorAtual += pv.getPreco() * qtd;
         String preco = "R$"+String.valueOf(valorAtual).replace(".", ",");
         
         
         
-        tmItemVenda.addRow(new Object[]{countItem, pv.getTipo(), pv.getNome(), pv.getPreco(), qtd, pv.getPreco() * qtd });
+        tmItemVenda.addRow(new Object[]{seqCod, pv.getTipo(), pv.getNome(), pv.getPreco(), qtd, pv.getPreco() * qtd });
         
         view.getTblItensVenda().setModel(tmItemVenda);
         view.getLblQtdItens().setText(String.valueOf(countItem));
         view.getLblValorAtual().setText(preco);
 
+    }
+    
+    public void removeItemVenda(){
+        DefaultTableModel tmItemVenda = (DefaultTableModel) view.getTblItensVenda().getModel();
+        
+        int linha = view.getTblItensVenda().getSelectedRow();
+        
+        double valorItemRemovido = Double.parseDouble(tmItemVenda.getValueAt(linha, 5).toString());
+        
+        tmItemVenda.removeRow(linha);
+        
+        view.getTblItensVenda().setModel(tmItemVenda);
+        
+        countItem -= 1;
+        valorAtual -= valorItemRemovido;
+        String preco = "R$"+String.valueOf(valorAtual).replace(".", ",");
+        
+        view.getLblQtdItens().setText(String.valueOf(countItem));
+        view.getLblValorAtual().setText(preco);
+
+        
+        
     }
     
 }
