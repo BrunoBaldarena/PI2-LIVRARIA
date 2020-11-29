@@ -72,6 +72,7 @@ public class ClienteController {
                 tmClientes.addColumn("Telefone");
                 tmClientes.addColumn("CEP");
                 tmClientes.addColumn("Logadouro");
+                tmClientes.addColumn("Num");
                 tmClientes.addColumn("Bairro");
                 tmClientes.addColumn("Cidade");
                 tmClientes.addColumn("UF");
@@ -82,7 +83,7 @@ public class ClienteController {
                 tmClientes.setRowCount(0);
                
                 for (Cliente u : ListCliente) {
-                    tmClientes.addRow(new Object[]{u.getId(),u.getNome(),u.getSexo(),u.getEmail(),u.getCpf(),u.getDataNascimento(),u.getTelefone(),u.getCep(),u.getLogadoutro(),u.getBairro(),u.getCidade(),u.getUf(),u.getComplemento()});
+                    tmClientes.addRow(new Object[]{u.getId(),u.getNome(),u.getSexo(),u.getEmail(),u.getCpf(),u.getDataNascimento(),u.getTelefone(),u.getCep(),u.getLogadoutro(),u.getNumero(),u.getBairro(),u.getCidade(),u.getUf(),u.getComplemento()});
                 }
                 
             }

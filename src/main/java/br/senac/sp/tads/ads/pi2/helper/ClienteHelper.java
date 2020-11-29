@@ -44,6 +44,7 @@ public class ClienteHelper {
         String cidade = view.getTxtCidade().getText();
         String uf = view.getTxtUF().getText();
         String complemento = view.getTxtComplemento().getText();
+        String numero = view.getTxtNum().getText();
         
         if(codCliente.length() >0){
             codigo = Integer.parseInt(codCliente);
@@ -62,6 +63,7 @@ public class ClienteHelper {
         modelo.setCidade(cidade);
         modelo.setUf(uf);
         modelo.setId(codigo);
+        modelo.setNumero(numero);
         
         if (!"".equals(complemento)){
             modelo.setComplemento(complemento);
@@ -85,6 +87,7 @@ public class ClienteHelper {
         String cidade = modelo.getCidade();
         String uf = modelo.getUf();
         String complemento = modelo.getComplemento();
+        String numero = modelo.getNumero();
         
         view.getTxtCodCliente().setText(codigo);
         view.getTxtNomeCliente().setText(nome);
@@ -110,6 +113,7 @@ public class ClienteHelper {
         view.getTxtBairro().setText(bairro);
         view.getTxtCidade().setText(cidade);
         view.getTxtUF().setText(uf);
+        view.getTxtNum().setText(numero);
         if (!"".equals(complemento)){
             view.getTxtComplemento().setText(complemento);
         }
@@ -131,6 +135,7 @@ public class ClienteHelper {
         view.getTxtCidade().setText("");
         view.getTxtUF().setText("");
         view.getTxtComplemento().setText("");
+        view.getTxtNum().setText("");
     }
         
 }

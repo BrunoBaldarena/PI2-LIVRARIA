@@ -18,6 +18,7 @@ public class Cliente {
     private String dataNascimento;
     private String telefone; 
     private String logadoutro; 
+    private String numero;
     private String cep; 
     private String cidade;
     private String bairro;
@@ -25,7 +26,7 @@ public class Cliente {
     private String complemento;
     private String email;
 
-    public Cliente(int id, String nome, String cpf, String sexo, String dataNascimento, String telefone, String logadoutro, String cep, String cidade, String bairro, String uf, String complemento, String email) {
+    public Cliente(int id, String nome, String cpf, String sexo, String dataNascimento, String numero, String telefone, String logadoutro, String cep, String cidade, String bairro, String uf, String complemento, String email) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -33,6 +34,7 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
         this.logadoutro = logadoutro;
+        this.numero = numero;
         this.cep = cep;
         this.cidade = cidade;
         this.bairro = bairro;
@@ -147,6 +149,14 @@ public class Cliente {
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
     
     

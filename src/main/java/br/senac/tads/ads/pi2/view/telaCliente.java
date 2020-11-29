@@ -178,6 +178,8 @@ public class telaCliente extends javax.swing.JFrame {
         txtCidade = new javax.swing.JTextField();
         txtCEP = new javax.swing.JFormattedTextField();
         txtUF = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtNum = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCliente = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -517,6 +519,18 @@ public class telaCliente extends javax.swing.JFrame {
         txtUF.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         txtUF.setForeground(new java.awt.Color(35, 70, 72));
 
+        jLabel20.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("*Nº:");
+
+        txtNum.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        txtNum.setForeground(new java.awt.Color(35, 70, 72));
+        txtNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNumKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelProdutoLayout = new javax.swing.GroupLayout(panelProduto);
         panelProduto.setLayout(panelProdutoLayout);
         panelProdutoLayout.setHorizontalGroup(
@@ -595,7 +609,12 @@ public class telaCliente extends javax.swing.JFrame {
                                     .addGroup(panelProdutoLayout.createSequentialGroup()
                                         .addComponent(jLabel17)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel20)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(txtLogadouro))))))
                 .addContainerGap())
         );
@@ -637,9 +656,11 @@ public class telaCliente extends javax.swing.JFrame {
                         .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel17)
                         .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel18)
-                        .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel20)
+                        .addComponent(jLabel18)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -654,11 +675,11 @@ public class telaCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Sexo", "E-Mail", "CPF", "Data Nascimento", "Telefone", "CEP", "Logadouro", "Bairro", "Cidade", "UF", "Complemento"
+                "Codigo", "Nome", "Sexo", "E-Mail", "CPF", "Data Nascimento", "Telefone", "CEP", "Logadouro", "Num", "Bairro", "Cidade", "UF", "Complemento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, true, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -671,6 +692,10 @@ public class telaCliente extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tableCliente);
+        if (tableCliente.getColumnModel().getColumnCount() > 0) {
+            tableCliente.getColumnModel().getColumn(9).setResizable(false);
+            tableCliente.getColumnModel().getColumn(13).setResizable(false);
+        }
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Cliente__dePapel.png"))); // NOI18N
@@ -937,10 +962,11 @@ public class telaCliente extends javax.swing.JFrame {
         cliente.setTelefone((String) tableCliente.getValueAt(linhaSelecionada,6));
         cliente.setCep((String) tableCliente.getValueAt(linhaSelecionada,7));
         cliente.setLogadoutro((String) tableCliente.getValueAt(linhaSelecionada,8));
-        cliente.setBairro((String) tableCliente.getValueAt(linhaSelecionada,9));
-        cliente.setCidade((String) tableCliente.getValueAt(linhaSelecionada,10));
-        cliente.setUf((String) tableCliente.getValueAt(linhaSelecionada,11));
-        cliente.setComplemento((String) tableCliente.getValueAt(linhaSelecionada,12));
+        cliente.setNumero((String) tableCliente.getValueAt(linhaSelecionada, 9));
+        cliente.setBairro((String) tableCliente.getValueAt(linhaSelecionada,10));
+        cliente.setCidade((String) tableCliente.getValueAt(linhaSelecionada,11));
+        cliente.setUf((String) tableCliente.getValueAt(linhaSelecionada,12));
+        cliente.setComplemento((String) tableCliente.getValueAt(linhaSelecionada,13));
         
         helper.setarModelo(cliente);
     }//GEN-LAST:event_tableClienteMouseClicked
@@ -969,6 +995,18 @@ public class telaCliente extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtBuscaKeyReleased
+
+    private void txtNumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumKeyReleased
+        // TODO add your handling code here:
+        
+        try {
+            Integer.parseInt(txtNum.getText());
+        } catch (NumberFormatException numberFormatException) {
+            JOptionPane.showMessageDialog(this, "Por favoe, informe um numero neste campo!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            txtNum.setText("");
+        }
+        
+    }//GEN-LAST:event_txtNumKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1028,6 +1066,7 @@ public class telaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1054,6 +1093,7 @@ public class telaCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLogadouro;
     private javax.swing.JTextField txtNomeCliente;
+    private javax.swing.JTextField txtNum;
     private javax.swing.JFormattedTextField txtTelefone;
     private javax.swing.JTextField txtUF;
     // End of variables declaration//GEN-END:variables
@@ -1134,6 +1174,12 @@ public class telaCliente extends javax.swing.JFrame {
         return tableCliente;
     }
 
+    public JTextField getTxtNum() {
+        return txtNum;
+    }
+
+    
+    
     
    
     

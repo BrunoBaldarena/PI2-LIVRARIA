@@ -28,7 +28,7 @@ public class ClienteDAO {
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
 
-        String SQL = "INSERT INTO cliente (nome, cpf, sexo, dataNascimento, telefone, logadouro, cep, cidade, bairro, uf, complemento, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+        String SQL = "INSERT INTO cliente (nome, cpf, sexo, dataNascimento, telefone, logadouro, numero, cep, cidade, bairro, uf, complemento, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
         PreparedStatement ps = conexao.prepareStatement(SQL);
 
@@ -40,15 +40,16 @@ public class ClienteDAO {
             ps.setString(4, cliente.getDataNascimento());
             ps.setString(5, cliente.getTelefone());
             ps.setString(6, cliente.getLogadoutro());
-            ps.setString(7, cliente.getCep());
-            ps.setString(8, cliente.getCidade());
-            ps.setString(9, cliente.getBairro());
-            ps.setString(10, cliente.getUf());
-            ps.setString(11, cliente.getComplemento());
-            ps.setString(12, cliente.getEmail());
+            ps.setString(7, cliente.getNumero());
+            ps.setString(8, cliente.getCep());
+            ps.setString(9, cliente.getCidade());
+            ps.setString(10, cliente.getBairro());
+            ps.setString(11, cliente.getUf());
+            ps.setString(12, cliente.getComplemento());
+            ps.setString(13, cliente.getEmail());
             
             boolean sucess = ps.execute();     // Executa o Comando
-            if(sucess) JOptionPane.showMessageDialog(null, "Cliente Incluido com Sucesso");
+            if(sucess) JOptionPane.showMessageDialog(null, "Cliente Criado com Sucesso");
 
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -66,7 +67,7 @@ public class ClienteDAO {
         //Chama a conexao com o banco de dados 
         Connection conexao = GerenciadorConexao.CONEXAO;
 
-        String SQL = "UPDATE cliente SET nome=?, cpf=?, sexo=?, dataNascimento=?, telefone=?, logadouro=?, cep=?, cidade=?, bairro=? ,uf=?, complemento=?, email=? WHERE id=?;";
+        String SQL = "UPDATE cliente SET nome=?, cpf=?, sexo=?, dataNascimento=?, telefone=?, logadouro=?, numero=?, cep=?, cidade=?, bairro=? ,uf=?, complemento=?, email=? WHERE id=?;";
         PreparedStatement ps = conexao.prepareStatement(SQL);
 
         try {
@@ -77,13 +78,14 @@ public class ClienteDAO {
             ps.setString(4, cliente.getDataNascimento());
             ps.setString(5, cliente.getTelefone());
             ps.setString(6, cliente.getLogadoutro());
-            ps.setString(7, cliente.getCep());
-            ps.setString(8, cliente.getCidade());
-            ps.setString(9, cliente.getBairro());
-            ps.setString(10, cliente.getUf());
-            ps.setString(11, cliente.getComplemento());
-            ps.setString(12, cliente.getEmail());
-            ps.setInt(13, cliente.getId());
+            ps.setString(7, cliente.getNumero());
+            ps.setString(8, cliente.getCep());
+            ps.setString(9, cliente.getCidade());
+            ps.setString(10, cliente.getBairro());
+            ps.setString(11, cliente.getUf());
+            ps.setString(12, cliente.getComplemento());
+            ps.setString(13, cliente.getEmail());
+            ps.setInt(14, cliente.getId());
 
             int linhasAfetadas = ps.executeUpdate();     // Executa o Comando
             if(linhasAfetadas > 0) JOptionPane.showMessageDialog(null, "Cliente Atualizado com Sucesso");
@@ -123,6 +125,7 @@ public class ClienteDAO {
                 cliente.setDataNascimento(rs.getString("dataNascimento"));
                 cliente.setTelefone(rs.getString("telefone"));
                 cliente.setLogadoutro(rs.getString("logadouro"));
+                cliente.setNumero(rs.getString("numero"));
                 cliente.setCep(rs.getString("cep"));
                 cliente.setCidade(rs.getString("cidade"));
                 cliente.setBairro(rs.getString("bairro"));
