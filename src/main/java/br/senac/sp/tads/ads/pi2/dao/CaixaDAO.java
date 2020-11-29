@@ -88,10 +88,7 @@ public class CaixaDAO {
             
             
             ps.execute();     // Executa o Comando
-            
-            ProdutoDAO dao = new ProdutoDAO();
-            dao.atualizarQtd(iv.getCodigoProd(), iv.getQuantidade());
-                    
+
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         } finally {

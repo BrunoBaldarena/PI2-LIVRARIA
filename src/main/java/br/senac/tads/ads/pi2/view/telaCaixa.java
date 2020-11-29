@@ -599,6 +599,10 @@ public class telaCaixa extends javax.swing.JFrame {
                 try {
                     controller.createVenda(usuario.getId(), cliente.getId());
                     
+                    telaSelecaoCliente ts = new telaSelecaoCliente(usuario);
+                    ts.setVisible(true);
+                    this.dispose();
+                    
                 } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(telaCaixa.class.getName()).log(Level.SEVERE, null, ex);
                 }

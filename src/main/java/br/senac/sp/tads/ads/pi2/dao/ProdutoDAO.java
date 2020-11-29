@@ -5,6 +5,7 @@
  */
 package br.senac.sp.tads.ads.pi2.dao;
 
+import br.senac.sp.tads.ads.pi2.modal.ItemVenda;
 import br.senac.sp.tads.ads.pi2.utils.GerenciadorConexao;
 import br.senac.sp.tads.ads.pi2.modal.Produto;
 import java.sql.Connection;
@@ -199,9 +200,29 @@ public class ProdutoDAO {
 
     }
 
-    void atualizarQtd(int codigoProd, int quantidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void atualizarQtd(ItemVenda iv) throws ClassNotFoundException, SQLException {
+        GerenciadorConexao.abrirConexao();
+
+        //Chama a conexao com o banco de dados 
+        Connection conexao = GerenciadorConexao.CONEXAO;
+
+        
+        String SQL = "UPDATE produto SET quantidade=quantidade-"+iv.getQuantidade()+" WHERE id="+iv.getCodigoProd()+";";
+
+        Statement st = conexao.createStatement();
+
+        try {
+
+            st.execute(SQL);
+
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            st.close();
+            GerenciadorConexao.fecharConexao();
+        }
+    }   
 
 }
 

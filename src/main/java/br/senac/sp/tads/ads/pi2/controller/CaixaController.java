@@ -140,24 +140,27 @@ public class CaixaController {
         
         CaixaDAO dao = new CaixaDAO();
         int idVenda = dao.salvar(caixa);
-        int idProduto = 0;
-        Double valorUnitario = 0.00;
-        int qtd = 0;
+
         
         DefaultTableModel tmItemVenda = (DefaultTableModel) view.getTblItensVenda().getModel();
 
         int totalRows = tmItemVenda.getRowCount();
+        
+
         
          for (int i = 0; i < totalRows; i++) {
              ItemVenda iv = new ItemVenda();
              
              iv.setCodVenda(idVenda);
              iv.setCodigoProd((int) tmItemVenda.getValueAt(i, 1));
-             iv.setQuantidade((int) tmItemVenda.getValueAt(i, 5));
              iv.setValor((Double)tmItemVenda.getValueAt(i, 4));
-             
+             iv.setQuantidade((int) tmItemVenda.getValueAt(i, 5));
+     
              dao.salvarItens(iv);
-             JOptionPane.showMessageDialog(null, i, "Aviso",JOptionPane.WARNING_MESSAGE);
+             ProdutoDAO daoP = new ProdutoDAO();
+             
+             daoP.atualizarQtd(iv);
+             
          }
         
         //
