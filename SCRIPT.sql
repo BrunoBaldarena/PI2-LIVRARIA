@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `librariadepapel`.`itemVenda` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `venda_id` INT NOT NULL,
   `produto_id` INT NOT NULL,
-  `valorUnitario` INT NOT NULL,
+  `valorUnitario` DOUBLE NOT NULL,
   `quantidade` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_itemVenda_venda1_idx` (`venda_id` ASC),

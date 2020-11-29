@@ -301,11 +301,11 @@ public class telaCaixa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Tipo", "Preço", "Qtd.", "Total"
+                "Item", "Codigo", "Nome", "Tipo", "Preço", "Qtd.", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -558,6 +558,8 @@ public class telaCaixa extends javax.swing.JFrame {
                     ProdutoVenda pv = helper.getProdutoVenda();
                     
                     controller.addItemVenda(pv);
+                    
+                    
                     // continua
                 } else{
                     JOptionPane.showMessageDialog(null, "Só esta disponivel "+lblQtdDisponivel.getText()+" unidades deste item!", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -596,9 +598,8 @@ public class telaCaixa extends javax.swing.JFrame {
                 
                 try {
                     controller.createVenda(usuario.getId(), cliente.getId());
-                } catch (SQLException ex) {
-                    Logger.getLogger(telaCaixa.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
+                    
+                } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(telaCaixa.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else{

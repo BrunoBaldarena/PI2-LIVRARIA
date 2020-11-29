@@ -13,18 +13,17 @@ public class ItemVenda {
     
     private int id;
     private int quantidade;
-    private float valorTotalItem;
-    private float valor; 
+    private Double valorTotalItem;
+    private Double valor; 
     private int codigoProd;
     private String nome;
-    private float valorUnitario;
-    private float descontoItem; 
+    private Double valorUnitario;
     private int codVenda; 
 
     public ItemVenda() {
     }
 
-    public ItemVenda(int id, int quantidade, float valorTotalItem, float valor, int codigoProd, String nome, float valorUnitario, float descontoItem, int codVenda) {
+    public ItemVenda(int id, int quantidade, Double valorTotalItem, Double valor, int codigoProd, String nome, Double valorUnitario,  int codVenda) {
         this.id = id;
         this.quantidade = quantidade;
         this.valorTotalItem = valorTotalItem;
@@ -32,7 +31,6 @@ public class ItemVenda {
         this.codigoProd = codigoProd;
         this.nome = nome;
         this.valorUnitario = valorUnitario;
-        this.descontoItem = descontoItem;
         this.codVenda = codVenda;
     }
 
@@ -52,19 +50,19 @@ public class ItemVenda {
         this.quantidade = quantidade;
     }
 
-    public float getValorTotalItem() {
+    public Double getValorTotalItem() {
         return valorTotalItem;
     }
 
-    public void setValorTotalItem(float valorTotalItem) {
+    public void setValorTotalItem(Double valorTotalItem) {
         this.valorTotalItem = valorTotalItem;
     }
 
-    public float getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
@@ -84,21 +82,14 @@ public class ItemVenda {
         this.nome = nome;
     }
 
-    public float getValorUnitario() {
+    public Double getValorUnitario() {
         return valorUnitario;
     }
 
-    public void setValorUnitario(float valorUnitario) {
+    public void setValorUnitario(Double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 
-    public float getDescontoItem() {
-        return descontoItem;
-    }
-
-    public void setDescontoItem(float descontoItem) {
-        this.descontoItem = descontoItem;
-    }
 
     public int getCodVenda() {
         return codVenda;

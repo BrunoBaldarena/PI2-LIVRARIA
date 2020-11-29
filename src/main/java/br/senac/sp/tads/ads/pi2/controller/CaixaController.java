@@ -10,6 +10,7 @@ import br.senac.sp.tads.ads.pi2.dao.ProdutoDAO;
 import br.senac.sp.tads.ads.pi2.helper.CaixaHelper;
 import br.senac.sp.tads.ads.pi2.helper.ProdutoHelper;
 import br.senac.sp.tads.ads.pi2.modal.Caixa;
+import br.senac.sp.tads.ads.pi2.modal.ItemVenda;
 import br.senac.sp.tads.ads.pi2.modal.Produto;
 import br.senac.sp.tads.ads.pi2.modal.ProdutoVenda;
 import br.senac.tads.ads.pi2.view.telaCaixa;
@@ -84,7 +85,7 @@ public class CaixaController {
         
         
         
-        tmItemVenda.addRow(new Object[]{seqCod, pv.getTipo(), pv.getNome(), pv.getPreco(), qtd, pv.getPreco() * qtd });
+        tmItemVenda.addRow(new Object[]{seqCod,pv.getId(), pv.getNome(), pv.getTipo(), pv.getPreco(), qtd, pv.getPreco() * qtd });
         
         view.getTblItensVenda().setModel(tmItemVenda);
         view.getLblQtdItens().setText(String.valueOf(countItem));
@@ -125,7 +126,6 @@ public class CaixaController {
         Double valorTotal = Double.parseDouble(view.getLblValorAtual().getText().substring(2).replace(",", "."));
         int qtdItens = Integer.parseInt(view.getLblQtdItens().getText());
         String tipoPagamento = view.getMetodoPagamento();
-        Double desconto = 0.00;
         int usuarioId = userID;
         int clienteId = cliID;
         
@@ -135,14 +135,34 @@ public class CaixaController {
         caixa.setValorTotal(valorTotal);
         caixa.setQuantidade(qtdItens);
         caixa.setTipoPagamento(tipoPagamento);
-        caixa.setDescontoTotal(desconto);
         caixa.setIdCaixa(usuarioId);
         caixa.setIdCliente(clienteId);
         
         CaixaDAO dao = new CaixaDAO();
-        dao.salvar(caixa);
+        int idVenda = dao.salvar(caixa);
+        int idProduto = 0;
+        Double valorUnitario = 0.00;
+        int qtd = 0;
         
-        JOptionPane.showMessageDialog(null, dataVenda + " | " + valorTotal + " | " + qtdItens + " | " + tipoPagamento + " | " + usuarioId + " | " + clienteId, "Aviso",JOptionPane.WARNING_MESSAGE);
-}
+        DefaultTableModel tmItemVenda = (DefaultTableModel) view.getTblItensVenda().getModel();
+
+        int totalRows = tmItemVenda.getRowCount();
+        
+         for (int i = 0; i < totalRows; i++) {
+             ItemVenda iv = new ItemVenda();
+             
+             iv.setCodVenda(idVenda);
+             iv.setCodigoProd((int) tmItemVenda.getValueAt(i, 1));
+             iv.setQuantidade((int) tmItemVenda.getValueAt(i, 5));
+             iv.setValor((Double)tmItemVenda.getValueAt(i, 4));
+             
+             dao.salvarItens(iv);
+             JOptionPane.showMessageDialog(null, i, "Aviso",JOptionPane.WARNING_MESSAGE);
+         }
+        
+        //
+        
+        //JOptionPane.showMessageDialog(null, dataVenda + " | " + valorTotal + " | " + qtdItens + " | " + tipoPagamento + " | " + usuarioId + " | " + clienteId, "Aviso",JOptionPane.WARNING_MESSAGE);
+    }
     
 }

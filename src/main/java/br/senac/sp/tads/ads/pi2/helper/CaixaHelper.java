@@ -38,10 +38,12 @@ public class CaixaHelper {
         
         ProdutoVenda pv = new ProdutoVenda();
         
+        pv.setId((int) view.getTblInclusaoProduto().getValueAt(view.getTblInclusaoProduto().getSelectedRow(), 0));
         pv.setNome((String) view.getTblInclusaoProduto().getValueAt(view.getTblInclusaoProduto().getSelectedRow(), 1));
         pv.setTipo((String) view.getTblInclusaoProduto().getValueAt(view.getTblInclusaoProduto().getSelectedRow(), 2));
         pv.setPreco((Double) view.getTblInclusaoProduto().getValueAt(view.getTblInclusaoProduto().getSelectedRow(), 3));
         pv.setQuantidade((int) view.getTblInclusaoProduto().getValueAt(view.getTblInclusaoProduto().getSelectedRow(), 4));
+        
                 
         return pv;
     }

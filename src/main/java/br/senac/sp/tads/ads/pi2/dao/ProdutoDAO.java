@@ -199,5 +199,9 @@ public class ProdutoDAO {
 
     }
 
+    void atualizarQtd(int codigoProd, int quantidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
 
