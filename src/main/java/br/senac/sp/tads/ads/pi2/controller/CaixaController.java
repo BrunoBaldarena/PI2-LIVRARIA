@@ -5,6 +5,7 @@
  */
 package br.senac.sp.tads.ads.pi2.controller;
 
+import br.senac.sp.tads.ads.pi2.dao.CaixaDAO;
 import br.senac.sp.tads.ads.pi2.dao.ProdutoDAO;
 import br.senac.sp.tads.ads.pi2.helper.CaixaHelper;
 import br.senac.sp.tads.ads.pi2.helper.ProdutoHelper;
@@ -12,10 +13,15 @@ import br.senac.sp.tads.ads.pi2.modal.Caixa;
 import br.senac.sp.tads.ads.pi2.modal.Produto;
 import br.senac.sp.tads.ads.pi2.modal.ProdutoVenda;
 import br.senac.tads.ads.pi2.view.telaCaixa;
+import java.math.RoundingMode;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -68,9 +74,13 @@ public class CaixaController {
         int qtd = Integer.parseInt(view.getTxtQuantidade().getText());
 
         seqCod += 1;
-        countItem += 1;
+        countItem += qtd;
         valorAtual += pv.getPreco() * qtd;
-        String preco = "R$"+String.valueOf(valorAtual).replace(".", ",");
+        
+        DecimalFormat df = new DecimalFormat("###.##");
+        df.setRoundingMode(RoundingMode.UP);
+        
+        String preco = "R$"+String.valueOf(df.format(valorAtual)).replace(".", ",");
         
         
         
@@ -88,20 +98,51 @@ public class CaixaController {
         int linha = view.getTblItensVenda().getSelectedRow();
         
         double valorItemRemovido = Double.parseDouble(tmItemVenda.getValueAt(linha, 5).toString());
+        int qtdItemRemovido = Integer.parseInt(tmItemVenda.getValueAt(linha, 4).toString());
         
         tmItemVenda.removeRow(linha);
         
         view.getTblItensVenda().setModel(tmItemVenda);
         
-        countItem -= 1;
+        countItem -= qtdItemRemovido;
         valorAtual -= valorItemRemovido;
-        String preco = "R$"+String.valueOf(valorAtual).replace(".", ",");
+        
+        DecimalFormat df = new DecimalFormat("###.##");
+        df.setRoundingMode(RoundingMode.UP);
+        
+        String preco = "R$"+String.valueOf(df.format(valorAtual)).replace(".", ",");
         
         view.getLblQtdItens().setText(String.valueOf(countItem));
         view.getLblValorAtual().setText(preco);
-
-        
-        
     }
+    
+    public void createVenda(int userID, int cliID) throws SQLException, ClassNotFoundException{
+    
+        Date data = new Date(System.currentTimeMillis()); 
+        SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+        
+        String dataVenda = formatarDate.format(data);
+        Double valorTotal = Double.parseDouble(view.getLblValorAtual().getText().substring(2).replace(",", "."));
+        int qtdItens = Integer.parseInt(view.getLblQtdItens().getText());
+        String tipoPagamento = view.getMetodoPagamento();
+        Double desconto = 0.00;
+        int usuarioId = userID;
+        int clienteId = cliID;
+        
+        Caixa caixa = new Caixa();
+        
+        caixa.setDataVenda(dataVenda);
+        caixa.setValorTotal(valorTotal);
+        caixa.setQuantidade(qtdItens);
+        caixa.setTipoPagamento(tipoPagamento);
+        caixa.setDescontoTotal(desconto);
+        caixa.setIdCaixa(usuarioId);
+        caixa.setIdCliente(clienteId);
+        
+        CaixaDAO dao = new CaixaDAO();
+        dao.salvar(caixa);
+        
+        JOptionPane.showMessageDialog(null, dataVenda + " | " + valorTotal + " | " + qtdItens + " | " + tipoPagamento + " | " + usuarioId + " | " + clienteId, "Aviso",JOptionPane.WARNING_MESSAGE);
+}
     
 }

@@ -111,5 +111,5 @@ public class UsuarioController {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
 }

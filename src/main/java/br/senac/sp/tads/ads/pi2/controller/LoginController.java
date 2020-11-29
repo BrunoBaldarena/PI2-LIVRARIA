@@ -12,6 +12,8 @@ import br.senac.sp.tads.ads.pi2.utils.Sessao;
 import br.senac.tads.ads.pi2.view.telaInicial;
 import br.senac.tads.ads.pi2.view.telaLogin;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,7 +40,7 @@ public class LoginController {
          if(usuarioAutenticacao != null){
              Sessao sessao = Sessao.getInstance();
              sessao.setUsuario(usuario); // //Usuario é um POJO qualquer;
-             telaInicial viewInicial = new telaInicial();
+             telaInicial viewInicial = new telaInicial(usuarioAutenticacao);
              viewInicial.setVisible(true);
          }else{
              view.exibeMensagemAtencao("Usuário ou senha inválidos"); 
@@ -62,7 +64,6 @@ public class LoginController {
 
         
     }
-    
     
     
 }

@@ -7,6 +7,8 @@ package br.senac.tads.ads.pi2.view;
 
 import br.senac.sp.tads.ads.pi2.controller.ClienteController;
 import br.senac.sp.tads.ads.pi2.controller.SelecaoClienteController;
+import br.senac.sp.tads.ads.pi2.modal.Cliente;
+import br.senac.sp.tads.ads.pi2.modal.Usuario;
 import java.awt.event.KeyEvent;
 import static java.lang.String.valueOf;
 import java.util.logging.Level;
@@ -26,6 +28,7 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
      */
     
     private final SelecaoClienteController controller;
+    private Usuario usuario;
 
     public telaSelecaoCliente() {
         initComponents();
@@ -37,6 +40,20 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    telaSelecaoCliente(Usuario user) {
+        initComponents();
+        controller = new SelecaoClienteController(this);
+        
+        
+        try{
+            controller.getClienteCaixa();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.usuario = user;
     }
 
     /**
@@ -279,17 +296,19 @@ public class telaSelecaoCliente extends javax.swing.JFrame {
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
         telaCaixa c;
+        
+        Cliente cliente = new Cliente();
+        cliente = controller.clienteSelecionado();
+        
         try {
-            String[] cliente = new String[2]; 
-            
-            cliente = controller.clienteSelecionado();
-            
-            c = new telaCaixa(cliente[0], cliente[1]);
+            c = new telaCaixa(cliente , usuario);
             c.setVisible(true);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(telaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(telaSelecaoCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            this.dispose();
         }
-        this.dispose();
+        
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

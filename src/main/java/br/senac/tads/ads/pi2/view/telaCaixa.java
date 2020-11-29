@@ -9,9 +9,12 @@ import br.senac.sp.tads.ads.pi2.controller.CaixaController;
 import br.senac.sp.tads.ads.pi2.controller.ClienteController;
 import br.senac.sp.tads.ads.pi2.helper.CaixaHelper;
 import br.senac.sp.tads.ads.pi2.helper.ClienteHelper;
+import br.senac.sp.tads.ads.pi2.modal.Cliente;
 import br.senac.sp.tads.ads.pi2.modal.ProdutoVenda;
+import br.senac.sp.tads.ads.pi2.modal.Usuario;
 import java.awt.event.KeyEvent;
 import static java.lang.String.valueOf;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -33,9 +36,9 @@ public class telaCaixa extends javax.swing.JFrame {
     
     private final CaixaController controller;
     private final CaixaHelper helper;
-    private String cliente = null;
-    private int idCliente = 0;
-
+    private Cliente cliente;
+    private String pagamento = "";
+    private Usuario usuario;
     
     public telaCaixa() throws ClassNotFoundException {
         initComponents();
@@ -50,7 +53,7 @@ public class telaCaixa extends javax.swing.JFrame {
         this.helper = new CaixaHelper(this);
     }
     
-    public telaCaixa(String idCliente, String cliente) throws ClassNotFoundException {
+    public telaCaixa(Cliente cliente, Usuario user) throws ClassNotFoundException {
         initComponents();
         // Definindo tamanho in1cial da janela
         //this.setBounds(250, 150, 1124, 718);
@@ -63,10 +66,9 @@ public class telaCaixa extends javax.swing.JFrame {
         this.helper = new CaixaHelper(this);
         
         this.cliente = cliente;
-        this.idCliente = Integer.parseInt(idCliente);
         
-        this.txtCliente.setText(cliente);
-        
+        this.txtCliente.setText(cliente.getNome());
+        this.usuario = user;
     }
 
     /**
@@ -578,15 +580,32 @@ public class telaCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
-        // Validacao das entradas para finalizacao das compras
-        String pagamento;
+        // Validacao das entradas para finalizacao das compras        
+        if (rdDebito.isSelected()){
+            pagamento = "Debito";
+        } else if (rdCredito.isSelected()) {
+            pagamento = "Credito";
+        } else if (rdDinheiro.isSelected()) {
+            pagamento = "Dinheiro";
+        } else {
+            JOptionPane.showMessageDialog(this, "Voce deve selecionar um metodo de pagamento!", "Aviso",JOptionPane.WARNING_MESSAGE);
+        }
         
-        if (rdDebito.isSelected()) pagamento = "Debito";
-        else if (rdCredito.isSelected()) pagamento = "Credito";
-        else if (rdDinheiro.isSelected()) pagamento = "Dinheiro";
-        else JOptionPane.showMessageDialog(this, "Voce deve selecionar um metodo de pagamento!", "Aviso",JOptionPane.WARNING_MESSAGE);
+        if(!pagamento.equals("")){
+            if (!txtCliente.getText().equals("")){
+                
+                try {
+                    controller.createVenda(usuario.getId(), cliente.getId());
+                } catch (SQLException ex) {
+                    Logger.getLogger(telaCaixa.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(telaCaixa.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else{
+                JOptionPane.showMessageDialog(this, "Voce deve selecionar um Cliente", "Aviso",JOptionPane.WARNING_MESSAGE);
+            }
+        }
         
-        if (txtCliente.getText().equals("")) JOptionPane.showMessageDialog(this, "Voce deve selecionar um Cliente", "Aviso",JOptionPane.WARNING_MESSAGE);;
                 
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
@@ -746,6 +765,9 @@ public class telaCaixa extends javax.swing.JFrame {
         return btnRemoverRegistro;
     }
     
+    public String getMetodoPagamento(){
+        return pagamento;
+    }
     
     
 

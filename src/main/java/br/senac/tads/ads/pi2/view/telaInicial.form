@@ -55,11 +55,13 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="panelDataHora" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="1070" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="lblUser" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="919" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="panelProduto" min="-2" max="-2" attributes="0"/>
+                          <Component id="panelCadUsuario" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -72,9 +74,15 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="panelDataHora" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="panelDataHora" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Component id="lblUser" min="-2" pref="25" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="panelProduto" min="-2" max="-2" attributes="0"/>
+                          <Component id="panelCadUsuario" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="panelLateral" max="32767" attributes="0"/>
                   </Group>
@@ -132,7 +140,7 @@
                       <Component id="btnCliente" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnDados" linkSize="2" min="-2" pref="124" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
                       <Component id="btnInfo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSair" min="-2" pref="37" max="-2" attributes="0"/>
@@ -317,7 +325,22 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="panelProduto">
+        <Component class="javax.swing.JLabel" name="lblUser">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="48" green="46" red="23" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Lucida Grande" size="15" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Data"/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JPanel" name="panelCadUsuario">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="48" green="46" red="23" type="rgb"/>

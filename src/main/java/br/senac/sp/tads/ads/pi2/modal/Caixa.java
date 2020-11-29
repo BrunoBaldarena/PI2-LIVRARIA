@@ -13,17 +13,17 @@ public class Caixa {
     
     private int codigoVenda;
     private String dataVenda;
-    private float valorTotal;
+    private double valorTotal;
     private int IdCliente;
     private int idCaixa;
     private int quantidade;
     private String tipoPagamento; 
-    private float descontoTotal; 
+    private double descontoTotal; 
 
     public Caixa() {
     }
 
-    public Caixa(int codigoVenda, String dataVenda, float valorTotal, int IdCliente, int idCaixa, int quantidade, String tipoPagamento, float descontoTotal) {
+    public Caixa(int codigoVenda, String dataVenda, double valorTotal, int IdCliente, int idCaixa, int quantidade, String tipoPagamento, double descontoTotal) {
         this.codigoVenda = codigoVenda;
         this.dataVenda = dataVenda;
         this.valorTotal = valorTotal;
@@ -31,7 +31,7 @@ public class Caixa {
         this.idCaixa = idCaixa;
         this.quantidade = quantidade;
         this.tipoPagamento = tipoPagamento;
-        this.descontoTotal = descontoTotal;
+        this.descontoTotal = (float) descontoTotal;
     }
 
     public int getCodigoVenda() {
@@ -50,11 +50,11 @@ public class Caixa {
         this.dataVenda = dataVenda;
     }
 
-    public float getValorTotal() {
+    public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(float valorTotal) {
+    public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
@@ -90,11 +90,11 @@ public class Caixa {
         this.tipoPagamento = tipoPagamento;
     }
 
-    public float getDescontoTotal() {
+    public double getDescontoTotal() {
         return descontoTotal;
     }
 
-    public void setDescontoTotal(float descontoTotal) {
+    public void setDescontoTotal(double descontoTotal) {
         this.descontoTotal = descontoTotal;
     }
     

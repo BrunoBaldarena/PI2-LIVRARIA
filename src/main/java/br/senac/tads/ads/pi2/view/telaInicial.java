@@ -5,6 +5,7 @@
  */
 package br.senac.tads.ads.pi2.view;
 
+import br.senac.sp.tads.ads.pi2.modal.Usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -23,9 +24,25 @@ public class telaInicial extends javax.swing.JFrame {
     /**
      * Creates new form telaInicial
      */
+    
+    private Usuario usuario;
+    
     public telaInicial() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+    }
+
+    public telaInicial(Usuario user) {
+        initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.usuario = user;
+        
+        lblUser.setText("Seja bem vindo(a), "+ usuario.getUsuario()+"!!");
+        
+        if(usuario.getTipo().equals("Administrador")) panelCadUsuario.setVisible(true);
+        else panelCadUsuario.setVisible(false);
+        
+
     }
 
     /**
@@ -49,7 +66,8 @@ public class telaInicial extends javax.swing.JFrame {
         panelDataHora = new javax.swing.JPanel();
         lblData = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        panelProduto = new javax.swing.JPanel();
+        lblUser = new javax.swing.JLabel();
+        panelCadUsuario = new javax.swing.JPanel();
         btnDados1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -153,7 +171,7 @@ public class telaInicial extends javax.swing.JFrame {
                 .addComponent(btnCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDados, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -196,8 +214,14 @@ public class telaInicial extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panelProduto.setBackground(new java.awt.Color(35, 70, 72));
-        panelProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "Cadastrar Usuario", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        lblUser.setBackground(new java.awt.Color(35, 70, 72));
+        lblUser.setFont(new java.awt.Font("Lucida Grande", 1, 15)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(255, 255, 255));
+        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUser.setText("Data");
+
+        panelCadUsuario.setBackground(new java.awt.Color(35, 70, 72));
+        panelCadUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "Cadastrar Usuario", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         btnDados1.setBackground(new java.awt.Color(35, 70, 72));
         btnDados1.setForeground(new java.awt.Color(35, 70, 72));
@@ -208,18 +232,18 @@ public class telaInicial extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelProdutoLayout = new javax.swing.GroupLayout(panelProduto);
-        panelProduto.setLayout(panelProdutoLayout);
-        panelProdutoLayout.setHorizontalGroup(
-            panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelProdutoLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelCadUsuarioLayout = new javax.swing.GroupLayout(panelCadUsuario);
+        panelCadUsuario.setLayout(panelCadUsuarioLayout);
+        panelCadUsuarioLayout.setHorizontalGroup(
+            panelCadUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCadUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnDados1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        panelProdutoLayout.setVerticalGroup(
-            panelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProdutoLayout.createSequentialGroup()
+        panelCadUsuarioLayout.setVerticalGroup(
+            panelCadUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCadUsuarioLayout.createSequentialGroup()
                 .addComponent(btnDados1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -235,10 +259,12 @@ public class telaInicial extends javax.swing.JFrame {
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(1070, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(919, 919, 919))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelCadUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -247,9 +273,13 @@ public class telaInicial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(panelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(panelCadUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -308,7 +338,7 @@ public class telaInicial extends javax.swing.JFrame {
         }
         */
         telaSelecaoCliente c;
-        c = new telaSelecaoCliente();
+        c = new telaSelecaoCliente(usuario);
         c.setVisible(true);
         
     }//GEN-LAST:event_btnCaixaActionPerformed
@@ -399,9 +429,10 @@ public class telaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblUser;
+    private javax.swing.JPanel panelCadUsuario;
     private javax.swing.JPanel panelDataHora;
     private javax.swing.JPanel panelLateral;
     private javax.swing.JPanel panelPrincipal;
-    private javax.swing.JPanel panelProduto;
     // End of variables declaration//GEN-END:variables
 }

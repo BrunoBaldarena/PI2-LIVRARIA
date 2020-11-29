@@ -53,17 +53,19 @@ public class SelecaoClienteController {
         }
     }
     
-    public String[] clienteSelecionado(){
+    public Cliente clienteSelecionado(){
         
+        Cliente c = new Cliente();
         DefaultTableModel tmCliente = (DefaultTableModel) view.getTableCliente().getModel();
 
         int linha = view.getTableCliente().getSelectedRow();
         
-        String id = tmCliente.getValueAt(linha, 0).toString();
+        int id = Integer.parseInt(tmCliente.getValueAt(linha, 0).toString());
         String nome = tmCliente.getValueAt(linha, 1).toString();
         
-        String[] retorno = {id, nome};
+        c.setId(id);
+        c.setNome(nome);
         
-        return retorno;
+        return c;
     }
 }
