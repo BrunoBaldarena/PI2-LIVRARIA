@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -217,14 +218,27 @@ public class ClienteDAO {
         Connection conexao = GerenciadorConexao.CONEXAO;
         String SQL = "SELECT cpf FROM cliente WHERE cpf = '"+cpf+"';";
         
-        ResultSet rs;
-        try (Statement st = conexao.createStatement()) {
-            rs = st.executeQuery(SQL);
-            cpfExistente = rs.getString("cpf").equals(cpf);
+        Statement st = conexao.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+        Cliente cliente = new Cliente();
+        cliente.setCpf("");
+        
+
+        
+        while (rs.next()){
+            cliente.setCpf(rs.getString("cpf"));
         }
+
+        
         rs.close();
         GerenciadorConexao.fecharConexao();
-        return cpfExistente;
+        
+        if(cliente.getCpf().equals("")){
+            return false;
+        } else{
+            return true;
+        }
+        
     }
     
     
@@ -271,6 +285,30 @@ public class ClienteDAO {
             GerenciadorConexao.fecharConexao();
         }
         return cliente;
+    }
+
+    public boolean compraRealizada(String idCliente) throws SQLException, ClassNotFoundException {
+        GerenciadorConexao.abrirConexao();
+
+        
+        Connection conexao = GerenciadorConexao.CONEXAO;
+        String SQL = "SELECT cliente_id FROM venda WHERE cliente_id = '"+idCliente+"';";
+        
+        Statement st = conexao.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+        String id = "";
+        
+
+        
+        while (rs.next()){
+            id = rs.getString("cliente_id");
+        }
+
+        
+        rs.close();
+        GerenciadorConexao.fecharConexao();
+        
+        return !id.equals("");
     }
     
     

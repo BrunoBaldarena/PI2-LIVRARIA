@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
@@ -864,15 +865,20 @@ public class telaCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(!txtCodCliente.getText().equals("")){
             try {
-                controller.deleteCliente();
-                controller.getCliente();
+                if(controller.fezCompra()){
+                    JOptionPane.showMessageDialog(this, "Nao foi possivel remover este cliente, pois ele ja reslizou compras na nossa loja.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                } else{
+                    controller.deleteCliente();
+                    controller.getCliente();
+                }
+                
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Para atualizar, por favor selecione um cliente acima!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Para remover, por favor selecione um cliente acima!", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_btnRemoverActionPerformed
@@ -901,6 +907,8 @@ public class telaCliente extends javax.swing.JFrame {
                     controller.createCliente();
                     controller.getCliente();
                 } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
                     Logger.getLogger(telaCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -1000,7 +1008,7 @@ public class telaCliente extends javax.swing.JFrame {
         try {
             Integer.parseInt(txtNum.getText());
         } catch (NumberFormatException numberFormatException) {
-            JOptionPane.showMessageDialog(this, "Por favoe, informe um numero neste campo!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor, informe um numero neste campo!", "Aviso", JOptionPane.WARNING_MESSAGE);
             txtNum.setText("");
         }
         

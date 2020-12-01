@@ -29,16 +29,22 @@ public class ClienteController {
         this.helper = new ClienteHelper(view);
     }
     
-    public void createCliente(){
+    public void createCliente() throws ClassNotFoundException, SQLException{
         Cliente cliente = helper.obterModelo();
         ClienteDAO dao = new ClienteDAO();
         
-        try {
-            dao.salvar(cliente);
-            helper.limparTela();
-        } catch (SQLException | ClassNotFoundException ex) {
-            view.exibeMensagemAtencao("Falha ao cadastrar!");
+        if(!dao.verificarCpfDuplicado(cliente.getCpf())){
+            try {
+                dao.salvar(cliente);
+                helper.limparTela();
+            } catch (SQLException | ClassNotFoundException ex) {
+                view.exibeMensagemAtencao("Falha ao cadastrar!");
+            }
+        } else{
+            view.exibeMensagemAtencao("Já existe um Cliente com este CPF cadastrado");
         }
+        
+        
     }
     
     public void updateCliente(){
@@ -114,6 +120,12 @@ public class ClienteController {
             Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
+    }
+
+    public boolean fezCompra() throws SQLException {
+        ClienteDAO dao = new ClienteDAO();
+        return dao.compraRealizada(view.getTxtCodCliente().getText());
         
     }
     
