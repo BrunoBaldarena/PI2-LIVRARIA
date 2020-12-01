@@ -7,6 +7,7 @@ package br.senac.tads.ads.pi2.view;
 
 import br.senac.sp.tads.ads.pi2.controller.UsuarioController;
 import br.senac.sp.tads.ads.pi2.helper.UsuarioHelper;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -591,13 +592,24 @@ public class telaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(!txtCodigo.getText().equals("")){
             try {
-                controller.deleteUsuario();
-                controller.getUsuario();
+                if(!controller.realizouVenda()){
+                    try {
+                        controller.deleteUsuario();
+                        controller.getUsuario();
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (Exception ex) {
+                        Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else{
+                    JOptionPane.showMessageDialog(this, "Nao foi possivel remover este usuario, pois ele ja realizou vendas na nossa loja.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(telaUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         } else {
             JOptionPane.showMessageDialog(this, "Para atualizar, por favor selecione um cliente acima!", "Aviso", JOptionPane.WARNING_MESSAGE);
         }

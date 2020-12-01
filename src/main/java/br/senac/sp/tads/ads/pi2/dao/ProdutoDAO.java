@@ -224,5 +224,29 @@ public class ProdutoDAO {
         }
     }   
 
+    public boolean foiVendido(String idProduto) throws SQLException, ClassNotFoundException {
+        GerenciadorConexao.abrirConexao();
+
+        
+        Connection conexao = GerenciadorConexao.CONEXAO;
+        String SQL = "SELECT produto_id FROM itemVenda WHERE produto_id = '"+idProduto+"';";
+        
+        Statement st = conexao.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+        String id = "";
+        
+
+        
+        while (rs.next()){
+            id = rs.getString("produto_id");
+        }
+
+        
+        rs.close();
+        GerenciadorConexao.fecharConexao();
+        
+        return !id.equals("");
+    }
+
 }
 

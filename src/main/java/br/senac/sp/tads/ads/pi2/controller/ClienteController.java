@@ -123,7 +123,7 @@ public class ClienteController {
         
     }
 
-    public boolean fezCompra() throws SQLException {
+    public boolean fezCompra() throws SQLException, ClassNotFoundException {
         ClienteDAO dao = new ClienteDAO();
         return dao.compraRealizada(view.getTxtCodCliente().getText());
         

@@ -99,5 +99,10 @@ public class ProdutoController {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public boolean produtoVendido() throws SQLException, ClassNotFoundException {
+        ProdutoDAO dao = new ProdutoDAO();
+        return dao.foiVendido(view.getTxtCodProduto().getText());
+    }
     
 }

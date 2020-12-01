@@ -111,5 +111,10 @@ public class UsuarioController {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public boolean realizouVenda() throws SQLException, ClassNotFoundException {
+        UsuarioDAO dao = new UsuarioDAO();
+        return dao.vendaRealizada(view.getTxtCodigo().getText());
+    }
     
 }

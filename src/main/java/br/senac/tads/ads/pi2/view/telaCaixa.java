@@ -551,23 +551,31 @@ public class telaCaixa extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
         String msg = null;
+        
+        
       
         if(!txtQuantidade.getText().equals("")){
+            
             try {
-                if(helper.verificaEstoque()){
-                    ProdutoVenda pv = helper.getProdutoVenda();
-                    
-                    controller.addItemVenda(pv);
-                    
-                    
-                    // continua
-                } else{
-                    JOptionPane.showMessageDialog(null, "Só esta disponivel "+lblQtdDisponivel.getText()+" unidades deste item!", "Aviso", JOptionPane.WARNING_MESSAGE);
+                Integer.parseInt(txtQuantidade.getText());
+                try {
+                    if(helper.verificaEstoque()){
+                        ProdutoVenda pv = helper.getProdutoVenda();
+
+                        controller.addItemVenda(pv);
+
+
+                        // continua
+                    } else{
+                        JOptionPane.showMessageDialog(null, "Só esta disponivel "+lblQtdDisponivel.getText()+" unidades deste item!", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (NumberFormatException e){
+                    if (msg == null) msg = "Quantidade precisa ser um numero inteiro";
+                    else msg += "\nQuantidade precisa ser um numero inteiro";
+                    txtQuantidade.setText("");
                 }
-            } catch (NumberFormatException e){
-                if (msg == null) msg = "Quantidade precisa ser um numero inteiro";
-                else msg += "\nQuantidade precisa ser um numero inteiro";
-                txtQuantidade.setText("");
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "No campo quantidade deve ser informado um numero inteiro!", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
         } else{
             msg = "Você precisa preencher o campo de quantidade!";
@@ -633,15 +641,7 @@ public class telaCaixa extends javax.swing.JFrame {
 
     private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
         // Validação de entrada quantidade
-        char c = evt.getKeyChar();
         
-        if(((c < '0') || (c > '9') && (c != KeyEvent.VK_BACK_SPACE))) evt.consume(); 
-        
-        try {
-            Integer.parseInt(valueOf(c));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Neste campo deve ser inserido um numero!", "Aviso", JOptionPane.WARNING_MESSAGE);        
-        }
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     private void txtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyReleased

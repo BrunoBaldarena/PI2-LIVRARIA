@@ -9,6 +9,7 @@ import br.senac.sp.tads.ads.pi2.controller.ProdutoController;
 import br.senac.sp.tads.ads.pi2.helper.ProdutoHelper;
 import br.senac.sp.tads.ads.pi2.modal.Produto;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -948,15 +949,27 @@ public class telaProduto extends javax.swing.JFrame {
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
+        
         if(!txtCodProduto.getText().equals("")) {
             try {
-                controller.deleteProduto();
-                controller.getProduto();
-            } catch (Exception ex) {
+                if(!controller.produtoVendido()){
+                    try {
+                        controller.deleteProduto();
+                        controller.getProduto();
+                    } catch (Exception ex) {
+                        Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else{
+                    JOptionPane.showMessageDialog(this, "Nao foi possivel remover este produto, pois ele ja foi vendido em nossa loja.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
                 Logger.getLogger(telaProduto.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         } else {
-            JOptionPane.showMessageDialog(this, "Para remover, por favor selecione um cliente acima!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Para remover, por favor selecione um produto acima!", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 

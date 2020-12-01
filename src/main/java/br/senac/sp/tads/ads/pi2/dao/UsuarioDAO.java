@@ -182,5 +182,29 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    public boolean vendaRealizada(String idUsuario) throws SQLException, ClassNotFoundException {
+        GerenciadorConexao.abrirConexao();
+
+        
+        Connection conexao = GerenciadorConexao.CONEXAO;
+        String SQL = "SELECT usuario_id FROM venda WHERE usuario_id = '"+idUsuario+"';";
+        
+        Statement st = conexao.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+        String id = "";
+        
+
+        
+        while (rs.next()){
+            id = rs.getString("usuario_id");
+        }
+
+        
+        rs.close();
+        GerenciadorConexao.fecharConexao();
+        
+        return !id.equals("");
+    }
+
     
 }
