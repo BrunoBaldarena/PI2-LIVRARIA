@@ -10,25 +10,47 @@ package br.senac.sp.tads.ads.pi2.modal;
  * @author baldarena
  */
 public class RelatorioAnalitico {
-    
+
     private int id;
-    private int codCliente; 
-    private int codVenda; 
-    private int qtdLivros;
-    private String dtCompra;
-    private Float desconto;
+    private int codVenda;
+    private int codProduto;
+    private float valorTotalItem;
+    private float valorUnitario;
+    private int quantidade;
+    private String tipoProduto;
+    private String nomeProduto;
 
     public RelatorioAnalitico() {
     }
 
-    public RelatorioAnalitico(int id, int codCliente, int codVenda, int qtdLivros, String dtCompra, Float desconto) {
+    public RelatorioAnalitico(int id, int codVenda, int codProduto, float valorTotalItem, float valorUnitario, int quantidade, String tipoProduto, String nomeProduto) {
         this.id = id;
-        this.codCliente = codCliente;
         this.codVenda = codVenda;
-        this.qtdLivros = qtdLivros;
-        this.dtCompra = dtCompra;
-        this.desconto = desconto;
+        this.codProduto = codProduto;
+        this.valorTotalItem = valorTotalItem;
+        this.valorUnitario = valorUnitario;
+        this.quantidade = quantidade;
+        this.tipoProduto = tipoProduto;
+        this.nomeProduto = nomeProduto;
     }
+
+    public String getTipoProduto() {
+        return tipoProduto;
+    }
+
+    public void setTipoProduto(String tipoProduto) {
+        this.tipoProduto = tipoProduto;
+    }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+
 
     public int getId() {
         return id;
@@ -36,14 +58,6 @@ public class RelatorioAnalitico {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCodCliente() {
-        return codCliente;
-    }
-
-    public void setCodCliente(int codCliente) {
-        this.codCliente = codCliente;
     }
 
     public int getCodVenda() {
@@ -54,32 +68,38 @@ public class RelatorioAnalitico {
         this.codVenda = codVenda;
     }
 
-    public int getQtdLivros() {
-        return qtdLivros;
+    public int getCodProduto() {
+        return codProduto;
     }
 
-    public void setQtdLivros(int qtdLivros) {
-        this.qtdLivros = qtdLivros;
+    public void setCodProduto(int codProduto) {
+        this.codProduto = codProduto;
     }
 
-    public String getDtCompra() {
-        return dtCompra;
+    public float getValorTotalItem() {
+        return valorTotalItem;
     }
 
-    public void setDtCompra(String dtCompra) {
-        this.dtCompra = dtCompra;
+    public void setValorTotalItem(float valorTotalItem) {
+        this.valorTotalItem = valorTotalItem;
     }
 
-    public Float getDesconto() {
-        return desconto;
+    public float getValorUnitario() {
+        return valorUnitario;
     }
 
-    public void setDesconto(Float desconto) {
-        this.desconto = desconto;
+    public void setValorUnitario(float valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
     
     
-   
-    
-    
+
 }

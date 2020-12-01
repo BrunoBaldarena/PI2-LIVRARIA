@@ -25,11 +25,14 @@ public class telaRelatorio extends javax.swing.JFrame {
     /**
      * Creates new form telaRelatorio
      */
+    
+        private int codVenda = 0;
     public telaRelatorio() throws SQLException, ClassNotFoundException {
         initComponents();
         
         controller = new RelatorioSinteticoController(this);
-        controller.getRelatorioSintetico();
+        controller.getRelatorioSinteticoParam();
+        btnRegistrar.setEnabled(false);
     
 
         //this.setExtendedState(MAXIMIZED_BOTH);
@@ -161,7 +164,7 @@ public class telaRelatorio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBuscar)
                 .addGap(6, 6, 6))
         );
         panelBuscaLayout.setVerticalGroup(
@@ -220,10 +223,9 @@ public class telaRelatorio extends javax.swing.JFrame {
         btnDetalhesLayout.setVerticalGroup(
             btnDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnDetalhesLayout.createSequentialGroup()
-                .addComponent(btnRegistrar)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLimparCampos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tblVendas.setModel(new javax.swing.table.DefaultTableModel(
@@ -240,6 +242,11 @@ public class telaRelatorio extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblVendas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVendasMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblVendas);
@@ -382,9 +389,15 @@ public class telaRelatorio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
-        telaDetalhesRelatorio dr = new telaDetalhesRelatorio();
-        dr.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            
+            telaDetalhesRelatorio dr = new telaDetalhesRelatorio(codVenda);
+            dr.setVisible(true);
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(telaRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -413,7 +426,7 @@ public class telaRelatorio extends javax.swing.JFrame {
         try {
             RelatorioSinteticoHelper helper = new RelatorioSinteticoHelper(this);
             helper.limparTela();
-            controller.getRelatorioSintetico();
+            controller.getRelatorioSinteticoParam();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(telaRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -421,19 +434,25 @@ public class telaRelatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try {
-            // TODO add your handling cod"e here:
-            
-            
-            if(txtDataFinal.getText().equals("  /  /    ") && txtDataFinal.getText().equals("  /  /    ")){
-                controller.getRelatorioSintetico();
-            }
 
+        try {
             controller.getRelatorioSinteticoParam();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(telaRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tblVendasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVendasMouseClicked
+        // TODO add your handling code here:
+        
+        btnRegistrar.setEnabled(true);
+        int linha = tblVendas.getSelectedRow(); //retorna um inteiro
+       
+       
+       codVenda = (int) tblVendas.getValueAt(linha,0); 
+       
+       
+    }//GEN-LAST:event_tblVendasMouseClicked
 
     /**
      * @param args the command line arguments

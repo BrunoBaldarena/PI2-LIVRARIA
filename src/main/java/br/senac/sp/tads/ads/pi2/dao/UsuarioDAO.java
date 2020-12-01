@@ -145,6 +145,42 @@ public class UsuarioDAO {
         }
 
     }
+    
+    public Usuario buscarID(int idUser) throws ClassNotFoundException, SQLException {
+
+        Usuario usuario =null;
+
+        GerenciadorConexao.abrirConexao();
+
+        //Chama a conexao com o banco de dados 
+        Connection conexao = GerenciadorConexao.CONEXAO;
+        String SQL = "SELECT * FROM usuario WHERE id= "+idUser+";";
+        
+        Statement st = conexao.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+
+        try {
+
+            while (rs.next()) {
+
+                usuario = new Usuario();
+
+                usuario.setId(rs.getInt("id"));
+                usuario.setTipo(rs.getString("tipo"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setUsuario(rs.getString("usuario"));
+                usuario.setSenha(rs.getString("senha"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            st.close();
+            rs.close();
+            GerenciadorConexao.fecharConexao();
+        }
+        return usuario;
+    }
 
     
 }
