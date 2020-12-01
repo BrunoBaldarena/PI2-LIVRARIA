@@ -20,7 +20,10 @@ public class RelatorioSinteticoHelper {
         this.view = view;
     }
     
-    
+     /** @author baldarena
+     * Metodo que é utilizado para capturar os dados da view para um objeto
+     * @return RelatorioSintetico
+     */   
      public RelatorioSintetico obterModelo(){
          
         RelatorioSintetico rls = new RelatorioSintetico();
@@ -41,6 +44,9 @@ public class RelatorioSinteticoHelper {
         
      }
      
+     /** @author baldarena
+     * Metodo que é utilizado para limpar os campos da view
+     */  
      public void limparTela(){
         view.getTxtDataInicial().setText("");
         view.getTxtDataFinal().setText("");

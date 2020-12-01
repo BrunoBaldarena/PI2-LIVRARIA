@@ -20,6 +20,10 @@ public class UsuarioHelper {
         this.view = view;
     }
     
+        
+     /** @author baldarena
+     * Metodo que é utilizado para capturar os dados da view para um objeto
+     */   
     public Usuario obterModelo(){
                 
         int codigo = 0;
@@ -42,6 +46,9 @@ public class UsuarioHelper {
         return modelo;
     }
     
+      /** @author baldarena
+     * Metodo que é utilizado para definir os dados da de um objeti na view
+     */   
     public void setarModelo(Usuario modelo){
         String usuario = modelo.getUsuario();
         String senha = modelo.getSenha();
@@ -57,6 +64,9 @@ public class UsuarioHelper {
          
     }
     
+     /** @author baldarena
+     * Metodo que é utilizado para limpar os campos da view
+     */  
     public void limparTela(){
         view.getTxtUsuario().setText("");
         view.getTxtSenha().setText("");

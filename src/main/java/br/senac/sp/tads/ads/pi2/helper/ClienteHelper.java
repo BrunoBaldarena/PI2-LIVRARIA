@@ -22,6 +22,10 @@ public class ClienteHelper {
         this.view = view;
     }
     
+    /** @author victor.santos
+     * Metodo que é utilizado para capturar os dados da view para um objeto
+     * @return Cliente
+     */       
     public Cliente obterModelo(){
         int codigo = 0;
         String codCliente = view.getTxtCodCliente().getText();
@@ -73,6 +77,9 @@ public class ClienteHelper {
         return modelo;
     }
     
+    /** @author victor.santos
+     * Metodo que é utilizado para definir os dados da de um objeti na view
+     */  
     public void setarModelo(Cliente modelo){
         String codigo = Integer.toString(modelo.getId());
         String nome = modelo.getNome();
@@ -119,6 +126,9 @@ public class ClienteHelper {
         }
     }
     
+    /** @author victor.santos
+     * Metodo que é utilizado para limpar os campos da view
+     */  
     public void limparTela(){
         view.getTxtCodCliente().setText("");
         view.getTxtNomeCliente().setText("");

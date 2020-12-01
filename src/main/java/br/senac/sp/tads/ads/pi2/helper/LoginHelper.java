@@ -19,7 +19,11 @@ public class LoginHelper {
     public LoginHelper(telaLogin view) {
         this.view = view;
     }
-    
+
+     /** @author baldarena
+     * Metodo que é utilizado para capturar os dados da view para um objeto
+     * @return Usuario
+     */       
     public Usuario obterModelo(){
                 
         String user = view.getTxtUsuario().getText();
@@ -31,6 +35,9 @@ public class LoginHelper {
         return modelo;
     }
     
+     /** @author diogo.carauta
+     * Metodo que é utilizado para definir os dados da de um objeti na view
+     */   
     public void setarModelo(Usuario modelo){
         String usuario = modelo.getUsuario();
         String senha = modelo.getSenha();
@@ -41,6 +48,9 @@ public class LoginHelper {
         
     }
     
+    /** @author baldarena
+     * Metodo que é utilizado para limpar os campos da view
+     */  
     public void limparTela(){
         view.getTxtUsuario().setText("");
         view.getTxtSenha().setText("");

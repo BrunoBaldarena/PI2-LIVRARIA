@@ -13,7 +13,8 @@ import java.sql.SQLException;
 
 /**
  *
- * @author fernando.fernandes
+ * @author baldarena
+ * Classe desenvolvida para deter os metodos que serao utilizados para gerenciamento de conexao com banco de dados.
  */
 public class GerenciadorConexao {
     
@@ -24,7 +25,7 @@ public class GerenciadorConexao {
     public static String DATABASE = "librariadepapel";              //nome do seu banco de dados
     
     public static String LOGIN = "root";                     //nome de um usuário de seu BD      
-    public static String SENHA = "123456";                         //sua senha de acesso
+    public static String SENHA = "";                         //sua senha de acesso
     
     public static String URL = "";
     
@@ -33,6 +34,11 @@ public class GerenciadorConexao {
     public GerenciadorConexao() {
     }
     
+        
+     /** @author baldarena
+     * Metodo que realiza a abertura da conexao com o banco de dados MySQL
+     * @return Connection conexao
+     */   
     public static Connection abrirConexao() throws ClassNotFoundException,SQLException {
  
         URL = "jdbc:mysql://" + SERVER + ":3306/" +DATABASE + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
@@ -75,10 +81,20 @@ public class GerenciadorConexao {
         return CONEXAO;
     }
     
+     /** @author baldarena
+     * Metodo que retorna status da conexao
+     * @return String status atual da conexao
+     */    
     public static String getStatusConexao() {
         return STATUS;
     }
     
+    
+     /**
+     * @author baldarena
+     * Metodo que encerra a conexao com banco de dados
+     * @return boolean se a conexao foi encerrada corretamente
+     */
     public static boolean fecharConexao() throws SQLException {
  
         boolean retorno = false;

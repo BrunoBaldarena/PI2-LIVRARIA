@@ -32,7 +32,10 @@ public class CaixaHelper {
         
     }
     
-
+    /** @author victor.santos
+     * Metodo que é utilizado para lpraze ros itens da view para um objeto
+     * @return ProdutoVenda
+     */ 
     public ProdutoVenda getProdutoVenda() {
         
         

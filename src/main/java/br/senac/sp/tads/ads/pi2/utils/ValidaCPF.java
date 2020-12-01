@@ -13,6 +13,10 @@ import java.util.InputMismatchException;
  */
 
 public class ValidaCPF {
+        
+     /** @author baldarena
+     * Metodo que valida se CPF é valido
+     */   
     public static boolean isCPF(String CPF) {
         
         CPF = CPF.replace(" ", "");//Tira espaco

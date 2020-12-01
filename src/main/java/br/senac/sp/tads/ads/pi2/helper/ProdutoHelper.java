@@ -20,6 +20,10 @@ public class ProdutoHelper {
         this.view = view;
     }
     
+     /** @author diogo.carauta
+     * Metodo que é utilizado para capturar os dados da view para um objeto
+     * @return Produto
+     */   
     public Produto obterModelo(){
         int codigo = 0;
         String codProduto = view.getTxtCodProduto().getText();
@@ -54,6 +58,9 @@ public class ProdutoHelper {
         return modelo;
     }
     
+     /** @author diogo.carauta
+     * Metodo que é utilizado para definir os dados da de um objeti na view
+     */   
     public void setarModelo(Produto modelo){
         view.getTxtCodProduto().setText(Integer.toString(modelo.getId()));
         view.getTxtNome().setText(modelo.getNome());
@@ -68,6 +75,10 @@ public class ProdutoHelper {
        
     }
     
+    
+     /** @author baldarena
+     * Metodo que é utilizado para limpar os campos da view
+     */ 
     public void limparTela(){
         view.getTxtCodProduto().setText("");
         view.getTxtNome().setText("");

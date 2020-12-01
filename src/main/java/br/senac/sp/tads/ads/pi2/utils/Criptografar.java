@@ -11,9 +11,16 @@ import java.security.MessageDigest;
 /**
  *
  * @author baldarena
+ * Classe usada para declarar os metodos de criptografia utilizados para criptografar os dados necessarios
  */
 public class Criptografar {
     
+     /**
+     * @author baldarena
+     * Metodo que recebe a senha cadastrada no usuario e criptografa no padrao MD5
+     * @param data senha em String
+     * @return senha criptografada
+     */
     public static String criptografar(String Senha){
         String retorno=""; 
         MessageDigest md; 
