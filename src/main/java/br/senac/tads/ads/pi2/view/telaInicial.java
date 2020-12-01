@@ -8,6 +8,7 @@ package br.senac.tads.ads.pi2.view;
 import br.senac.sp.tads.ads.pi2.modal.Usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -363,9 +364,15 @@ public class telaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInfoActionPerformed
 
     private void btnDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDadosActionPerformed
-        // TODO add your handling code here:
-        telaRelatorio r = new telaRelatorio();
-        r.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            telaRelatorio r = new telaRelatorio();
+            r.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(telaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(telaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnDadosActionPerformed
 
     private void btnDados1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDados1ActionPerformed

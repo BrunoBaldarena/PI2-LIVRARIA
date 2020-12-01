@@ -11,57 +11,38 @@ package br.senac.sp.tads.ads.pi2.modal;
  */
 public class RelatorioSintetico {
     
-    private int id;
-    private int qtdVendas;
-    private int qtdLivrosPeriodo;
+    
+    private String tipoPagamento;
     private int qtdLivros;
-    private float valorVendaPeriodo;
+    private float valorTotal;
     private String dtInicio;
     private String dtFinal;
-    private String dtCompra;
+    private String dtVenda;
     private int codCliente; 
-    private int codCaixa;
+    private int codUsuario;
     private int codVenda; 
 
     public RelatorioSintetico() {
     }
 
-    public RelatorioSintetico(int id, int qtdVendas, int qtdLivrosPeriodo, int qtdLivros, float valorVendaPeriodo, String dtInicio, String dtFinal, String dtCompra, int codCliente, int codCaixa, int codVenda) {
-        this.id = id;
-        this.qtdVendas = qtdVendas;
-        this.qtdLivrosPeriodo = qtdLivrosPeriodo;
+    public RelatorioSintetico(String tipoPagamento, int qtdLivros, float valorTotal, String dtInicio, String dtFinal, String dtVenda, int codCliente, int codUsuario, int codVenda) {
+        this.tipoPagamento = tipoPagamento;
         this.qtdLivros = qtdLivros;
-        this.valorVendaPeriodo = valorVendaPeriodo;
+        this.valorTotal = valorTotal;
         this.dtInicio = dtInicio;
         this.dtFinal = dtFinal;
-        this.dtCompra = dtCompra;
+        this.dtVenda = dtVenda;
         this.codCliente = codCliente;
-        this.codCaixa = codCaixa;
+        this.codUsuario = codUsuario;
         this.codVenda = codVenda;
     }
 
-    public int getId() {
-        return id;
+    public String getTipoPagamento() {
+        return tipoPagamento;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getQtdVendas() {
-        return qtdVendas;
-    }
-
-    public void setQtdVendas(int qtdVendas) {
-        this.qtdVendas = qtdVendas;
-    }
-
-    public int getQtdLivrosPeriodo() {
-        return qtdLivrosPeriodo;
-    }
-
-    public void setQtdLivrosPeriodo(int qtdLivrosPeriodo) {
-        this.qtdLivrosPeriodo = qtdLivrosPeriodo;
+    public void setTipoPagamento(String tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
     }
 
     public int getQtdLivros() {
@@ -72,12 +53,12 @@ public class RelatorioSintetico {
         this.qtdLivros = qtdLivros;
     }
 
-    public float getValorVendaPeriodo() {
-        return valorVendaPeriodo;
+    public float getValorTotal() {
+        return valorTotal;
     }
 
-    public void setValorVendaPeriodo(float valorVendaPeriodo) {
-        this.valorVendaPeriodo = valorVendaPeriodo;
+    public void setValorTotal(float valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public String getDtInicio() {
@@ -96,12 +77,12 @@ public class RelatorioSintetico {
         this.dtFinal = dtFinal;
     }
 
-    public String getDtCompra() {
-        return dtCompra;
+    public String getDtVenda() {
+        return dtVenda;
     }
 
-    public void setDtCompra(String dtCompra) {
-        this.dtCompra = dtCompra;
+    public void setDtVenda(String dtVenda) {
+        this.dtVenda = dtVenda;
     }
 
     public int getCodCliente() {
@@ -112,12 +93,12 @@ public class RelatorioSintetico {
         this.codCliente = codCliente;
     }
 
-    public int getCodCaixa() {
-        return codCaixa;
+    public int getCodUsuario() {
+        return codUsuario;
     }
 
-    public void setCodCaixa(int codCaixa) {
-        this.codCaixa = codCaixa;
+    public void setCodUsuario(int codUsuario) {
+        this.codUsuario = codUsuario;
     }
 
     public int getCodVenda() {
@@ -127,6 +108,7 @@ public class RelatorioSintetico {
     public void setCodVenda(int codVenda) {
         this.codVenda = codVenda;
     }
+    
     
     
 }

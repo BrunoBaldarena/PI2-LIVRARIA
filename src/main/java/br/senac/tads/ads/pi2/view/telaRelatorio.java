@@ -5,17 +5,33 @@
  */
 package br.senac.tads.ads.pi2.view;
 
+import br.senac.sp.tads.ads.pi2.controller.RelatorioSinteticoController;
+import br.senac.sp.tads.ads.pi2.helper.RelatorioSinteticoHelper;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+
 /**
  *
  * @author diogo.carauta
  */
 public class telaRelatorio extends javax.swing.JFrame {
 
+    private final RelatorioSinteticoController controller;
+
     /**
      * Creates new form telaRelatorio
      */
-    public telaRelatorio() {
+    public telaRelatorio() throws SQLException, ClassNotFoundException {
         initComponents();
+        
+        controller = new RelatorioSinteticoController(this);
+        controller.getRelatorioSintetico();
+    
+
         //this.setExtendedState(MAXIMIZED_BOTH);
         //this.setBounds(250, 150, 1151, 718);
         this.setLocationRelativeTo(null);
@@ -155,7 +171,7 @@ public class telaRelatorio extends javax.swing.JFrame {
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataInicial)
                     .addComponent(lblDataFinal)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -182,6 +198,7 @@ public class telaRelatorio extends javax.swing.JFrame {
         btnLimparCampos.setForeground(new java.awt.Color(255, 255, 255));
         btnLimparCampos.setMnemonic(' ');
         btnLimparCampos.setText("Limpar Campos"); // NOI18N
+        btnLimparCampos.setToolTipText("");
         btnLimparCampos.setActionCommand("Registrar Item");
         btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,16 +213,15 @@ public class telaRelatorio extends javax.swing.JFrame {
             .addGroup(btnDetalhesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(btnDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
-                    .addComponent(btnLimparCampos, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                    .addComponent(btnLimparCampos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
                 .addContainerGap())
         );
         btnDetalhesLayout.setVerticalGroup(
             btnDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnDetalhesLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(btnRegistrar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLimparCampos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -240,7 +256,7 @@ public class telaRelatorio extends javax.swing.JFrame {
         panelQtdVendas.setLayout(panelQtdVendasLayout);
         panelQtdVendasLayout.setHorizontalGroup(
             panelQtdVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblQtdVendas, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+            .addComponent(lblQtdVendas, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
         );
         panelQtdVendasLayout.setVerticalGroup(
             panelQtdVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +278,7 @@ public class telaRelatorio extends javax.swing.JFrame {
         panelLivrosVendidos.setLayout(panelLivrosVendidosLayout);
         panelLivrosVendidosLayout.setHorizontalGroup(
             panelLivrosVendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblLivrosVendidos, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+            .addComponent(lblLivrosVendidos, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
         );
         panelLivrosVendidosLayout.setVerticalGroup(
             panelLivrosVendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +302,7 @@ public class telaRelatorio extends javax.swing.JFrame {
             panelValorTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelValorTotalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addComponent(lblValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelValorTotalLayout.setVerticalGroup(
@@ -339,7 +355,7 @@ public class telaRelatorio extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -359,7 +375,7 @@ public class telaRelatorio extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
         );
 
         pack();
@@ -385,10 +401,6 @@ public class telaRelatorio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataInicialFocusLost
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling cod"e here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     private void txtDataFinalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataFinalFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataFinalFocusLost
@@ -398,8 +410,30 @@ public class telaRelatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDataFinalActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        // TODO add your handling code here:
+        try {
+            RelatorioSinteticoHelper helper = new RelatorioSinteticoHelper(this);
+            helper.limparTela();
+            controller.getRelatorioSintetico();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(telaRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
     }//GEN-LAST:event_btnLimparCamposActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try {
+            // TODO add your handling cod"e here:
+            
+            
+            if(txtDataFinal.getText().equals("  /  /    ") && txtDataFinal.getText().equals("  /  /    ")){
+                controller.getRelatorioSintetico();
+            }
+
+            controller.getRelatorioSinteticoParam();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(telaRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -432,7 +466,13 @@ public class telaRelatorio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaRelatorio().setVisible(true);
+                try {
+                    new telaRelatorio().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(telaRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(telaRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -461,4 +501,53 @@ public class telaRelatorio extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getLblLivrosVendidos() {
+        return lblLivrosVendidos;
+    }
+
+    public void setLblLivrosVendidos(JLabel lblLivrosVendidos) {
+        this.lblLivrosVendidos = lblLivrosVendidos;
+    }
+
+    public JLabel getLblQtdVendas() {
+        return lblQtdVendas;
+    }
+
+    public void setLblQtdVendas(JLabel lblQtdVendas) {
+        this.lblQtdVendas = lblQtdVendas;
+    }
+
+    public JLabel getLblValorTotal() {
+        return lblValorTotal;
+    }
+
+    public void setLblValorTotal(JLabel lblValorTotal) {
+        this.lblValorTotal = lblValorTotal;
+    }
+
+    public JTable getTblVendas() {
+        return tblVendas;
+    }
+
+    public void setTblVendas(JTable tblVendas) {
+        this.tblVendas = tblVendas;
+    }
+
+    public JFormattedTextField getTxtDataFinal() {
+        return txtDataFinal;
+    }
+
+    public void setTxtDataFinal(JFormattedTextField txtDataFinal) {
+        this.txtDataFinal = txtDataFinal;
+    }
+
+    public JFormattedTextField getTxtDataInicial() {
+        return txtDataInicial;
+    }
+
+    public void setTxtDataInicial(JFormattedTextField txtDataInicial) {
+        this.txtDataInicial = txtDataInicial;
+    }
+
 }

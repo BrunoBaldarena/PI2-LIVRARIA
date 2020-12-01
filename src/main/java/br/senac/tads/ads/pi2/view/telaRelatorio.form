@@ -50,7 +50,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="531" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="530" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -114,7 +114,7 @@
                       <Component id="panelBusca" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="193" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="177" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="panelValorTotal" alignment="0" max="32767" attributes="0"/>
@@ -124,7 +124,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="btnVoltar" min="-2" pref="38" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -192,7 +192,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblDataInicial" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDataFinal" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnBuscar" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="btnBuscar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="txtDataInicial" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="txtDataFinal" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
@@ -306,8 +306,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnRegistrar" pref="336" max="32767" attributes="0"/>
-                          <Component id="btnLimparCampos" alignment="0" pref="324" max="32767" attributes="0"/>
+                          <Component id="btnRegistrar" pref="324" max="32767" attributes="0"/>
+                          <Component id="btnLimparCampos" alignment="1" pref="324" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -316,9 +316,8 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnLimparCampos" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -358,6 +357,7 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="32"/>
                 <Property name="text" type="java.lang.String" value="Limpar Campos" noResource="true"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="actionCommand" type="java.lang.String" value="Registrar Item"/>
               </Properties>
               <Events>
@@ -410,7 +410,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblQtdVendas" alignment="0" pref="325" max="32767" attributes="0"/>
+                  <Component id="lblQtdVendas" alignment="0" pref="317" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -461,7 +461,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblLivrosVendidos" alignment="0" pref="327" max="32767" attributes="0"/>
+                  <Component id="lblLivrosVendidos" alignment="0" pref="319" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -514,7 +514,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblValorTotal" pref="396" max="32767" attributes="0"/>
+                      <Component id="lblValorTotal" pref="388" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

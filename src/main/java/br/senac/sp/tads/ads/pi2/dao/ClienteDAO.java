@@ -228,6 +228,52 @@ public class ClienteDAO {
     }
     
     
+        public Cliente buscarID(int id) throws ClassNotFoundException, SQLException {
+
+        GerenciadorConexao.abrirConexao();
+
+        //Chama a conexao com o banco de dados 
+        Connection conexao = GerenciadorConexao.CONEXAO;
+        String SQL = "SELECT * FROM cliente WHERE id LIKE '%"+id+"%';";
+        
+        Statement st = conexao.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+        Cliente cliente = null;
+
+        try {
+
+            while (rs.next()) {
+
+                cliente = new Cliente();
+
+                cliente.setId(rs.getInt("id"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setSexo(rs.getString("sexo"));
+                cliente.setDataNascimento(rs.getString("dataNascimento"));
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setLogadoutro(rs.getString("logadouro"));
+                cliente.setNumero(rs.getString("numero"));
+                cliente.setCep(rs.getString("cep"));
+                cliente.setCidade(rs.getString("cidade"));
+                cliente.setBairro(rs.getString("bairro"));
+                cliente.setUf(rs.getString("uf"));
+                cliente.setComplemento(rs.getString("complemento"));
+                cliente.setEmail(rs.getString("email"));
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            st.close();
+            rs.close();
+            GerenciadorConexao.fecharConexao();
+        }
+        return cliente;
+    }
+    
+    
     
     
     

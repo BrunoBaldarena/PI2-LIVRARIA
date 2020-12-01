@@ -5,7 +5,6 @@
  */
 package br.senac.sp.tads.ads.pi2.utils;
 
-import javax.swing.JOptionPane;
 
 /**
  *
