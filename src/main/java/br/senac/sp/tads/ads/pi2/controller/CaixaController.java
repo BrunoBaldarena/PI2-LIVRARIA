@@ -98,8 +98,8 @@ public class CaixaController {
         
         int linha = view.getTblItensVenda().getSelectedRow();
         
-        double valorItemRemovido = Double.parseDouble(tmItemVenda.getValueAt(linha, 5).toString());
-        int qtdItemRemovido = Integer.parseInt(tmItemVenda.getValueAt(linha, 4).toString());
+        double valorItemRemovido = Double.parseDouble(tmItemVenda.getValueAt(linha, 6).toString());
+        int qtdItemRemovido = Integer.parseInt(tmItemVenda.getValueAt(linha, 5).toString());
         
         tmItemVenda.removeRow(linha);
         
