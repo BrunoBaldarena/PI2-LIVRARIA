@@ -5,7 +5,10 @@
  */
 package br.senac.tads.ads.pi2.view;
 
-import javax.swing.JOptionPane;
+import br.senac.sp.tads.ads.pi2.controller.RelatorioDetalhadoController;
+import java.sql.SQLException;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 
 /**
  *
@@ -15,12 +18,24 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
 
     /**
      * Creates new form telaDetalhesRelatorio
+     * @param CodVenda
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
-    public telaDetalhesRelatorio() {
+    public telaDetalhesRelatorio(int CodVenda) throws ClassNotFoundException, SQLException {
         initComponents();
         //this.setBounds(250, 150, 1124, 718);
         pack();
+        RelatorioDetalhadoController controller = new RelatorioDetalhadoController(this);
+        controller.getRelatorioAnalitico(CodVenda);
+        
+  
     }
+
+    private telaDetalhesRelatorio() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,19 +52,17 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
         panelPrincipal = new javax.swing.JPanel();
         panelBusca = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblDetalhe = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lbNomeCliente = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        lbVendedor = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -96,7 +109,7 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
         panelBusca.setBackground(new java.awt.Color(35, 70, 72));
         panelBusca.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "Informações da venda", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblDetalhe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -112,7 +125,7 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblDetalhe);
 
         jLabel7.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,27 +137,23 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Itens adquiridos:");
+        jLabel9.setText("Quantidade Itens:");
 
         jLabel10.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Valor itens:");
-
-        jLabel11.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Desconto:");
+        jLabel10.setText("Vendedor:");
 
         jLabel12.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Valor final:");
+        jLabel12.setText("Valor final:R$");
 
         jLabel13.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Método de pagamento:");
 
-        jLabel14.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("José da Silva");
+        lbNomeCliente.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
+        lbNomeCliente.setForeground(new java.awt.Color(255, 255, 255));
+        lbNomeCliente.setText("José da Silva");
 
         jLabel15.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -154,13 +163,9 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("15");
 
-        jLabel17.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("R$ 150,00");
-
-        jLabel18.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("R$ 15,00 (10%)");
+        lbVendedor.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
+        lbVendedor.setForeground(new java.awt.Color(255, 255, 255));
+        lbVendedor.setText("Bruno Baldarena");
 
         jLabel19.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,22 +193,20 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
                                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel13)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel10)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel10))
                                 .addGap(18, 18, 18)
                                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14)
+                                    .addComponent(lbNomeCliente)
                                     .addComponent(jLabel15)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jLabel18)
                                     .addComponent(jLabel19)
+                                    .addComponent(jLabel16)
+                                    .addComponent(lbVendedor)
                                     .addComponent(jLabel20)))
                             .addComponent(jLabel21))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 746, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelBuscaLayout.setVerticalGroup(
@@ -212,23 +215,19 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel14))
+                    .addComponent(lbNomeCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(lbVendedor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -240,7 +239,7 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel21)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addGap(40, 40, 40))
         );
 
@@ -360,14 +359,10 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -378,8 +373,70 @@ public class telaDetalhesRelatorio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lbNomeCliente;
+    private javax.swing.JLabel lbVendedor;
     private javax.swing.JPanel panelBusca;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JTable tblDetalhe;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getLbDataVenda() {
+        return jLabel15;
+    }
+
+    public void setLbDataVenda(JLabel lbDataVenda) {
+        this.jLabel15 = lbDataVenda;
+    }
+
+    public JLabel getLbNomeCliente() {
+        return lbNomeCliente;
+    }
+
+    public void setLbNomeCliente(JLabel lbNomeCliente) {
+        this.lbNomeCliente = lbNomeCliente;
+    }
+
+    public JLabel getLbTipoPagamento() {
+        return jLabel20;
+    }
+
+    public void setLbTipoPagamento(JLabel lbTipoPagamento) {
+        this.jLabel20 = lbTipoPagamento;
+    }
+
+    public JLabel getLbTotalItensVenda() {
+        return jLabel16;
+    }
+
+    public void setLbTotalItensVenda(JLabel lbTotalItensVenda) {
+        this.jLabel16 = lbTotalItensVenda;
+    }
+
+    public JLabel getLbValorTotal() {
+        return jLabel19;
+    }
+
+    public void setLbValorTotal(JLabel lbValorTotal) {
+        this.jLabel19 = lbValorTotal;
+    }
+
+    public JTable getTblDetalhe() {
+        return tblDetalhe;
+    }
+
+    public void setTblDetalhe(JTable tblDetalhe) {
+        this.tblDetalhe = tblDetalhe;
+    }
+
+    public JLabel getLbVendedor() {
+        return lbVendedor;
+    }
+
+    public void setLbVendedor(JLabel lbVendedor) {
+        this.lbVendedor = lbVendedor;
+    }
+    
+    
+
+
 }

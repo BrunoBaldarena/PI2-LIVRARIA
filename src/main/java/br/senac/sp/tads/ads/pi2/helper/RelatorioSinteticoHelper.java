@@ -31,15 +31,16 @@ public class RelatorioSinteticoHelper {
          String txtFin = view.getTxtDataFinal().getText();
          
    
+         if(!txtIni.equals("  /  /    ")){
              String dtIni = Conversores.convertDate(txtIni);
              rls.setDtInicio(dtIni);
-
+         }
          
-       
+         if(!txtFin.equals("  /  /    ")){
              String dtFin = Conversores.convertDate(txtFin);
-             rls.setDtFinal(dtFin);
-
-
+             rls.setDtFinal(dtFin); 
+         }
+         
         return rls;
         
      }
